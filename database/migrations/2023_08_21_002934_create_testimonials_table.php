@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('testimonials', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('designation');
+            $table->string('designation')->nullable();
             $table->string('comment_type');
             $table->text('comment')->nullable();
             $table->bigInteger('video_link_id')->nullable();

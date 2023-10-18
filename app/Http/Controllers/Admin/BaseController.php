@@ -37,9 +37,10 @@ class BaseController extends Controller {
             if(substr($file->getMimeType(), 0, 5) == 'image') {
                 $type = "Image";
                 $imagedetails = getimagesize($file);
-                $width = $imagedetails[0];
-                $height = $imagedetails[1];
-                $fileDimensions = $width." X ".$height;
+                $width = (!empty($imagedetails[0]))?$imagedetails[0]:0;
+                $height = (!empty($imagedetails[1]))?$imagedetails[1]:0;
+                if($width && $height)
+                    $fileDimensions = $width." X ".$height;
                 $thumb_image = NULL;
             }
             else if(substr($file->getMimeType(), 0, 5) == 'video') {

@@ -29,7 +29,7 @@ class TestimonialController extends Controller
     }
 
     protected function getCollection() {
-        return $this->model->select('id', 'name', 'status', 'designation', 'priority', 'created_at', 'updated_at');
+        return $this->model->select('id', 'name', 'status', 'title', 'priority', 'created_at', 'updated_at');
         
     }
 

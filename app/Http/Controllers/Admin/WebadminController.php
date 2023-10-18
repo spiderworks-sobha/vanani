@@ -75,6 +75,17 @@ class WebadminController extends Controller {
         return \Response::json($json);
     }
 
+    public function select2_products(Request $request)
+    {
+        $items = DB::table('products')->where('name', 'like', $request->q.'%')->orderBy('name')
+            ->get();
+        $json = [];
+        foreach($items as $c){
+            $json[] = ['id'=>$c->id, 'text'=>$c->name];
+        }
+        return \Response::json($json);
+    }
+
     public function select2_categories($type=null)
     {
         $items = DB::table('categories')->where('name', 'like', request()->q.'%');
@@ -188,7 +199,7 @@ class WebadminController extends Controller {
         {
             $obj->content = json_encode($data['section']);
             $obj->save();
-            return Redirect::to(url('admin/widgets'))->withSuccess('Widget successfully updated!');
+            return Redirect::to(url('sw-admin/widgets'))->withSuccess('Widget successfully updated!');
         }
         return Redirect::back()
                         ->withErrors("Ooops..Something wrong happend.Please try again.") // send back all errors to the login form

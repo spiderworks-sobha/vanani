@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class SliderPhoto extends JsonResource
+class FeaturedProduct extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,13 @@ class SliderPhoto extends JsonResource
     {
         return [
             'id' => $this->id,
-            'media' => [
-                'file' => $this->media?->file_path,
-                'title' => $this->media?->title,
-                'file_type' => $this->media?->file_type,
-                'media_type' => $this->media?->media_type
+            'slug' => $this->slug,
+            'title' => $this->title,
+            'sub_title' => $this->sub_title,
+            'featured_image' => [
+                'file' => $this->featured_image?->file_path,
+                'title' => $this->featured_image?->title,
             ],
-            'meta_data' => $this->meta_data
         ];
     }
 }

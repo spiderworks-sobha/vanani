@@ -27,7 +27,8 @@ class Testimonial extends Model
     protected $table = 'testimonials';
 
 
-    protected $fillable = array('name','comment','comment_type','featured_image_id', 'youtube_link', 'designation', 'video_link_id', 'is_featured', 'priority');
+    protected $fillable = array('name', 'title', 'short_comment', 'related_products_id','comment','comment_type','featured_image_id', 
+    'youtube_link', 'designation', 'video_link_id', 'is_featured', 'priority');
 
     
 
@@ -36,10 +37,8 @@ class Testimonial extends Model
 
         $this->val_rules = array(
             'name' => 'required|max:250',
-            'designation' => 'required|max:250',
-            'youtube_link' => 'required_if:comment_type,==,Youtube Video',
-            'video_link_id' => 'required_if:comment_type,==,Video From Computer',
-            'comment' => 'required_if:comment_type,==,Text',
+            'title' => 'required|max:250',
+            'short_comment' => 'required',
         );
     }
 
@@ -56,6 +55,10 @@ class Testimonial extends Model
     public function video()
     {
         return $this->belongsTo('App\Models\Media', 'video_link_id');
+    }
+
+    public function related_product(){
+        return $this->belongsTo('App\Models\Product', 'related_products_id');
     }
 
 }

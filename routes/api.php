@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apis\BlogController;
 use App\Http\Controllers\Apis\AuthController;
 use App\Http\Controllers\Apis\CommonController;
+use App\Http\Controllers\Apis\MenuController;
+use App\Http\Controllers\Apis\ProductController;
+use App\Http\Controllers\Apis\TestimonialController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +34,12 @@ Route::get('blogs/{slug}', [BlogController::class, 'view'])->name('api.blogs.vie
 
 Route::get('settings', [CommonController::class, 'settings'])->name('settings');
 Route::get('sliders', [CommonController::class, 'sliders'])->name('sliders');
+
+Route::get('products/about-us', [ProductController::class, 'about_us'])->name('api.products.about-us');
+Route::get('products/featured', [ProductController::class, 'featured'])->name('api.products.featured');
+
+Route::get('testimonials/featured', [TestimonialController::class, 'featured'])->name('api.testimonials.featured');
+
+Route::get('page/{slug}', [CommonController::class, 'page'])->name('api.page');
+Route::get('widget/{code}', [CommonController::class, 'widget'])->name('api.widget');
+Route::get('menu/{menu_position}', [MenuController::class, 'index'])->name('api.menu');

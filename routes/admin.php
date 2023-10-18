@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\ListigItemController;
 use App\Http\Controllers\Admin\Auth\AuthenticateSessionOtpController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\ProductController;
 
 $prefix = (config()->has('admin.url_prefix'))?config()->get('admin.url_prefix'):'admin';
 $middleware = (config()->has('admin.admin_middleware'))?config()->get('admin.admin_middleware'):'auth';
@@ -48,6 +49,7 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
     Route::post('/logout', [AuthenticateSessionOtpController::class, 'logout'])->name('admin.auth.logout');
 
     Route::get('validation/unique-slug', [WebadminController::class, 'unique_slug'])->name('admin.unique-slug');
+    Route::get('select2/products', [WebadminController::class, 'select2_products'])->name('admin.select2.products');
 
 	Route::group(['middleware' => $middleware], function(){
 		Route::get('/dashboard', [WebadminController::class, 'index'])->name('admin.dashboard');
@@ -447,6 +449,16 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
          Route::get('galleries/media/edit/{id}/{type}', [GalleryController::class, 'media_edit'])->name('admin.galleries.media.edit');
          Route::post('galleries/media/update', [GalleryController::class, 'media_update'])->name('admin.galleries.media.update');
          Route::get('galleries/media/destroy/{id}', [GalleryController::class, 'media_destroy'])->name('admin.galleries.media.destroy');
+
+        //products
+        Route::get('products', [ProductController::class, 'index'])->name('admin.products.index');
+        Route::get('products/create', [ProductController::class, 'create'])->name('admin.products.create');
+        Route::get('products/edit/{id}', [ProductController::class, 'edit'])->name('admin.products.edit');
+        Route::get('products/destroy/{id}', [ProductController::class, 'destroy'])->name('admin.products.destroy');
+        Route::get('products/change-status/{id}', [ProductController::class, 'changeStatus'])->name('admin.products.change-status');
+        Route::post('products/store', [ProductController::class, 'store'])->name('admin.products.store');
+        Route::post('products/update', [ProductController::class, 'update'])->name('admin.products.update');
+        Route::get('products/show/{id}', [ProductController::class, 'show'])->name('admin.products.show');
 	});
 
     Route::get('/{id?}', [AuthenticateSessionOtpController::class, 'create'])->name('admin.auth.login');

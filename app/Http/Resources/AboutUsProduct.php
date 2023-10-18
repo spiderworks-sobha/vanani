@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class FeaturedBlog extends JsonResource
+class AboutUsProduct extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,16 +18,19 @@ class FeaturedBlog extends JsonResource
             'id' => $this->id,
             'slug' => $this->slug,
             'category' => [
+                'slug' => $this->category?->slug,
                 'name' => $this->category?->name,
-                'slug' => $this->category?->slug
-            ],
-            'featured_title' => $this->featured_title,
-            'image' => [
-                'file' => $this->featured_section_image?->file_path,
-                'title' => $this->featured_section_image?->title
             ],
             'title' => $this->title,
-            'short_description' => $this->short_description,
+            'sub_title' => $this->sub_title,
+            'icon' => [
+                'file' => $this->icon?->file_path,
+                'title' => $this->icon?->title,
+            ],
+            'featured_image' => [
+                'file' => $this->featured_image?->file_path,
+                'title' => $this->featured_image?->title,
+            ],
         ];
     }
 }

@@ -82,13 +82,29 @@
                                                 <div class="card-body">
                                                     <div data-simplebar>
                                                         <div class="row m-0">
-                                                            <div class="form-group col-md-12">
+                                                            <div class="form-group col-md-6">
                                                                 <label>Name</label>
                                                                 <input type="text" name="name" class="form-control" value="{{$obj->name}}">
                                                             </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Title</label>
+                                                                <input type="text" name="title" class="form-control" value="{{$obj->title}}">
+                                                            </div>
                                                             <div class="form-group col-md-12">
-                                                                <label>Designation</label>
-                                                                <textarea class="form-control" name="designation">{{$obj->designation}}</textarea>
+                                                                <label>Short Comment</label>
+                                                                <textarea class="form-control" name="short_comment">{{$obj->short_comment}}</textarea>
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Related Product</label>
+                                                                <select name="related_products_id" class="w-100 webadmin-select2-input" data-select2-url="{{route('admin.select2.products')}}" data-placeholder="Select a Product">
+                                                                    @if($obj->id && $obj->related_product)
+                                                                        <option value="{{$obj->related_product->id}}" selected="selected">{{$obj->related_product->name}}</option>
+                                                                    @endif
+                                                                </select>
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Priority</label>
+                                                                <input type="number" name="priority" class="form-control numeric" value="{{$obj->priority}}" >
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Type</label>
@@ -179,17 +195,6 @@
                                             </div>
                                             <div class="card">
                                                 <div class="card-header">
-                                                    Priority
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="form-group col-md-12">
-                                                        <label>Priority</label>
-                                                        <input type="number" name="priority" class="form-control numeric" value="{{$obj->priority}}" >
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header">
                                                     User Image
                                                 </div>
                                                 <div class="card-body">
@@ -214,12 +219,14 @@
               rules: 
               {
                 "name": "required",
-                "designation": "required"
+                "title": "required",
+                "short_comment": "required"
               },
               messages: 
               {
                 "name": "Name cannot be blank",
-                "designation": "Designation cannot be blank",
+                "title": "Title cannot be blank",
+                "short_comment": "Short comment cannot be blank"
               },
         });
 

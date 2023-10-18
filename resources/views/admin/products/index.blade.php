@@ -28,10 +28,10 @@
                             <div class="page-title-box">
                                 <div class="row">
                                     <div class="col">
-                                        <h4 class="page-title">All Testimonials</h4>
+                                        <h4 class="page-title">All Products</h4>
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admin</a></li>
-                                            <li class="breadcrumb-item active">All Testimonials</li>
+                                            <li class="breadcrumb-item active">All Products</li>
                                         </ol>
                                     </div><!--end col-->
                                     @if(auth()->user()->can($permissions['create']))
@@ -55,8 +55,8 @@
                                         <tr>
                                             <th class="nodisplay"></th>
                                             <th class="table-width-10">ID</th>
+                                            <th class="table-width-120">Slug</th>
                                             <th class="table-width-120">Name</th>
-                                            <th class="table-width-120">Title</th>
                                             <th class="table-width-120">Last Updated On</th>
                                             <th class="nosearch table-width-10 text-center">Priority</th>
                                             <th class="nosort nosearch table-width-10">Status</th>
@@ -88,8 +88,8 @@
         var my_columns = [
             {data: 'updated_at', name: 'updated_at'},
             {data: null, name: 'id'},
+            {data: 'slug', name: 'slug'},
             {data: 'name', name: 'name'},
-            {data: 'title', name: 'title'},
             {data: 'date', name: 'updated_at'},
             {data: 'priority', name: 'priority', className: 'text-center'},
             {data: 'status', name: 'status'},
