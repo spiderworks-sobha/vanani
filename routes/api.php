@@ -33,7 +33,7 @@ Route::get('blogs/featured', [BlogController::class, 'featured'])->name('api.blo
 Route::get('blogs/{slug}', [BlogController::class, 'view'])->name('api.blogs.view');
 
 Route::get('settings', [CommonController::class, 'settings'])->name('settings');
-Route::get('sliders', [CommonController::class, 'sliders'])->name('sliders');
+Route::get('sliders/{slider_name?}', [CommonController::class, 'sliders'])->name('sliders');
 
 Route::get('products/about-us', [ProductController::class, 'about_us'])->name('api.products.about-us');
 Route::get('products/featured', [ProductController::class, 'featured'])->name('api.products.featured');
