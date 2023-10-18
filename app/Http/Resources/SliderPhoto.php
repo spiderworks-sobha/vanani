@@ -17,7 +17,7 @@ class SliderPhoto extends JsonResource
         return [
             'id' => $this->id,
             'media' => [
-                'file' => $this->media?->file_path,
+                'file' => ($this->media)?asset($this->media?->file_path):NULL,
                 'title' => $this->media?->title,
                 'file_type' => $this->media?->file_type,
                 'media_type' => $this->media?->media_type
