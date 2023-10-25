@@ -115,6 +115,39 @@
                                 </div>
                             </form>
                         </div>
+                        <div class="col-6">
+                            <form method="POST" action="{{ route('admin.widgets.save') }}" class="p-t-15" id="InputFrm" data-validate=true>
+                                @csrf
+                                <input type="hidden" name="id" value="3">
+                                            
+                                <div class="card">
+                                    <div class="card-header">
+                                        Join Us
+                                    </div>
+                                    <div class="card-body row">
+                                        <div class="form-group col-md-12">
+                                            <label>Member Count</label>
+                                            <input type="text" name="section[member_count]" class="form-control" @if(isset($data['join-us']['member_count'])) value="{{$data['join-us']['member_count']}}" @endif>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Title</label>
+                                            <input type="text" name="section[title]" class="form-control" @if(isset($data['join-us']['title'])) value="{{$data['join-us']['title']}}" @endif>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Title Continue</label>
+                                            <input type="text" name="section[title_continue]" class="form-control" @if(isset($data['join-us']['title_continue'])) value="{{$data['join-us']['title_continue']}}" @endif>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <label>Follow us Text</label>
+                                            <input type="text" name="section[follow_us_text]" class="form-control" @if(isset($data['join-us']['follow_us_text'])) value="{{$data['join-us']['follow_us_text']}}" @endif>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-right">
+                                        <button class="btn btn-sm btn-primary">Update</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div> 
 
                 </div><!-- container -->

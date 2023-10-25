@@ -6,7 +6,9 @@ use App\Http\Controllers\Apis\BlogController;
 use App\Http\Controllers\Apis\AuthController;
 use App\Http\Controllers\Apis\CommonController;
 use App\Http\Controllers\Apis\MenuController;
+use App\Http\Controllers\Apis\PartnerController;
 use App\Http\Controllers\Apis\ProductController;
+use App\Http\Controllers\Apis\TeamController;
 use App\Http\Controllers\Apis\TestimonialController;
 
 /*
@@ -38,7 +40,10 @@ Route::get('sliders/{slider_name?}', [CommonController::class, 'sliders'])->name
 Route::get('products/about-us', [ProductController::class, 'about_us'])->name('api.products.about-us');
 Route::get('products/featured', [ProductController::class, 'featured'])->name('api.products.featured');
 
-Route::get('testimonials/featured', [TestimonialController::class, 'featured'])->name('api.testimonials.featured');
+Route::get('testimonials', [TestimonialController::class, 'index'])->name('api.testimonials.index');
+
+Route::get('members', [TeamController::class, 'index'])->name('api.members.index');
+Route::get('partners', [PartnerController::class, 'index'])->name('api.partners.index');
 
 Route::get('page/{slug}', [CommonController::class, 'page'])->name('api.page');
 Route::get('widget/{code}', [CommonController::class, 'widget'])->name('api.widget');

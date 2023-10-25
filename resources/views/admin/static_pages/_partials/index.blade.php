@@ -64,7 +64,7 @@
                                                             </div>  
                                                             <div class="form-group col-md-4">
                                                                 <label>Bottom Link Url</label>
-                                                                <input type="text" name="content[bottom_link_text_2]" class="form-control" @if($obj->content && isset($obj->content['bottom_link_text_2'])) value="{{$obj->content['bottom_link_text_2']}}" @endif >
+                                                                <input type="text" name="content[bottom_link_url_2]" class="form-control" @if($obj->content && isset($obj->content['bottom_link_url_2'])) value="{{$obj->content['bottom_link_url_2']}}" @endif >
                                                             </div>
                                                             <div class="form-group col-md-4">
                                                                 <label>Bottom Link Target</label>
