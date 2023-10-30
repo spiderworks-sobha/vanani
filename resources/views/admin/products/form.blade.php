@@ -198,6 +198,10 @@
                                                         <input type="checkbox" class="custom-control-input" value="1" id="list_in_home_about" name="list_in_home_about" @if($obj->list_in_home_about == 1) checked="checked" @endif>
                                                         <label class="custom-control-label" for="list_in_home_about">List in home about</label>
                                                     </div>
+                                                    <div class="custom-control custom-switch switch-primary">
+                                                        <input type="checkbox" class="custom-control-input" value="1" id="list_in_home_bottom" name="list_in_home_bottom" @if($obj->list_in_home_bottom == 1) checked="checked" @endif>
+                                                        <label class="custom-control-label" for="list_in_home_bottom">List in home bottom</label>
+                                                    </div>
                                                     <button class="btn btn-sm btn-primary float-right">Save</button>
                                                 </div>
                                             </div>

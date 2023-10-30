@@ -25,7 +25,7 @@ class Product extends Model
 
     protected $fillable = array('slug', 'name', 'title', 'sub_title', 'short_description', 'content', 'parent_id', 'featured_image_id', 'banner_image_id', 'icon_image_id', 
     'browser_title', 'meta_description', 'meta_keywords', 'bottom_description', 'og_title', 'og_description', 'og_image_id', 
-    'extra_js', 'category_id', 'is_featured', 'list_in_home_about', 'status', 'priority');
+    'extra_js', 'category_id', 'is_featured', 'list_in_home_about', 'list_in_home_bottom', 'status', 'priority');
 
     protected $dates = ['created_at','updated_at'];
 

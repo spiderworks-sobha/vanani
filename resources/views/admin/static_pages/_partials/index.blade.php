@@ -1,4 +1,34 @@
-<div id="form-vertical" class="form-horizontal form-wizard-wrapper">                                        
+<div id="form-vertical" class="form-horizontal form-wizard-wrapper">
+<h3>Section 1</h3>
+                                                        <fieldset class="row">
+                                                            <div class="form-group col-md-12">
+                                                                <label>Banner Text</label>
+                                                                <input type="text" name="content[section1_banner_text]" class="form-control" @if($obj->content && isset($obj->content['section1_banner_text'])) value="{{$obj->content['section1_banner_text']}}" @endif >
+                                                            </div>                                                                                       
+                                                            <div class="form-group col-md-6">
+                                                                <label>Text (Left bottom corner)</label>
+                                                                <input type="text" name="content[section1_left_bottom_text]" class="form-control" @if($obj->content && isset($obj->content['section1_left_bottom_text'])) value="{{$obj->content['section1_left_bottom_text']}}" @endif >
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Text (Button Left)</label>
+                                                                <input type="text" name="content[section1_button_left_text]" class="form-control" @if($obj->content && isset($obj->content['section1_button_left_text'])) value="{{$obj->content['section1_button_left_text']}}" @endif >
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Link Text</label>
+                                                                <input type="text" name="content[section1_link_text]" class="form-control" @if($obj->content && isset($obj->content['section1_link_text'])) value="{{$obj->content['section1_link_text']}}" @endif >
+                                                            </div>  
+                                                            <div class="form-group col-md-4">
+                                                                <label>Link Url</label>
+                                                                <input type="text" name="content[section1_link_url]" class="form-control" @if($obj->content && isset($obj->content['section1_link_url'])) value="{{$obj->content['section1_link_url']}}" @endif >
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Link Target</label>
+                                                                <select name="content[section1_link_target]" class="form-control" id="inputStatus">
+                                                                    <option value="" @if($obj->content && isset($obj->content['section1_link_target']) && $obj->content['section1_link_target'] == "") selected="selected" @endif></option>
+                                                                    <option value="_blank" @if($obj->content && isset($obj->content['section1_link_target']) && $obj->content['section1_link_target'] == "_blank") selected="selected" @endif>_blank</option>
+                                                                </select>
+                                                            </div>                                                                           
+                                                        </fieldset><!--end fieldset-->                                        
                                                         <h3>Section 2</h3>
                                                         <fieldset class="row">
                                                             <div class="form-group col-md-6">
