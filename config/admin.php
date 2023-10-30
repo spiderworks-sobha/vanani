@@ -24,7 +24,7 @@ return array(
 				'model' => 'App\Models\Service',
 			]
 		],
-		'positions'=>['Main Menu', 'Footer Menu'],
+		'positions'=>['Main Menu', 'Footer Menu', 'Footer Menu2', 'Bottom Menu'],
 	],
 
 	'category_types' => ['Blog', 'Event', 'Product'],

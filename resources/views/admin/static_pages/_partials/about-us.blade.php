@@ -44,10 +44,24 @@
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 @php
+                                                                    $video_thumb_media_id_1 = ($obj->content && isset($obj->content['video_thumb_media_id_1']))?$obj->content['video_thumb_media_id_1']:null;
+                                                                @endphp
+                                                                @include('admin.media.set_file', ['file'=>$video_thumb_media_id_1, 'title'=>'Video Thumbnail', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'content[video_thumb_media_id_1]', 'id'=>'video_thumb_media_id_1', 'display'=> 'horizontal'])                                             
+                                                            </div><!--end form-group-->
+                                                            <div class="form-group col-md-12">
+                                                                @php
                                                                     $video_media_id_1 = ($obj->content && isset($obj->content['video_media_id_1']))?$obj->content['video_media_id_1']:null;
                                                                 @endphp
                                                                 @include('admin.media.set_file', ['file'=>$video_media_id_1, 'title'=>'Video', 'popup_type'=>'single_image', 'type'=>'Video', 'holder_attr'=>'content[video_media_id_1]', 'id'=>'video_media_id_1', 'display'=> 'horizontal'])                                             
-                                                            </div><!--end form-group-->                                                                       
+                                                            </div><!--end form-group-->
+                                                            <div class="form-group col-md-6">
+                                                                <label>Video Title</label>
+                                                                <input type="text" name="content[section1_video_title]" class="form-control" @if($obj->content && isset($obj->content['section1_video_title'])) value="{{$obj->content['section1_video_title']}}" @endif >
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Video Duration</label>
+                                                                <input type="text" name="content[section1_video_duration]" class="form-control" @if($obj->content && isset($obj->content['section1_video_duration'])) value="{{$obj->content['section1_video_duration']}}" @endif >
+                                                            </div>                                                                    
                                                         </fieldset><!--end fieldset--> 
 
                                                         <h3>Section 2 (Foundation)</h3>
