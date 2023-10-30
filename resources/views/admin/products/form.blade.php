@@ -289,6 +289,14 @@
                                             </div>
                                             <div class="card">
                                                 <div class="card-header">
+                                                    Extra Image
+                                                </div>
+                                                <div class="card-body">
+                                                    @include('admin.media.set_file', ['file'=>$obj->extra_image, 'title'=>'Extra Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'extra_image_id'])
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
                                                     OG Image
                                                 </div>
                                                 <div class="card-body">

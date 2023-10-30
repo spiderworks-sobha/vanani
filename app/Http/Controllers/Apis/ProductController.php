@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Apis;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AboutUsProductCollection;
 use App\Http\Resources\FeaturedProductCollection;
+use App\Http\Resources\HomeBottomProductCollection;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -30,6 +31,16 @@ class ProductController extends Controller
             }
             $products = $products->orderBy('priority')->get();
             return new FeaturedProductCollection($products);
+        }
+        catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function home_bottom(Request $request){
+        try{
+            $products = Product::with(['category', 'extra_image'])->where('status', 1)->where('list_in_home_bottom', 1)->take('3')->orderBy('priority')->get();
+            return new HomeBottomProductCollection($products);
         }
         catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], 500);

@@ -39,6 +39,7 @@ Route::get('sliders/{slider_name?}', [CommonController::class, 'sliders'])->name
 
 Route::get('products/about-us', [ProductController::class, 'about_us'])->name('api.products.about-us');
 Route::get('products/featured', [ProductController::class, 'featured'])->name('api.products.featured');
+Route::get('products/home-bottom', [ProductController::class, 'home_bottom'])->name('api.products.home-bottom');
 
 Route::get('testimonials', [TestimonialController::class, 'index'])->name('api.testimonials.index');
 
