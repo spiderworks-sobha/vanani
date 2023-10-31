@@ -39,7 +39,7 @@ class FrontendPage extends Model
 
     public function faq()
     {
-        return $this->morphMany('App\Models\Faq', 'linkable')->orderBy('created_at', 'DESC')->orderBy('display_order', 'DESC');
+        return $this->morphMany('App\Models\Faq', 'linkable')->orderBy('created_at', 'ASC')->orderBy('display_order', 'DESC');
     }
 
     public function og_image()
