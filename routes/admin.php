@@ -1,9 +1,12 @@
 <?php
+
+use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\WebadminController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminLinkController;
+use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\MenuController;
@@ -34,6 +37,7 @@ use App\Http\Controllers\Admin\Auth\AuthenticateSessionOtpController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\RentalController;
 
 $prefix = (config()->has('admin.url_prefix'))?config()->get('admin.url_prefix'):'admin';
 $middleware = (config()->has('admin.admin_middleware'))?config()->get('admin.admin_middleware'):'auth';
@@ -459,6 +463,36 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
         Route::post('products/store', [ProductController::class, 'store'])->name('admin.products.store');
         Route::post('products/update', [ProductController::class, 'update'])->name('admin.products.update');
         Route::get('products/show/{id}', [ProductController::class, 'show'])->name('admin.products.show');
+
+        //amenities
+        Route::get('amenities', [AmenityController::class, 'index'])->name('admin.amenities.index');
+        Route::get('amenities/create', [AmenityController::class, 'create'])->name('admin.amenities.create');
+        Route::get('amenities/edit/{id}', [AmenityController::class, 'edit'])->name('admin.amenities.edit');
+        Route::get('amenities/destroy/{id}', [AmenityController::class, 'destroy'])->name('admin.amenities.destroy');    
+        Route::post('amenities/store', [AmenityController::class, 'store'])->name('admin.amenities.store');
+        Route::post('amenities/update', [AmenityController::class, 'update'])->name('admin.amenities.update');
+        Route::get('amenities/change-status/{id}', [AmenityController::class, 'changeStatus'])->name('admin.amenities.change-status');
+        Route::get('amenities/show/{id}', [AmenityController::class, 'show'])->name('admin.amenities.show');
+
+        //activities
+        Route::get('activities', [ActivityController::class, 'index'])->name('admin.activities.index');
+        Route::get('activities/create', [ActivityController::class, 'create'])->name('admin.activities.create');
+        Route::get('activities/edit/{id}', [ActivityController::class, 'edit'])->name('admin.activities.edit');
+        Route::get('activities/destroy/{id}', [ActivityController::class, 'destroy'])->name('admin.activities.destroy');    
+        Route::post('activities/store', [ActivityController::class, 'store'])->name('admin.activities.store');
+        Route::post('activities/update', [ActivityController::class, 'update'])->name('admin.activities.update');
+        Route::get('activities/change-status/{id}', [ActivityController::class, 'changeStatus'])->name('admin.activities.change-status');
+        Route::get('activities/show/{id}', [ActivityController::class, 'show'])->name('admin.activities.show');
+
+        //rentals
+        Route::get('rentals', [RentalController::class, 'index'])->name('admin.rentals.index');
+        Route::get('rentals/create', [RentalController::class, 'create'])->name('admin.rentals.create');
+        Route::get('rentals/edit/{id}', [RentalController::class, 'edit'])->name('admin.rentals.edit');
+        Route::get('rentals/destroy/{id}', [RentalController::class, 'destroy'])->name('admin.rentals.destroy');    
+        Route::post('rentals/store', [RentalController::class, 'store'])->name('admin.rentals.store');
+        Route::post('rentals/update', [RentalController::class, 'update'])->name('admin.rentals.update');
+        Route::get('rentals/change-status/{id}', [RentalController::class, 'changeStatus'])->name('admin.rentals.change-status');
+        Route::get('rentals/show/{id}', [RentalController::class, 'show'])->name('admin.rentals.show');
 	});
 
     Route::get('/{id?}', [AuthenticateSessionOtpController::class, 'create'])->name('admin.auth.login');

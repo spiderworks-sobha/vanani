@@ -10,6 +10,7 @@ use App\Http\Controllers\Apis\PartnerController;
 use App\Http\Controllers\Apis\ProductController;
 use App\Http\Controllers\Apis\TeamController;
 use App\Http\Controllers\Apis\TestimonialController;
+use App\Http\Controllers\RentalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,3 +52,7 @@ Route::get('widget/{code}', [CommonController::class, 'widget'])->name('api.widg
 Route::get('menu/{menu_position}', [MenuController::class, 'index'])->name('api.menu');
 
 Route::get('tags', [CommonController::class, 'tags'])->name('api.tags');
+
+Route::get('rentals', [RentalController::class, 'index'])->name('rentals.index');
+Route::get('rentals/featured', [RentalController::class, 'featured'])->name('rentals.featured');
+Route::get('rentals/{slug}', [RentalController::class, 'details'])->name('rentals.details');
