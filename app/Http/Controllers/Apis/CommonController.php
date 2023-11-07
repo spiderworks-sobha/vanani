@@ -10,9 +10,14 @@ use App\Models\Setting;
 use App\Models\SliderPhoto;
 use App\Models\FrontendPage;
 use App\Http\Resources\FrontendPage as FrontendPageResource;
+use App\Http\Resources\HomeWhatWeOfferCollection;
 use App\Http\Resources\Widget as WidgetResource;
+use App\Models\Accommodation;
+use App\Models\Package;
+use App\Models\Rental;
 use App\Models\Widget;
 use DB;
+use stdClass;
 
 class CommonController extends Controller
 {
@@ -52,17 +57,13 @@ class CommonController extends Controller
         try{
             $tags = DB::table('tags')->select('tags.id', 'tags.slug', 'tags.name');
             if($type = $request->type){
-                if($type == 'products'){
-                    $tags->join('product_tags', 'tags.id', '=', 'product_tags.tags_id')->join('products', function($join){
-                        $join->on('products.id', '=', 'product_tags.products_id')->where('products.status', 1);
+                $is_featured = ($request->is_featured)?1:0;
+                if($type == 'accommodation'){
+                    $tags->join('accommodation_tag', 'tags.id', '=', 'accommodation_tag.tag_id')->join('accommodations', function($join) use($is_featured){
+                        $join->on('accommodations.id', '=', 'accommodation_tag.accommodation_id')->where('accommodations.status', 1);
+                        if($is_featured)
+                            $join->where('is_featured');
                     })->where('tags.status', 1)->get();
-                }
-                elseif($type == 'featured_products'){
-
-                    $tags->join('product_tags', 'tags.id', '=', 'product_tags.tags_id')->join('products', function($join){
-                        $join->on('products.id', '=', 'product_tags.products_id')->where('products.status', 1)->where('products.is_featured', 1);
-                    })->where('tags.status', 1)->get();
-
                 }
             }
             $tags = $tags->groupBy('tags.id')->get();
@@ -95,6 +96,20 @@ class CommonController extends Controller
         catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    public function home_what_we_offer(){
+        $data = [];
+        $rental = Rental::with('icon_image', 'featured_image')->where('status', 1)->where('show_on_offer', 1)->first();
+        $rental->type = "Rental";
+        $data[] = $rental;
+        $accommodation = Accommodation::with('icon_image', 'featured_image')->where('status', 1)->where('show_on_offer', 1)->first();
+        $accommodation->type = "Accommodation";
+        $data[] = $accommodation;
+        $package = Package::with('icon_image', 'featured_image')->where('status', 1)->where('show_on_offer', 1)->first();
+        $package->type = "Package";
+        $data[] = $package;
+        return new HomeWhatWeOfferCollection($data);
     }
     
 }

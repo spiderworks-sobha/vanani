@@ -18,6 +18,11 @@ class RentalController extends Controller
             $data = $request->all();
             $limit = !empty($data['limit'])?(int)$data['limit']:10;
             $rentals = Rental::with(['featured_image'])->where('status', 1);
+            if($tags = $request->tags){
+                $rentals->whereHas('tags', function($query) use($tags){
+                    $query->whereIn('rental_tag.tag_id', $tags);
+                });
+            }
             $rentals = $rentals->where('is_featured', '!=', 1)->orderBy('priority', 'DESC')->paginate($limit);
             return new RentalListCollection($rentals);
         }
@@ -28,8 +33,17 @@ class RentalController extends Controller
 
     public function featured(Request $request){
         try{
-            $rentals = Rental::with(['featured_image'])->where('status', 1);
-            $rentals = $rentals->where('is_featured', 1)->orderBy('priority', 'DESC')->get();
+            $rentals = Rental::with(['featured_image', 'extra_image'])->where('status', 1);
+            if($tags = $request->tags){
+                $rentals->whereHas('tags', function($query) use($tags){
+                    $query->whereIn('rental_tag.tag_id', $tags);
+                });
+            }
+            $rentals->where('is_featured', 1)->orderBy('priority', 'DESC');
+            if($limit = $request->limit)
+                $rentals->take($limit);
+            
+            $rentals = $rentals->get();
             return new RentalListCollection($rentals);
         }
         catch(\Exception $e){

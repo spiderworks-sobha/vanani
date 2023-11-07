@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Apis\AccommodationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apis\BlogController;
@@ -37,6 +38,7 @@ Route::get('blogs/{slug}', [BlogController::class, 'view'])->name('api.blogs.vie
 
 Route::get('settings', [CommonController::class, 'settings'])->name('settings');
 Route::get('sliders/{slider_name?}', [CommonController::class, 'sliders'])->name('sliders');
+Route::get('home/what-we-offer', [CommonController::class, 'home_what_we_offer'])->name('home.what-we-offer');
 
 Route::get('products/about-us', [ProductController::class, 'about_us'])->name('api.products.about-us');
 Route::get('products/featured', [ProductController::class, 'featured'])->name('api.products.featured');
@@ -57,4 +59,14 @@ Route::get('rentals', [RentalController::class, 'index'])->name('rentals.index')
 Route::get('rentals/featured', [RentalController::class, 'featured'])->name('rentals.featured');
 Route::get('rentals/reviews', [RentalController::class, 'reviews'])->name('rentals.reviews');
 Route::get('rentals/{slug}', [RentalController::class, 'details'])->name('rentals.details');
+
+Route::get('accommodations', [AccommodationController::class, 'index'])->name('accommodations.index');
+Route::get('accommodations/featured', [AccommodationController::class, 'featured'])->name('accommodations.featured');
+Route::get('accommodations/reviews', [AccommodationController::class, 'reviews'])->name('accommodations.reviews');
+Route::get('accommodations/{slug}', [AccommodationController::class, 'details'])->name('accommodations.details');
+
+Route::get('packages', [AccommodationController::class, 'index'])->name('packages.index');
+Route::get('packages/featured', [AccommodationController::class, 'featured'])->name('packages.featured');
+Route::get('packages/reviews', [AccommodationController::class, 'reviews'])->name('packages.reviews');
+Route::get('packages/{slug}', [AccommodationController::class, 'details'])->name('packages.details');
 

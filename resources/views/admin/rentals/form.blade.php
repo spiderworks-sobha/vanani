@@ -334,6 +334,28 @@
                                                 @endif
                                             <div class="card">
                                                 <div class="card-header">
+                                                    Extra Data
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group col-md-12">
+                                                        <label>Tag</label>
+                                                        <input type="text" class="form-control" name="extra_tag" id="extra_tag" value="{{$obj->extra_tag}}">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Title</label>
+                                                        <input type="text" class="form-control" name="extra_title" id="extra_title" value="{{$obj->extra_title}}">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label class="">Description</label>
+                                                        <textarea name="extra_short_description" class="form-control" rows="3" id="extra_short_description">{{$obj->extra_short_description}}</textarea>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        @include('admin.media.set_file', ['file'=>$obj->extra_image, 'title'=>'Extra Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'extra_image_id'])
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
                                                     Icon Image
                                                 </div>
                                                 <div class="card-body">
