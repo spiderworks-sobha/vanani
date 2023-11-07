@@ -10,7 +10,7 @@ use App\Http\Controllers\Apis\PartnerController;
 use App\Http\Controllers\Apis\ProductController;
 use App\Http\Controllers\Apis\TeamController;
 use App\Http\Controllers\Apis\TestimonialController;
-use App\Http\Controllers\RentalController;
+use App\Http\Controllers\Apis\RentalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,4 +55,6 @@ Route::get('tags', [CommonController::class, 'tags'])->name('api.tags');
 
 Route::get('rentals', [RentalController::class, 'index'])->name('rentals.index');
 Route::get('rentals/featured', [RentalController::class, 'featured'])->name('rentals.featured');
+Route::get('rentals/reviews', [RentalController::class, 'reviews'])->name('rentals.reviews');
 Route::get('rentals/{slug}', [RentalController::class, 'details'])->name('rentals.details');
+

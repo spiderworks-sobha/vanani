@@ -108,6 +108,7 @@
                                                             <div class="form-group col-md-12" id="video-div" @if(!$obj->id || $obj->review_type == 'Text') style="display:none;" @endif>
                                                                 <label>Review Video</label>
                                                                 <input type="file" class="form-control" name="video_review" />
+                                                                <input type="hidden" @if($obj->review_type == 'Video') value="1" @endif id="video-exist" name="video_exist" />
                                                                 @if($obj->review_type == 'Video')
                                                                     <a href="{{asset($obj->review)}}" target="_blank">Watch</a>
                                                                 @endif
@@ -165,6 +166,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-footer text-muted">
+                                                    <div class="custom-control custom-switch switch-primary float-left">
+                                                        <input type="checkbox" class="custom-control-input" value="1" id="show_on_main_page" name="show_on_main_page" @if($obj->show_on_main_page == 1) checked="" @endif>
+                                                        <label class="custom-control-label" for="show_on_main_page">Show on Main Page</label>
+                                                    </div>
                                                     <button class="btn btn-sm btn-primary float-right">Save</button>
                                                 </div>
                                             </div>
@@ -208,7 +213,7 @@
                 },
                 video_review: {
                     required: function() {
-                        return $('#type-select').val() == "Video";
+                        return ($('#type-select').val() == "Video" && $('#video-exist').val() != 1);
                     }
                 },
               },

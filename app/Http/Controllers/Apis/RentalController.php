@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Apis;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\Rental as ResourcesRental;
 use App\Http\Resources\RentalListCollection;
+use App\Http\Resources\ReviewCollection;
 use App\Models\Rental;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
 class RentalController extends Controller
@@ -34,13 +37,23 @@ class RentalController extends Controller
         }
     }
 
-    public function details(Request $request){
+    public function details(Request $request, string $slug){
         try{
-            $rental = Rental::with(['featured_image', 'banner_image', 'og_image', 'amenities', 'activities', 'tags', 'medias', 'faq'])->where('status', 1)->first();
+            $rental = Rental::with(['featured_image', 'banner_image', 'og_image', 'amenities', 'activities', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
             if($rental)
                 return new ResourcesRental($rental);
             else
                 return response()->json(['error' => "Rental not Found!"], 404);
+        }
+        catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function reviews(){
+        try{
+            $reviews = Review::where('reviewable_type', 'App\\Models\\Rental')->where('status', 1)->where('show_on_main_page', 1)->orderBy('priority')->take(3)->get();
+            return new ReviewCollection($reviews);
         }
         catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], 500);

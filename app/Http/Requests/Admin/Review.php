@@ -22,11 +22,14 @@ class Review extends FormRequest
     public function rules(): array
     {
         $file_size =  (int)ini_get("upload_max_filesize")*1024;
-        return [
+        $rules = [
             "name" => 'required|max:250',
             "review_type" => 'required',
             "text_review" => "required_if:review_type,Text",
-            "video_review" => "required_if:review_type,Video|max:".$file_size
         ];
+        if(empty($this->input('video_exist')))
+            $rules["video_review"] = "required_if:review_type,Video|max:".$file_size;
+
+        return $rules;
     }
 }

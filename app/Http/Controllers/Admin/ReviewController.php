@@ -139,6 +139,7 @@ class ReviewController extends Controller
         $data['reviewable_type'] = $this->getReviewableModel($data['type']);
         $data['reviewable_id'] = $data['reviewable_model_id'];
         $data['status'] = isset($data['status'])?1:0;
+        $data['show_on_main_page'] = isset($data['show_on_main_page'])?1:0;
         if(empty($data['priority'])){
             $last = $this->model->select('id')->orderBy('id', 'DESC')->first();
             $data['priority'] = ($last)?$last->id+1:1;
@@ -189,6 +190,7 @@ class ReviewController extends Controller
             }
             $data['priority'] = !empty($data['priority'])?$data['priority']:0;
             $data['status'] = isset($data['status'])?1:0;
+            $data['show_on_main_page'] = isset($data['show_on_main_page'])?1:0;
             $obj->update($data);
 
             return Redirect::to(route($this->route. '.edit', ['id'=>encrypt($id)]))->withSuccess('Review successfully updated!');
