@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AccommodationController;
 use App\Http\Controllers\Admin\ActivityController;
 use App\Http\Controllers\Admin\WebadminController;
 use App\Http\Controllers\Admin\UserController;
@@ -36,8 +37,10 @@ use App\Http\Controllers\Admin\ListigItemController;
 use App\Http\Controllers\Admin\Auth\AuthenticateSessionOtpController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RentalController;
+use App\Http\Controllers\Admin\ReviewController;
 
 $prefix = (config()->has('admin.url_prefix'))?config()->get('admin.url_prefix'):'admin';
 $middleware = (config()->has('admin.admin_middleware'))?config()->get('admin.admin_middleware'):'auth';
@@ -69,6 +72,7 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
         //widgets
         Route::get('/widgets', [WebadminController::class, 'widgets'])->name('admin.widgets.index');
         Route::post('/widgets/save', [WebadminController::class, 'save_widget'])->name('admin.widgets.save');
+        Route::get('/select2/list', [WebadminController::class, 'select2_list'])->name('admin.select2.list');
         
         //users
         Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('admin.users.edit');
@@ -493,6 +497,39 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
         Route::post('rentals/update', [RentalController::class, 'update'])->name('admin.rentals.update');
         Route::get('rentals/change-status/{id}', [RentalController::class, 'changeStatus'])->name('admin.rentals.change-status');
         Route::get('rentals/show/{id}', [RentalController::class, 'show'])->name('admin.rentals.show');
+        Route::get('rentals/show-on-offer/{id}', [RentalController::class, 'showOnOffer'])->name('admin.rentals.show-on-offer');
+
+        //accommodations
+        Route::get('accommodations', [AccommodationController::class, 'index'])->name('admin.accommodations.index');
+        Route::get('accommodations/create', [AccommodationController::class, 'create'])->name('admin.accommodations.create');
+        Route::get('accommodations/edit/{id}', [AccommodationController::class, 'edit'])->name('admin.accommodations.edit');
+        Route::get('accommodations/destroy/{id}', [AccommodationController::class, 'destroy'])->name('admin.accommodations.destroy');    
+        Route::post('accommodations/store', [AccommodationController::class, 'store'])->name('admin.accommodations.store');
+        Route::post('accommodations/update', [AccommodationController::class, 'update'])->name('admin.accommodations.update');
+        Route::get('accommodations/change-status/{id}', [AccommodationController::class, 'changeStatus'])->name('admin.accommodations.change-status');
+        Route::get('accommodations/show/{id}', [AccommodationController::class, 'show'])->name('admin.accommodations.show');
+        Route::get('accommodations/show-on-offer/{id}', [AccommodationController::class, 'showOnOffer'])->name('admin.accommodations.show-on-offer');
+
+        //packages
+        Route::get('packages', [PackageController::class, 'index'])->name('admin.packages.index');
+        Route::get('packages/create', [PackageController::class, 'create'])->name('admin.packages.create');
+        Route::get('packages/edit/{id}', [PackageController::class, 'edit'])->name('admin.packages.edit');
+        Route::get('packages/destroy/{id}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');    
+        Route::post('packages/store', [PackageController::class, 'store'])->name('admin.packages.store');
+        Route::post('packages/update', [PackageController::class, 'update'])->name('admin.packages.update');
+        Route::get('packages/change-status/{id}', [PackageController::class, 'changeStatus'])->name('admin.packages.change-status');
+        Route::get('packages/show/{id}', [PackageController::class, 'show'])->name('admin.packages.show');
+        Route::get('packages/show-on-offer/{id}', [PackageController::class, 'showOnOffer'])->name('admin.packages.show-on-offer');
+
+        //reviews
+        Route::get('/reviews/edit/{id}', [ReviewController::class, 'edit'])->name('admin.reviews.edit');
+        Route::get('/reviews/destroy/{id}', [ReviewController::class, 'destroy'])->name('admin.reviews.destroy');
+        Route::get('/reviews/create/{type}/{id}', [ReviewController::class, 'create'])->name('admin.reviews.create');
+        Route::post('/reviews/update', [ReviewController::class, 'update'])->name('admin.reviews.update');
+        Route::post('/reviews/store', [ReviewController::class, 'store'])->name('admin.reviews.store');
+        Route::get('/reviews/change-status/{id}', [ReviewController::class, 'changeStatus'])->name('admin.reviews.change-status');
+        Route::get('/reviews/{type}/{id}', [ReviewController::class, 'index'])->name('admin.reviews.index');
+        Route::get('/reviews/show/{id}', [ReviewController::class, 'show'])->name('admin.reviews.show');
 	});
 
     Route::get('/{id?}', [AuthenticateSessionOtpController::class, 'create'])->name('admin.auth.login');

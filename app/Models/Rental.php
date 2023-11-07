@@ -38,6 +38,11 @@ class Rental extends Model
         return $this->belongsTo(Media::class, 'og_image_id');
     }
 
+    public function icon_image(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'icon_image_id');
+    }
+
     public function amenities() :BelongsToMany
     {
         return $this->belongsToMany(Amenity::class, 'rental_amenity', 'rental_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');
@@ -56,5 +61,10 @@ class Rental extends Model
     public function medias() :BelongsToMany
     {
         return $this->belongsToMany(Media::class, 'rental_media', 'rental_id', 'media_id')->withPivot('created_by', 'updated_by', 'created_at', 'updated_at');
+    }
+
+    public function reviews(): MorphMany
+    {
+        return $this->morphMany(Review::class, 'reviewable')->orderBy('priority', 'ASC')->orderBy('created_at', 'DESC');
     }
 }

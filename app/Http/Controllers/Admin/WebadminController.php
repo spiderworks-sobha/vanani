@@ -100,6 +100,17 @@ class WebadminController extends Controller {
         return \Response::json($json);
     }
 
+    public function select2_list(Request $request)
+    {
+        $items = DB::table('listings')->where('listing_name', 'like', $request->q.'%')->orderBy('listing_name')
+            ->get();
+        $json = [];
+        foreach($items as $c){
+            $json[] = ['id'=>$c->id, 'text'=>$c->listing_name];
+        }
+        return \Response::json($json);
+    }
+
     public function unique_roles(Request $request)
     {
         $id = $request->id;

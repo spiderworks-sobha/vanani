@@ -54,26 +54,27 @@ class FrontendPage extends Model
 
     public function getContentAttribute($value)
     {
-        if(Config('admin.services.sections'))
-        {
-            $content = json_decode($value);
-            $output = collect($content)->map(function($item, $key){
+        $content = json_decode($value);
+        $output = collect($content)->map(function($item, $key){
                 
-                if (strpos($key, 'media_id') !== false) {
-                    if($item)
-                        return Media::find((int)$item);
-                    else
-                        return $item;
-                }
+            if (strpos($key, 'media_id') !== false) {
+                if($item)
+                    return Media::find((int)$item);
                 else
-                   return $item;
+                    return $item;
+            }
+            elseif(strpos($key, 'listing_id') !== false){
+                if($item)
+                    return Listing::with(['list', 'list.media'])->find((int)$item);
+                else
+                    return $item;
+            }
+            else
+                return $item;
 
-            });
+        });
 
-            return $output;
-            
-        }
-        return $value;
+        return $output;
     }
 
     public function create_admin_menu()

@@ -42,7 +42,7 @@ class RentalController extends Controller
             else
                 return response()->json(['error' => "Rental not Found!"], 404);
         }
-        catch(\Exception){
+        catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }

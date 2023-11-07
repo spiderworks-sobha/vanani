@@ -65,14 +65,14 @@
                                 <div class="row">
                                     <div class="col">
                                         @if($obj->id)
-                                            <h4 class="page-title">Edit Rental</h4>
+                                            <h4 class="page-title">Edit Package</h4>
                                         @else
-                                            <h4 class="page-title">Create new Rental</h4>
+                                            <h4 class="page-title">Create new Package</h4>
                                         @endif
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admin</a></li>
-                                            <li class="breadcrumb-item"><a href="{{ route($route.'.index') }}">All Rentals</a></li>
-                                            <li class="breadcrumb-item active">@if($obj->id)Edit @else Create new @endif Rental</li>
+                                            <li class="breadcrumb-item"><a href="{{ route($route.'.index') }}">All Packages</a></li>
+                                            <li class="breadcrumb-item active">@if($obj->id)Edit @else Create new @endif Package</li>
                                         </ol>
                                     </div><!--end col-->
                                     @if(auth()->user()->can($permissions['create']))
@@ -328,7 +328,7 @@
                                                         FAQ
                                                     </div>
                                                     <div class="card-body text-center">
-                                                        <a href="{{route('admin.faq.index', [$obj->id, 'Rental'])}}" class="webadmin-open-ajax-popup btn btn-sm btn-warning" title="SET FAQ" data-popup-size="large">@if(count($obj->faq)>0) Update FAQ @else Add FAQ @endif</a>
+                                                        <a href="{{route('admin.faq.index', [$obj->id, 'Package'])}}" class="webadmin-open-ajax-popup btn btn-sm btn-warning" title="SET FAQ" data-popup-size="large">@if(count($obj->faq)>0) Update FAQ @else Add FAQ @endif</a>
                                                     </div>
                                                 </div>
                                                 @endif
@@ -392,13 +392,13 @@
                         id: function() {
                           return $( "#inputId" ).val();
                         },
-                        table: 'rentals',
+                        table: 'packages',
                     }
                   }
                 },
               },
               messages: {
-                "name": "Rental name cannot be blank",
+                "name": "Package name cannot be blank",
                 "title": "Title cannot be blank",
                 slug: {
                   required: "Slug cannot be blank",

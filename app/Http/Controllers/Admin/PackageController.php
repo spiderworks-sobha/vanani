@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\BaseController as Controller;
-use App\Http\Requests\Admin\Rental as AdminRental;
+use App\Http\Requests\Admin\Package as AdminPackage;
 use App\Traits\ResourceTrait;
-use App\Models\Rental;
+use App\Models\Package;
 use App\Models\Tag;
 use Redirect;
 
-class RentalController extends Controller
+class PackageController extends Controller
 {
     use ResourceTrait;
     
@@ -17,11 +17,11 @@ class RentalController extends Controller
     {
         parent::__construct();
     
-        $this->model = new Rental;
-        $this->route .= '.rentals';
-        $this->views .= '.rentals';
+        $this->model = new Package;
+        $this->route .= '.packages';
+        $this->views .= '.packages';
         
-        $this->permissions = ['list'=>'rental_listing', 'create'=>'rental_adding', 'edit'=>'rental_editing', 'delete'=>'rental_deleting'];
+        $this->permissions = ['list'=>'package_listing', 'create'=>'package_adding', 'edit'=>'package_editing', 'delete'=>'package_deleting'];
         $this->resourceConstruct();
 
     }
@@ -34,9 +34,6 @@ class RentalController extends Controller
     {
         $route = $this->route;
         return $this->initDTData($collection)
-            ->addColumn('reviews', function($obj){
-                return '<a href="'.route('admin.reviews.index', ['rentals', $obj->id]).'" target="_blank"><i class="fas fa-eye"></i></a>';
-            })
             ->editColumn('show_on_offer', function($obj) use($route) { 
                 if($obj->show_on_offer == 1)
                 {
@@ -49,7 +46,7 @@ class RentalController extends Controller
                         return '<i class="h5 text-danger fa fa-times-circle"></i>';
                 }
             })
-            ->rawColumns(['action_edit', 'action_delete', 'status', 'show_on_offer', 'reviews']);
+            ->rawColumns(['action_edit', 'action_delete', 'status', 'show_on_offer']);
     }
 
     protected function getSearchSettings(){}
@@ -71,7 +68,7 @@ class RentalController extends Controller
     }
 
 
-    public function store(AdminRental $request)
+    public function store(AdminPackage $request)
     {
         $request->validated();
         $data = $request->all();
@@ -90,30 +87,30 @@ class RentalController extends Controller
             $this->saveTags($this->model, $data['tags']);
         }
 
-        return Redirect::to(route($this->route. '.edit', ['id'=> encrypt($this->model->id)]))->withSuccess('Rental successfully saved!');
+        return Redirect::to(route($this->route. '.edit', ['id'=> encrypt($this->model->id)]))->withSuccess('Package successfully saved!');
     }
 
-    protected function saveAmenities($rental, $amenities=[]): void
+    protected function saveAmenities($accommodation, $amenities=[]): void
     {
         $aminity_array = [];
         if($amenities)
             foreach($amenities as $key=>$aminity){
                 $aminity_array[$aminity] = ['priority'=>$key, 'created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
             }
-        $rental->amenities()->sync($aminity_array);
+        $accommodation->amenities()->sync($aminity_array);
     }
 
-    protected function saveActivities($rental, $activities=[]): void
+    protected function saveActivities($accommodation, $activities=[]): void
     {
         $activity_array = [];
         if($activities)
             foreach($activities as $key=>$activity){
                 $activity_array[$activity] = ['priority'=>$key, 'created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
             }
-        $rental->activities()->sync($activity_array);
+        $accommodation->activities()->sync($activity_array);
     }
 
-    protected function saveRentalMedia($rental, $medias=[]): void
+    protected function saveRentalMedia($accommodation, $medias=[]): void
     {
         $media_array = [];
         if($medias)
@@ -121,20 +118,20 @@ class RentalController extends Controller
                 if(!empty($media))
                     $media_array[$media] = ['created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
             }
-        $rental->medias()->sync($media_array);
+        $accommodation->medias()->sync($media_array);
     }
 
-    protected function saveTags($rental, $tags=[]): void
+    protected function saveTags($accommodation, $tags=[]): void
     {
         $tag_array = [];
         if($tags)
             foreach($tags as $key=>$tag){
                 $tag_array[$tag] = ['created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
             }
-        $rental->tags()->sync($tag_array);
+        $accommodation->tags()->sync($tag_array);
     }
 
-    public function update(AdminRental $request)
+    public function update(AdminPackage $request)
     {
         $request->validated();
         $data = $request->all();
@@ -150,7 +147,7 @@ class RentalController extends Controller
                 $this->saveRentalMedia($obj, $medias);
                 $this->saveTags($obj, $data['tags']);
             }
-            return Redirect::to(route($this->route. '.edit', ['id'=>encrypt($id)]))->withSuccess('Rental successfully updated!');
+            return Redirect::to(route($this->route. '.edit', ['id'=>encrypt($id)]))->withSuccess('Package successfully updated!');
         }
         else 
         {
@@ -165,7 +162,7 @@ class RentalController extends Controller
         $id = decrypt($id);
         $obj = $this->model->find($id);
         if ($obj) {
-            Rental::where('show_on_offer', 1)->update(['show_on_offer'=>0]);
+            Package::where('show_on_offer', 1)->update(['show_on_offer'=>0]);
             $obj->show_on_offer = 1;
             $obj->save();
             return response()->json(['success'=> 'Success']);
