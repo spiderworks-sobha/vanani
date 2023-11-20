@@ -22,7 +22,7 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'slug', 'name', 'category_type', 'short_description', 'description', 'title', 'parent_id', 'banner_image_id', 'featured_image_id', 
+        'slug', 'name', 'category_type', 'tag_line', 'short_description', 'description', 'title', 'parent_id', 'banner_image_id', 'featured_image_id', 
         'browser_title', 'meta_description', 'meta_keywords', 'bottom_description', 'og_title', 'og_description', 'og_image_id', 'extra_js', 
         'is_featured', 'status'
     ];
@@ -84,5 +84,9 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany('App\Models\Category', 'parent_id', 'id');
+    }
+
+    public function blogs(){
+        return $this->hasMany(Blog::class, 'category_id');
     }
 }

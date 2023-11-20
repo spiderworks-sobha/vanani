@@ -78,8 +78,12 @@
                                                                 <input type="text" name="slug" class="form-control" value="{{$obj->slug}}" id="slug">
                                                                 <small class="text-muted">The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
                                                             </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Tag Line</label>
+                                                                <input type="text" name="tag_line" class="form-control" value="{{$obj->tag_line}}" >
+                                                            </div>
                                                             @fieldshow(categories-title)
-                                                            <div class="form-group col-md-12">
+                                                            <div class="form-group col-md-6">
                                                                 <label>Title</label>
                                                                 <input type="text" name="title" class="form-control" value="{{$obj->title}}" required="">
                                                             </div>
