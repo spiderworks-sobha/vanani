@@ -35,6 +35,7 @@ Route::post('verify-otp', [AuthController::class, 'verify_otp'])->name('app.veri
 Route::get('blogs', [BlogController::class, 'index'])->name('api.blogs.index');
 Route::get('blogs/categories', [BlogController::class, 'categories'])->name('api.blogs.categories');
 Route::get('blogs/featured', [BlogController::class, 'featured'])->name('api.blogs.featured');
+Route::get('blogs/category-listing', [BlogController::class, 'category_listing'])->name('api.blogs.category-listing');
 Route::get('blogs/{slug}', [BlogController::class, 'view'])->name('api.blogs.view');
 
 Route::get('settings', [CommonController::class, 'settings'])->name('settings');

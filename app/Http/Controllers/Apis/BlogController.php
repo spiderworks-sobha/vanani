@@ -74,4 +74,9 @@ class BlogController extends Controller
         $blog->visit_count = $blog->visit_count+1;
         $blog->save();
     }
+
+    public function category_listing(){
+        $categories = Category::where('category_type', 'Blog')->whereHas('blogs')->where('status', 1)->orderBy('priority')->get();
+        return new CategoryListingCollection($categories);
+    }
 }

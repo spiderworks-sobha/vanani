@@ -14,15 +14,12 @@ class CategoryListing extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $response = [
+        return [
             'id' => $this->id,
             'slug' => $this->slug,
             'tag_line' => $this->tag_line,
             'title' => $this->title,
+            'blogs' => new BlogListingCollection($this->whenLoaded('blogs'))
         ];
-
-        if($this->blogs)
-            $response['blogs'] = new BlogListingCollection($this->blogs);
-        return $response;
     }
 }
