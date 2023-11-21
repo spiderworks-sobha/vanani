@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Apis\GalleryController;
 use App\Http\Controllers\Apis\AccommodationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -69,4 +70,8 @@ Route::get('packages', [AccommodationController::class, 'index'])->name('package
 Route::get('packages/featured', [AccommodationController::class, 'featured'])->name('packages.featured');
 Route::get('packages/reviews', [AccommodationController::class, 'reviews'])->name('packages.reviews');
 Route::get('packages/{slug}', [AccommodationController::class, 'details'])->name('packages.details');
+
+Route::get('gallery', [GalleryController::class, 'index'])->name('api.gallery.index');
+Route::get('gallery/{slug}', [GalleryController::class, 'view'])->name('api.gallery.view');
+Route::get('gallery/medias/{slug}', [GalleryController::class, 'medias'])->name('api.gallery.medias');
 
