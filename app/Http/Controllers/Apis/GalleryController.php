@@ -13,19 +13,24 @@ use Illuminate\Http\Request;
 class GalleryController extends Controller
 {
     public function index(){
-        $gallery = Gallery::with(['gallery'=>function($gallery){
-            $gallery->take(8);
-        }])->where('status', 1)->orderBy('priority')->get();
+        $gallery = Gallery::where('status', 1)
+                        ->orderBy('priority')
+                        ->get()
+                        ->each(function ($gallery) {
+                            $gallery->load('gallery')->take(8);
+                        });
 
         return new GalleryCollection($gallery);
     }
 
     public function view(Request $request, $slug){
         
-        $gallery = Gallery::without(['gallery'])->where('status', 1)->where('slug', $slug)->first();
+        $gallery = Gallery::where('status', 1)->where('slug', $slug)->first();
 
-        if($gallery)
+        if($gallery){
+            $gallery->gallery = GalleryMedia::where('galleries_id', $gallery->id)->take(8)->get();
             return new ResourcesGallery($gallery);
+        }
         else
             return response()->json(['error' => "Rental not Found!"], 404);
     }
