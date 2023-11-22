@@ -537,14 +537,24 @@
                         return;
                     }
                 }
-                var data = $('#galleryMediaUpdateForm').serialize();
-                $.post("{{route('admin.galleries.media.update')}}", data, function(response){
-                    if(typeof response.success != "undefined"){
-                        $('#gallery-item-'+response.id).replaceWith(response.html);
-                        miniweb_alert('Success!', 'Gallery successfully updated.');
-                        $(".jconfirm-closeIcon").trigger("click");
+                var postData = new FormData( $('#galleryMediaUpdateForm')[0] );
+                $.ajax({
+                    url : "{{route('admin.galleries.media.update')}}",
+                    type: "POST",
+                    data : postData,
+                    processData: false,
+                    contentType: false,
+                    success:function(response, textStatus, jqXHR){
+                        if(typeof response.success != "undefined"){
+                            $('#gallery-item-'+response.id).replaceWith(response.html);
+                            miniweb_alert('Success!', 'Gallery successfully updated.');
+                            $(".jconfirm-closeIcon").trigger("click");
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                        //if fails     
                     }
-                })
+                });
             })
 
             $(document).on('click', '.gallery-item-remove', function(e){
@@ -596,6 +606,14 @@
                 },
               },
             });
+
+            var loadFile = function(event) {
+                var output = document.getElementById('video-cover-image');
+                output.src = URL.createObjectURL(event.target.files[0]);
+                output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+                }
+            };
     </script>
 @parent
 @endsection

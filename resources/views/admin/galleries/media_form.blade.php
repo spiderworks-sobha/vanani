@@ -1,5 +1,5 @@
 <div class="settings-item w-100 confirm-wrap" id="media-item-edit">
-    <form method="POST" action="{{ route('admin.galleries.media.update', ['id'=>$file->id]) }}" id="galleryMediaUpdateForm">
+    <form method="POST" action="{{ route('admin.galleries.media.update', ['id'=>$file->id]) }}" id="galleryMediaUpdateForm" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="gallery_media_id" value="{{encrypt($file->id)}}" />
         <div class="row m-0">
@@ -15,6 +15,17 @@
                 data-popup-size="xlarge"><i class="fas fa-pencil-alt"></i></a>
                         </div>
                     @endif
+                @endif
+                @if($file->media && $file->media->media_type == "Video")
+                <div class="video-cover-image-holder">
+                    <p class="mt-2">Video Preview Image</p>
+                    <div class="video-cover-image">
+                        <img id="video-cover-image" @if($file->video_preview_image) src="{{asset($file->video_preview_image)}}" @endif/>
+                    </div>
+                    <div class="video-cover-upload">
+                        <input type="file" class="form-control" name="video_cover" accept="image/*" onchange="loadFile(event)" />
+                    </div>
+                </div>
                 @endif
             </div>
             <div class="col-md-5 img-details-edit">
