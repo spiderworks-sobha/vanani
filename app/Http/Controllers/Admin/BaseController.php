@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Routing\Controller;
 use Image, File AS FileInput, DB, Auth;
 use Spiderworks\Webadmin\Models\Media;
+use Illuminate\Support\Str;
 
 class BaseController extends Controller {
 
@@ -87,7 +88,7 @@ class BaseController extends Controller {
             
             $file_parts = pathinfo($fileName);
             $file_ext = $file_parts['extension'];
-            $file_name = $file_parts['filename'];
+            $file_name = Str::slug($file_parts['filename']);
             if(!$file_update_name)
             {
                 $i = 0;
@@ -137,7 +138,7 @@ class BaseController extends Controller {
 
         $file_parts = pathinfo($fileName);
         $file_ext = $file_parts['extension'];
-        $file_name = $file_parts['filename'];
+        $file_name = Str::slug($file_parts['filename']);
         $i = 0;
         $extra = uniqid();
         while (file_exists($destinationPath . $file_name . $extra . '.' . $file_ext)) {

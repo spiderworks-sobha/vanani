@@ -13,6 +13,7 @@ use App\Http\Controllers\Apis\ProductController;
 use App\Http\Controllers\Apis\TeamController;
 use App\Http\Controllers\Apis\TestimonialController;
 use App\Http\Controllers\Apis\RentalController;
+use App\Http\Controllers\Apis\SustainableTourismController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,4 +76,6 @@ Route::get('packages/{slug}', [AccommodationController::class, 'details'])->name
 Route::get('gallery', [GalleryController::class, 'index'])->name('api.gallery.index');
 Route::get('gallery/{slug}', [GalleryController::class, 'view'])->name('api.gallery.view');
 Route::get('gallery/medias/{slug}', [GalleryController::class, 'medias'])->name('api.gallery.medias');
+
+Route::get('sustainable-tourism', [SustainableTourismController::class, 'index'])->name('api.sustainable-tourism.index');
 

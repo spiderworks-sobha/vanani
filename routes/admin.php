@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RentalController;
 use App\Http\Controllers\Admin\ReviewController;
+use App\Http\Controllers\Admin\SustainableTourismProcessController;
 
 $prefix = (config()->has('admin.url_prefix'))?config()->get('admin.url_prefix'):'admin';
 $middleware = (config()->has('admin.admin_middleware'))?config()->get('admin.admin_middleware'):'auth';
@@ -530,6 +531,16 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
         Route::get('/reviews/change-status/{id}', [ReviewController::class, 'changeStatus'])->name('admin.reviews.change-status');
         Route::get('/reviews/{type}/{id}', [ReviewController::class, 'index'])->name('admin.reviews.index');
         Route::get('/reviews/show/{id}', [ReviewController::class, 'show'])->name('admin.reviews.show');
+
+        //sustainable-tourism-processes
+        Route::get('sustainable-tourism-processes', [SustainableTourismProcessController::class, 'index'])->name('admin.sustainable-tourism-processes.index');
+        Route::get('sustainable-tourism-processes/create', [SustainableTourismProcessController::class, 'create'])->name('admin.sustainable-tourism-processes.create');
+        Route::get('sustainable-tourism-processes/edit/{id}', [SustainableTourismProcessController::class, 'edit'])->name('admin.sustainable-tourism-processes.edit');
+        Route::get('sustainable-tourism-processes/destroy/{id}', [SustainableTourismProcessController::class, 'destroy'])->name('admin.sustainable-tourism-processes.destroy');    
+        Route::post('sustainable-tourism-processes/store', [SustainableTourismProcessController::class, 'store'])->name('admin.sustainable-tourism-processes.store');
+        Route::post('sustainable-tourism-processes/update', [SustainableTourismProcessController::class, 'update'])->name('admin.sustainable-tourism-processes.update');
+        Route::get('sustainable-tourism-processes/change-status/{id}', [SustainableTourismProcessController::class, 'changeStatus'])->name('admin.sustainable-tourism-processes.change-status');
+        Route::get('sustainable-tourism-processes/show/{id}', [SustainableTourismProcessController::class, 'show'])->name('admin.sustainable-tourism-processes.show');
 	});
 
     Route::get('/{id?}', [AuthenticateSessionOtpController::class, 'create'])->name('admin.auth.login');

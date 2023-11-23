@@ -134,14 +134,9 @@ trait ResourceTrait {
 
 	protected function _store($data)
 	{
+        $data['status'] = isset($data['status'])?1:0;
         $data['is_featured'] = isset($data['is_featured'])?1:0;
-        if(empty($data['priority'])){
-            $last = $this->model->select('id')->orderBy('id', 'DESC')->first();
-            $data['priority'] = ($last)?$last->id+1:1;
-        }
-        else
-            $data['priority'] = 0;
-            
+        $data['priority'] = (!empty($data['priority']))?$data['priority']:0;    
 		$this->model->fill($data);
 		$this->model->save();
 		return $this->redirect('created', 'success', 'edit', [encrypt($this->model->id)]);
@@ -165,6 +160,7 @@ trait ResourceTrait {
 
     protected function _update($id, $data) {
         if($obj = $this->model->find($id)){
+            $data['status'] = isset($data['status'])?1:0;
             $data['is_featured'] = isset($data['is_featured'])?1:0;
             $data['priority'] = (!empty($data['priority']))?$data['priority']:0;
         	$obj->update($data);
