@@ -13,6 +13,12 @@
             <label>Description</label>
             <textarea name="content[section1_description]" class="form-control">@if($obj->content && isset($obj->content['section1_description'])) {{$obj->content['section1_description']}} @endif</textarea>
         </div>
+        <div class="form-group col-md-12">
+            @php
+                $media_id_section1 = ($obj->content && isset($obj->content['media_id_section1']))?$obj->content['media_id_section1']:null;
+            @endphp
+            @include('admin.media.set_file', ['file'=>$media_id_section1, 'title'=>'Image Banner', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'content[media_id_section1]', 'id'=>'media_id_section1', 'display'=> 'horizontal'])                                             
+        </div><!--end form-group-->
         <div class="form-group col-md-4">
             <label>Bottom Link Text</label>
             <input type="text" name="content[section1_button_text]" class="form-control" @if($obj->content && isset($obj->content['section1_button_text'])) value="{{$obj->content['section1_button_text']}}" @endif >
