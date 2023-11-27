@@ -78,4 +78,5 @@ Route::get('gallery/{slug}', [GalleryController::class, 'view'])->name('api.gall
 Route::get('gallery/medias/{slug}', [GalleryController::class, 'medias'])->name('api.gallery.medias');
 
 Route::get('sustainable-tourism', [SustainableTourismController::class, 'index'])->name('api.sustainable-tourism.index');
+Route::get('sustainable-tourism/{slug}', [SustainableTourismController::class, 'view'])->name('api.sustainable-tourism.view');
 

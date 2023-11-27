@@ -70,22 +70,73 @@
                                                 <div class="card-body">
                                                     <div data-simplebar>
                                                         <div class="row m-0">
+                                                            <div class="form-group col-md-6">
+                                                                <label>Name</label>
+                                                                <input type="text" name="name" class="form-control @if(!$obj->id) copy-name @endif" value="{{$obj->name}}" required="">
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label class="">Slug (for url)</label>
+                                                                <input type="text" name="slug" class="form-control" value="{{$obj->slug}}" id="slug">
+                                                                <small class="text-muted">The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
+                                                            </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Title</label>
-                                                                <input type="text" name="title" class="form-control" value="{{$obj->title}}">
+                                                                <input type="text" name="title" class="form-control" value="{{$obj->title}}" >
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Short Description</label>
-                                                                <textarea class="form-control" name="short_description">{{$obj->short_description}}</textarea>
+                                                                <textarea name="short_description" class="form-control" rows="2" id="short_description">{{$obj->short_description}}</textarea>
                                                             </div>
                                                             <div class="form-group col-md-12">
-                                                                <label>Description</label>
-                                                                <textarea class="form-control editor" name="description">{{$obj->description}}</textarea>
+                                                                <label>Content</label>
+                                                                <textarea name="content" class="form-control editor" id="content">{{$obj->content}}</textarea>
                                                             </div>
                                                         </div>
                                                     </div>                                           
                                                 </div><!--end card-body-->
                                             </div><!--end card-->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    SEO
+                                                </div>
+                                                <div class="card-body row">
+                                                    <div class="form-group col-md-12">
+                                                        <label>Bottom content</label>
+                                                        <textarea name="bottom_description" class="form-control editor" id="bottom_description">{{$obj->bottom_description}}</textarea>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Browser title</label>
+                                                        <input type="text" class="form-control" name="browser_title" id="browser_title" value="{{$obj->browser_title}}">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="">Meta Keywords</label>
+                                                        <textarea name="meta_keywords" class="form-control" rows="3" id="meta_keywords">{{$obj->meta_keywords}}</textarea>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="">Meta description</label>
+                                                        <textarea name="meta_description" class="form-control" rows="3" id="meta_description">{{$obj->meta_description}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Extra Data
+                                                </div>
+                                                <div class="card-body row">
+                                                    <div class="form-group col-md-12">
+                                                        <label>OG Title</label>
+                                                        <input type="text" class="form-control" name="og_title" id="og_title" value="{{$obj->og_title}}">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="">OG Description</label>
+                                                        <textarea name="og_description" class="form-control" rows="3" id="og_description">{{$obj->og_description}}</textarea>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="">Extra Js</label>
+                                                        <textarea name="extra_js" class="form-control" rows="3" id="extra_js">{{$obj->extra_js}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="card">
@@ -151,7 +202,15 @@
                                             </div>
                                             <div class="card">
                                                 <div class="card-header">
-                                                    Icon
+                                                    Featured Image
+                                                </div>
+                                                <div class="card-body">
+                                                    @include('admin.media.set_file', ['file'=>$obj->featured_image, 'title'=>'Featured Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'featured_image_id'])
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Icon Image
                                                 </div>
                                                 <div class="card-body">
                                                     @include('admin.media.set_file', ['file'=>$obj->icon, 'title'=>'Icon Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'icon_image_id'])
@@ -159,10 +218,18 @@
                                             </div>
                                             <div class="card">
                                                 <div class="card-header">
-                                                    Featured Image
+                                                    Banner Image
                                                 </div>
                                                 <div class="card-body">
-                                                    @include('admin.media.set_file', ['file'=>$obj->featured_image, 'title'=>'Featured Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'featured_image_id'])
+                                                    @include('admin.media.set_file', ['file'=>$obj->banner_image, 'title'=>'Banner Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'banner_image_id'])
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    OG Image
+                                                </div>
+                                                <div class="card-body">
+                                                    @include('admin.media.set_file', ['file'=>$obj->og_image, 'title'=>'OG Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'og_image_id'])
                                                 </div>
                                             </div>
                                         </div>    
@@ -180,15 +247,32 @@
 @section('footer')
     <script type="text/javascript">
         var validator = $('#InputFrm').validate({
-              rules: 
-              {
+            ignore: [],
+            rules: {
                 "name": "required",
+                slug: {
+                  required: true,
+                  remote: {
+                      url: "{{route('admin.unique-slug')}}",
+                      data: {
+                        id: function() {
+                          return $( "#inputId" ).val();
+                        },
+                        table: 'sustainable_tourism_processes',
+                    }
+                  }
+                },
+                title: "required",
               },
-              messages: 
-              {
-                "name": "Name cannot be blank",
+              messages: {
+                "name": "Sustainable Tourism Process cannot be blank",
+                slug: {
+                  required: "Slug cannot be blank",
+                  remote: "Slug is already in use",
+                },
+                "title": "Title cannot be blank",
               },
-        });
+            });
     </script>
 @parent
 @endsection

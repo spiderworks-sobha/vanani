@@ -32,4 +32,14 @@ class SustainableTourismProcess extends Model
         return $this->belongsTo(Media::class, 'icon_image_id');
     }
 
+    public function banner_image()
+    {
+        return $this->belongsTo(Media::class, 'banner_image_id');
+    }
+
+    public function og_image()
+    {
+        return $this->belongsTo(Media::class, 'og_image_id');
+    }
+
 }

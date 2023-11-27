@@ -91,5 +91,16 @@
             <label>Title</label>
             <input type="text" name="content[section3_title]" class="form-control" @if($obj->content && isset($obj->content['section3_title'])) value="{{$obj->content['section3_title']}}" @endif >
         </div>       
-    </fieldset><!--end fieldset-->                                       
+    </fieldset><!--end fieldset-->
+    <h3>Detail Page</h3>
+    <fieldset class="row">                                                                               
+        <div class="form-group col-md-12">
+            <label>Other process listing title</label>
+            <input type="text" name="content[detail_page_other_process_listing_title]" class="form-control" @if($obj->content && isset($obj->content['detail_page_other_process_listing_title'])) value="{{$obj->content['detail_page_other_process_listing_title']}}" @endif >
+        </div>
+        <div class="form-group col-md-12">
+            <label>Other process listing short description</label>
+            <textarea name="content[detail_page_other_process_listing_short_description]" class="form-control">@if($obj->content && isset($obj->content['detail_page_other_process_listing_short_description'])) {{$obj->content['detail_page_other_process_listing_short_description']}} @endif</textarea>
+        </div>       
+    </fieldset><!--end fieldset-->                                
 </div><!--end form-->

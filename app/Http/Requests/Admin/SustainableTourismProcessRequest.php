@@ -21,8 +21,11 @@ class SustainableTourismProcessRequest extends FormRequest
      */
     public function rules(): array
     {
+        $ignoreId = ($this->input('id'))?decrypt($this->input('id')):NULL;
         return [
-            'title' => 'required|max:250'
+            'name' => "required|max:250",
+            'title' => "required|max:250",
+            'slug' => "required|max:250|unique:sustainable_tourism_processes,slug,{$ignoreId},id,deleted_at,NULL",
         ];
     }
 }
