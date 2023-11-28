@@ -14,6 +14,20 @@ class FrontendPage extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'slug' => $this->slug,
+            'name' => $this->name,
+            'title' => $this->title,
+            'content' => new FrontendPageContentResource($this->content),
+            'browser_title' => $this->browser_title,
+            'og_title' => $this->og_title,
+            'meta_description' => $this->meta_description,
+            'og_description' => $this->og_description,
+            'og_image' => new Media($this->og_image),
+            'meta_keywords' => $this->meta_keywords,
+            'bottom_description' => $this->bottom_description,
+            'extra_js' => $this->extra_js,
+        ];
     }
 }
