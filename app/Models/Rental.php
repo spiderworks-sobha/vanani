@@ -65,7 +65,7 @@ class Rental extends Model
 
     public function medias() :BelongsToMany
     {
-        return $this->belongsToMany(Media::class, 'rental_media', 'rental_id', 'media_id')->withPivot('created_by', 'updated_by', 'created_at', 'updated_at');
+        return $this->belongsToMany(Media::class, 'rental_media', 'rental_id', 'media_id')->withPivot('id', 'created_by', 'updated_by', 'created_at', 'updated_at');
     }
 
     public function reviews(): MorphMany

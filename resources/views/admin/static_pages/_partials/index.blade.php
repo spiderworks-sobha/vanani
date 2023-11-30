@@ -108,6 +108,12 @@
                                                         <fieldset class="row">
                                                             <div class="form-group col-md-12">
                                                                 @php
+                                                                    $media_id_2_left_image = ($obj->content && isset($obj->content['media_id_2_left_image']))?$obj->content['media_id_2_left_image']:null;
+                                                                @endphp
+                                                                @include('admin.media.set_file', ['file'=>$media_id_2_left_image, 'title'=>'Video Cover', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'content[media_id_2_left_image]', 'id'=>'media_id_2_left_image', 'display'=> 'horizontal'])                                             
+                                                            </div><!--end form-group-->
+                                                            <div class="form-group col-md-12">
+                                                                @php
                                                                     $media_id_2_left = ($obj->content && isset($obj->content['media_id_2_left']))?$obj->content['media_id_2_left']:null;
                                                                 @endphp
                                                                 @include('admin.media.set_file', ['file'=>$media_id_2_left, 'title'=>'Video', 'popup_type'=>'single_image', 'type'=>'Video', 'holder_attr'=>'content[media_id_2_left]', 'id'=>'content_image_2_left', 'display'=> 'horizontal'])                                             

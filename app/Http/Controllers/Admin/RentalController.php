@@ -7,7 +7,9 @@ use App\Http\Requests\Admin\Rental as AdminRental;
 use App\Traits\ResourceTrait;
 use App\Models\Rental;
 use App\Models\Tag;
-use Redirect;
+use App\Models\RentalMedia;
+use Symfony\Component\HttpFoundation\Request;
+use Redirect, View;
 
 class RentalController extends Controller
 {
@@ -115,13 +117,14 @@ class RentalController extends Controller
 
     protected function saveRentalMedia($rental, $medias=[]): void
     {
-        $media_array = [];
-        if($medias)
+        if($medias){
+            $media_array = [];
             foreach($medias as $key=>$media){
                 if(!empty($media))
                     $media_array[$media] = ['created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
             }
-        $rental->medias()->sync($media_array);
+            $rental->medias()->attach($media_array);
+        }
     }
 
     protected function saveTags($rental, $tags=[]): void
@@ -171,5 +174,40 @@ class RentalController extends Controller
             return response()->json(['success'=> 'Success']);
         }
         return $this->redirect('notfound');
+    }
+
+    public function media_edit($id){
+        $id = decrypt($id);
+		if($file = RentalMedia::find($id))
+		{
+			return view($this->views.'.media_form', array('file'=>$file));
+		}
+    }
+
+    public function media_update(Request $request){
+        $data = $request->all();
+        $id = decrypt($data['rental_media_id']);
+        if($obj = RentalMedia::find($id)){
+            $obj->media_id = $data['media_id'];
+            $obj->title = $data['media_title'];
+            $obj->description = $data['media_description'];
+            $obj->save();
+
+            $file_view = View::make($this->views.'.media', [ 'item' => $obj->media, 'rental_media_id'=>$obj->id]);
+            $file_html = $file_view->render();
+            return response()->json(['success'=>1, 'html'=>$file_html, 'id'=>$obj->id]);
+
+        } else {
+            return $this->redirect('notfound');
+        }
+    }
+
+    public function media_destroy($id){
+        $id = decrypt($id);
+		if($file = RentalMedia::find($id))
+		{
+            $file->delete();
+            return response()->json(['success'=>1]);
+		}
     }
 }

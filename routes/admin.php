@@ -499,6 +499,9 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
         Route::get('rentals/change-status/{id}', [RentalController::class, 'changeStatus'])->name('admin.rentals.change-status');
         Route::get('rentals/show/{id}', [RentalController::class, 'show'])->name('admin.rentals.show');
         Route::get('rentals/show-on-offer/{id}', [RentalController::class, 'showOnOffer'])->name('admin.rentals.show-on-offer');
+        Route::get('rentals/media/edit/{id}', [RentalController::class, 'media_edit'])->name('admin.rentals.media.edit');
+        Route::post('rentals/media/update', [RentalController::class, 'media_update'])->name('admin.rentals.media.update');
+        Route::get('rentals/media/destroy/{id}', [RentalController::class, 'media_destroy'])->name('admin.rentals.media.destroy');
 
         //accommodations
         Route::get('accommodations', [AccommodationController::class, 'index'])->name('admin.accommodations.index');

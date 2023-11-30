@@ -115,25 +115,103 @@
                                                                 <small class="text-muted">The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
                                                             </div>
                                                             <div class="form-group col-md-6">
+                                                                <label>Tagline</label>
+                                                                <input type="text" name="tagline" class="form-control" value="{{$obj->tagline}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-6">
                                                                 <label>Title</label>
                                                                 <input type="text" name="title" class="form-control" value="{{$obj->title}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Whatsapp Number</label>
+                                                                <input type="text" name="whatsapp_number" class="form-control" value="{{$obj->whatsapp_number}}" >
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label>Price Description</label>
                                                                 <input type="text" name="price_description" class="form-control" value="{{$obj->price_description}}" >
                                                             </div>
                                                             <div class="form-group col-md-12">
-                                                                <label>Short Description</label>
-                                                                <textarea name="short_description" class="form-control" rows="2" id="short_description">{{$obj->short_description}}</textarea>
+                                                                <label>Terms & Condiion link</label>
+                                                                <input type="text" name="terms_and_condition_link" class="form-control" value="{{$obj->terms_and_condition_link}}" >
                                                             </div>
                                                             <div class="form-group col-md-12">
-                                                                <label>Content</label>
-                                                                <textarea name="content" class="form-control editor" id="content">{{$obj->content}}</textarea>
+                                                                <label>Short Description</label>
+                                                                <textarea name="short_description" class="form-control" rows="2" id="short_description">{{$obj->short_description}}</textarea>
                                                             </div>
                                                         </div>
                                                     </div>                                           
                                                 </div><!--end card-body-->
                                             </div><!--end card-->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Content
+                                                </div>
+                                                <div class="card-body row">
+                                                    <div class="form-group col-md-6">
+                                                        <label>Featured Tagline</label>
+                                                        <input type="text" name="features_tagline" class="form-control" value="{{$obj->features_tagline}}" >
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Features Title</label>
+                                                        <input type="text" name="features_title" class="form-control" value="{{$obj->features_title}}" >
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Offer Tagline</label>
+                                                        <input type="text" name="offer_tagline" class="form-control" value="{{$obj->offer_tagline}}" >
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Offer Title</label>
+                                                        <input type="text" name="offer_headering" class="form-control" value="{{$obj->offer_headering}}" >
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Content Tagline</label>
+                                                        <input type="text" class="form-control" name="content_tagline" id="content_tagline" value="{{$obj->content_tagline}}">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Content</label>
+                                                        <textarea name="content" class="form-control editor" id="content">{{$obj->content}}</textarea>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label class="">Policy Tagline</label>
+                                                        <input type="text" class="form-control" name="policy_tagline" id="policy_tagline" value="{{$obj->policy_tagline}}">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label class="">Policy</label>
+                                                        <textarea name="policy_description" class="form-control editor" id="policy_description">{{$obj->policy_description}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Extra Content
+                                                </div>
+                                                <div class="card-body row">
+                                                    <div class="form-group col-md-6">
+                                                        <label>Title 1</label>
+                                                        <input type="text" class="form-control" name="extra_data_title1"  value="{{$obj->extra_data_title1}}">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Short Description 1</label>
+                                                        <input type="text" class="form-control" name="extra_data_description1" value="{{$obj->extra_data_description1}}">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Title 2</label>
+                                                        <input type="text" class="form-control" name="extra_data_title2"  value="{{$obj->extra_data_title2}}">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Short Description 2</label>
+                                                        <input type="text" class="form-control" name="extra_data_description2" value="{{$obj->extra_data_description2}}">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Title 3</label>
+                                                        <input type="text" class="form-control" name="extra_data_title3" value="{{$obj->extra_data_title3}}">
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>Short Description 3</label>
+                                                        <input type="text" class="form-control" name="extra_data_description3" value="{{$obj->extra_data_description3}}">
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="card">
                                                 <div class="card-header">
                                                     Amenities
@@ -168,9 +246,7 @@
                                                     <div class="row add-multiple-image">
                                                         @if(count($obj->medias)>0)
                                                             @foreach($obj->medias as $key=>$media)
-                                                                <div class="col-md-4 mb-2">
-                                                                    @include('admin.media.set_file', ['file'=>$media, 'title'=>'Rental Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_edit_'.$key])
-                                                                </div>
+                                                                @include('admin.rentals.media', ['item'=>$media, 'rental_media_id'=>$media->pivot->id])
                                                             @endforeach
                                                         @endif
                                                         <div class="col-md-4 mb-2">
@@ -332,28 +408,7 @@
                                                     </div>
                                                 </div>
                                                 @endif
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    Extra Data
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="form-group col-md-12">
-                                                        <label>Tag</label>
-                                                        <input type="text" class="form-control" name="extra_tag" id="extra_tag" value="{{$obj->extra_tag}}">
-                                                    </div>
-                                                    <div class="form-group col-md-12">
-                                                        <label>Title</label>
-                                                        <input type="text" class="form-control" name="extra_title" id="extra_title" value="{{$obj->extra_title}}">
-                                                    </div>
-                                                    <div class="form-group col-md-12">
-                                                        <label class="">Description</label>
-                                                        <textarea name="extra_short_description" class="form-control" rows="3" id="extra_short_description">{{$obj->extra_short_description}}</textarea>
-                                                    </div>
-                                                    <div class="form-group col-md-12">
-                                                        @include('admin.media.set_file', ['file'=>$obj->extra_image, 'title'=>'Extra Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'extra_image_id'])
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                             <div class="card">
                                                 <div class="card-header">
                                                     Icon Image
@@ -461,6 +516,54 @@
                     content = content.replaceAll("id_holder", img_id);
                     $(content).insertBefore('#add-new-media-wrap');
                     idInc++;
+                })
+
+                $(document).on('click', '#gallery-media-update-form', function(){
+                    if($('#galleryMediaUpdateForm #gallery-youtube-url').length){
+                        if($('#galleryMediaUpdateForm #gallery-youtube-url').val() == ""){
+                            miniweb_alert('Alert!', 'Youtube url cannot be null');
+                            return;
+                        }
+                    }
+                    var postData = new FormData( $('#galleryMediaUpdateForm')[0] );
+                    $.ajax({
+                        url : "{{route('admin.rentals.media.update')}}",
+                        type: "POST",
+                        data : postData,
+                        processData: false,
+                        contentType: false,
+                        success:function(response, textStatus, jqXHR){
+                            if(typeof response.success != "undefined"){
+                                $('#gallery-item-'+response.id).replaceWith(response.html);
+                                miniweb_alert('Success!', 'Gallery successfully updated.');
+                                $(".jconfirm-closeIcon").trigger("click");
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            //if fails     
+                        }
+                    });
+                })
+
+                $(document).on('click', '.gallery-item-remove', function(e){
+                    e.preventDefault();
+                    var that = $(this);
+                    var delete_url = that.attr('href');
+                    $.confirm({
+                        title: 'Confirm!',
+                        content: 'Are you sure to delete this?',
+                        buttons: {
+                            confirm:{
+                                btnClass: 'btn-blue',
+                                action: function(){
+                                    that.parents('.gallery-item').remove();
+                                    $.get(delete_url);
+                                }
+                            },
+                            cancel: function () {
+                            },
+                        }
+                    });
                 })
             })
     </script>
