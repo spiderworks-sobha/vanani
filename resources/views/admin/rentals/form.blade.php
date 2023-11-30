@@ -127,10 +127,14 @@
                                                                 <input type="text" name="whatsapp_number" class="form-control" value="{{$obj->whatsapp_number}}" >
                                                             </div>
                                                             <div class="form-group col-md-6">
+                                                                <label>Whatsapp Text</label>
+                                                                <input type="text" name="whatsapp_text" class="form-control" value="{{$obj->whatsapp_text}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-6">
                                                                 <label>Price Description</label>
                                                                 <input type="text" name="price_description" class="form-control" value="{{$obj->price_description}}" >
                                                             </div>
-                                                            <div class="form-group col-md-12">
+                                                            <div class="form-group col-md-6">
                                                                 <label>Terms & Condiion link</label>
                                                                 <input type="text" name="terms_and_condition_link" class="form-control" value="{{$obj->terms_and_condition_link}}" >
                                                             </div>
@@ -148,7 +152,7 @@
                                                 </div>
                                                 <div class="card-body row">
                                                     <div class="form-group col-md-6">
-                                                        <label>Featured Tagline</label>
+                                                        <label>Features Tagline</label>
                                                         <input type="text" name="features_tagline" class="form-control" value="{{$obj->features_tagline}}" >
                                                     </div>
                                                     <div class="form-group col-md-6">
@@ -408,7 +412,14 @@
                                                     </div>
                                                 </div>
                                                 @endif
-                                            
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Featured Video
+                                                </div>
+                                                <div class="card-body">
+                                                    @include('admin.media.set_file', ['file'=>$obj->featured_video, 'title'=>'Featured Video', 'popup_type'=>'single_image', 'type'=>'Video', 'holder_attr'=>'featured_video_id'])
+                                                </div>
+                                            </div>
                                             <div class="card">
                                                 <div class="card-header">
                                                     Icon Image

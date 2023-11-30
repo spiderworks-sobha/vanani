@@ -85,6 +85,9 @@ class RentalController extends Controller
         }
         $this->model->fill($data);
         if($this->model->save()){
+            $data['amenity_to'] = !empty($data['amenity_to'])?$data['amenity_to']:[];
+            $data['activity_to'] = !empty($data['activity_to'])?$data['activity_to']:[];
+            $data['tags'] = !empty($data['tags'])?$data['tags']:[];
             $this->saveAmenities($this->model, $data['amenity_to']);
             $this->saveActivities($this->model, $data['activity_to']);
             $medias = (!empty($data['rental_media']))?$data['rental_media']:[];
@@ -147,6 +150,9 @@ class RentalController extends Controller
             $data['is_featured'] = isset($data['is_featured'])?1:0;
             $data['priority'] = !empty($data['priority'])?$data['priority']:0;
             if($obj->update($data)){
+                $data['amenity_to'] = !empty($data['amenity_to'])?$data['amenity_to']:[];
+                $data['activity_to'] = !empty($data['activity_to'])?$data['activity_to']:[];
+                $data['tags'] = !empty($data['tags'])?$data['tags']:[];
                 $this->saveAmenities($obj, $data['amenity_to']);
                 $this->saveActivities($obj, $data['activity_to']);
                 $medias = (!empty($data['rental_media']))?$data['rental_media']:[];
