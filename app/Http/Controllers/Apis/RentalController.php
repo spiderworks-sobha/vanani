@@ -53,7 +53,7 @@ class RentalController extends Controller
 
     public function details(Request $request, string $slug){
         try{
-            $rental = Rental::with(['featured_image', 'banner_image', 'og_image', 'featured_video', 'amenities', 'activities', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
+            $rental = Rental::with(['featured_image', 'banner_image', 'og_image', 'featured_video', 'amenities', 'activities', 'tags', 'medias', 'faq', 'reviews'])->where('slug', $slug)->where('status', 1)->first();
             if($rental)
                 return new ResourcesRental($rental);
             else

@@ -50,6 +50,7 @@ class Rental extends JsonResource
             //'activities' => new ActivityCollection($this->activities),
             'amenities' => new AmenityCollection($this->amenities),
             'medias' => new MediaCollection($this->medias),
+            'reviews' => new ReviewCollection($this->reviews),
             'tags' => new TagCollection($this->tags),
             'faq' => new FaqCollection($this->faq)
         ];
