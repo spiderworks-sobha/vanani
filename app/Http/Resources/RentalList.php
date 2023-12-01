@@ -23,6 +23,8 @@ class RentalList extends JsonResource
             'price_description' => $this->price_description,
             'short_description' => $this->short_description,
             'featured_image' => new Media($this->featured_image),
+            'featured_medias' => new MediaCollection($this->whenLoaded('featured_medias')),
+            'medias' => new MediaCollection($this->medias),
         ];
     }
 }

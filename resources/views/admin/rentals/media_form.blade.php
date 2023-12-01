@@ -15,6 +15,10 @@
                     <label>Description</label>
                     <textarea name="media_description" class="form-control" rows="3" >{{$file->description}}</textarea>
                 </div>
+                <div class="custom-control custom-switch switch-primary">
+                    <input type="checkbox" class="custom-control-input" value="1" id="media_is_featured" name="is_featured" @if($file->is_featured == 1) checked="" @endif>
+                    <label class="custom-control-label" for="media_is_featured">Is featured?</label>
+                </div>
             </div>
             <div class="col-md-12 text-right">
                 <button type="button" class="btn btn-soft-primary" id="gallery-media-update-form">Save</button> 

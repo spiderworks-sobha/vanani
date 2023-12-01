@@ -197,6 +197,7 @@ class RentalController extends Controller
             $obj->media_id = $data['media_id'];
             $obj->title = $data['media_title'];
             $obj->description = $data['media_description'];
+            $obj->is_featured = isset($data['is_featured'])?1:0;
             $obj->save();
 
             $file_view = View::make($this->views.'.media', [ 'item' => $obj->media, 'rental_media_id'=>$obj->id]);

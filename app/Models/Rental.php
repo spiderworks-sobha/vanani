@@ -68,6 +68,10 @@ class Rental extends Model
         return $this->belongsToMany(Media::class, 'rental_media', 'rental_id', 'media_id')->withPivot('id', 'created_by', 'updated_by', 'created_at', 'updated_at');
     }
 
+    public function featured_medias(){
+        return $this->belongsToMany(Media::class, 'rental_media', 'rental_id', 'media_id')->withPivot('id', 'created_by', 'updated_by', 'created_at', 'updated_at')->wherePivot('is_featured', 1);
+    }
+
     public function reviews(): MorphMany
     {
         return $this->morphMany(Review::class, 'reviewable')->orderBy('priority', 'ASC')->orderBy('created_at', 'DESC');
