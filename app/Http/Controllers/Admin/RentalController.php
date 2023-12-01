@@ -87,15 +87,28 @@ class RentalController extends Controller
         if($this->model->save()){
             $data['amenity_to'] = !empty($data['amenity_to'])?$data['amenity_to']:[];
             $data['activity_to'] = !empty($data['activity_to'])?$data['activity_to']:[];
+            $data['feature_to'] = !empty($data['feature_to'])?$data['feature_to']:[];
             $data['tags'] = !empty($data['tags'])?$data['tags']:[];
             $this->saveAmenities($this->model, $data['amenity_to']);
             $this->saveActivities($this->model, $data['activity_to']);
+            $this->saveFeatures($this->model, $data['feature_to']);
             $medias = (!empty($data['rental_media']))?$data['rental_media']:[];
             $this->saveRentalMedia($this->model, $medias);
             $this->saveTags($this->model, $data['tags']);
         }
 
         return Redirect::to(route($this->route. '.edit', ['id'=> encrypt($this->model->id)]))->withSuccess('Rental successfully saved!');
+    }
+
+    protected function saveFeatures($rental, $features=[]): void
+    {
+        $feature_array = [];
+        if($features)
+            foreach($features as $key=>$feature){
+                $feature_array[$feature] = ['priority'=>$key, 'created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
+            }
+
+        $rental->features()->sync($feature_array);
     }
 
     protected function saveAmenities($rental, $amenities=[]): void
@@ -152,9 +165,11 @@ class RentalController extends Controller
             if($obj->update($data)){
                 $data['amenity_to'] = !empty($data['amenity_to'])?$data['amenity_to']:[];
                 $data['activity_to'] = !empty($data['activity_to'])?$data['activity_to']:[];
+                $data['feature_to'] = !empty($data['feature_to'])?$data['feature_to']:[];
                 $data['tags'] = !empty($data['tags'])?$data['tags']:[];
                 $this->saveAmenities($obj, $data['amenity_to']);
                 $this->saveActivities($obj, $data['activity_to']);
+                $this->saveFeatures($obj, $data['feature_to']);
                 $medias = (!empty($data['rental_media']))?$data['rental_media']:[];
                 $this->saveRentalMedia($obj, $medias);
                 $this->saveTags($obj, $data['tags']);

@@ -58,6 +58,11 @@ class Rental extends Model
         return $this->belongsToMany(Activity::class, 'rental_activity', 'rental_id', 'activity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');
     }
 
+    public function features() :BelongsToMany
+    {
+        return $this->belongsToMany(Amenity::class, 'rental_feature', 'rental_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');
+    }
+
     public function tags() :BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'rental_tag', 'rental_id', 'tag_id')->withPivot('created_by', 'updated_by', 'created_at', 'updated_at');
@@ -68,7 +73,8 @@ class Rental extends Model
         return $this->belongsToMany(Media::class, 'rental_media', 'rental_id', 'media_id')->withPivot('id', 'created_by', 'updated_by', 'created_at', 'updated_at');
     }
 
-    public function featured_medias(){
+    public function featured_medias() :BelongsToMany
+    {
         return $this->belongsToMany(Media::class, 'rental_media', 'rental_id', 'media_id')->withPivot('id', 'created_by', 'updated_by', 'created_at', 'updated_at')->wherePivot('is_featured', 1);
     }
 

@@ -17,7 +17,7 @@ class AccommodationController extends Controller
         try{
             $data = $request->all();
             $limit = !empty($data['limit'])?(int)$data['limit']:10;
-            $accommodations = Accommodation::with(['featured_image'])->where('status', 1);
+            $accommodations = Accommodation::with(['featured_medias', 'featured_features'])->where('status', 1);
             if($tags = $request->tags){
                 $accommodations->whereHas('tags', function($query) use($tags){
                     $query->whereIn('accommodation_tag.tag_id', $tags);
@@ -31,25 +31,10 @@ class AccommodationController extends Controller
         }
     }
 
-    public function featured(Request $request){
-        try{
-            $accommodations = Accommodation::with(['featured_image'])->where('status', 1);
-            if($tags = $request->tags){
-                $accommodations->whereHas('tags', function($query) use($tags){
-                    $query->whereIn('accommodation_tag.tag_id', $tags);
-                });
-            }
-            $accommodations = $accommodations->where('is_featured', 1)->orderBy('priority', 'DESC')->get();
-            return new AccommodationListCollection($accommodations);
-        }
-        catch(\Exception $e){
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
 
     public function details(Request $request, string $slug){
         try{
-            $accommodation = Accommodation::with(['featured_image', 'banner_image', 'og_image', 'amenities', 'activities', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
+            $accommodation = Accommodation::with(['featured_image', 'banner_image', 'features_image', 'amenities_image', 'activities_image', 'featured_video', 'reviews', 'og_image', 'amenities', 'activities', 'features', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
             if($accommodation)
                 return new ResourcesAccommodation($accommodation);
             else

@@ -216,7 +216,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card">
+                                            {{--<div class="card">
                                                 <div class="card-header">
                                                     Amenities
                                                 </div>
@@ -240,6 +240,19 @@
                                                             $activities = $obj->activities->toArray();
                                                     @endphp
                                                     <x-activity-select :selected="$activities"></x-activity-select>
+                                                </div>
+                                            </div>--}}
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Features
+                                                </div>
+                                                <div class="card-body">
+                                                    @php
+                                                        $features = [];
+                                                        if(count($obj->features))
+                                                            $features = $obj->features->toArray();
+                                                    @endphp
+                                                    <x-feature-select :selected="$features"></x-feature-select>
                                                 </div>
                                             </div>
                                             <div class="card">
@@ -507,6 +520,16 @@
                 });
 
                 $('#activitymultiselect').multiselect({
+                    search: {
+                        left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                        right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                    },
+                    fireSearch: function(value) {
+                        return value.length > 2;
+                    }
+                });
+
+                $('#featuremultiselect').multiselect({
                     search: {
                         left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
                         right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',

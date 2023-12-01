@@ -2,12 +2,12 @@
 
 namespace App\View\Components;
 
-use App\Models\Amenity;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\Amenity;
 
-class AminitySelect extends Component
+class FeatureSelect extends Component
 {
     /**
      * Create a new component instance.
@@ -22,7 +22,7 @@ class AminitySelect extends Component
      */
     public function render(): View|Closure|string
     {
-        $amenities = Amenity::where('is_a_feature', 0)->get();
-        return view('admin._partials.aminity_select')->with('amenities', $amenities)->with('selected', $this->selected);
+        $features = Amenity::where('is_a_feature', 1)->get();
+        return view('admin._partials.feature_select')->with('features', $features)->with('selected', $this->selected);
     }
 }

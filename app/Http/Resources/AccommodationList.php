@@ -17,10 +17,11 @@ class AccommodationList extends JsonResource
         return [
             'name' => $this->name,
             'slug' => $this->slug,
+            'tagline' => $this->tagline,
             'title' => $this->title,
-            'price_description' => $this->price_description,
             'short_description' => $this->short_description,
-            'featured_image' => new Media($this->featured_image)
+            'featured_medias' => new MediaCollection($this->whenLoaded('featured_medias')),
+            'featured_features' => new AmenityCollection($this->whenLoaded('featured_features')),
         ];
     }
 }

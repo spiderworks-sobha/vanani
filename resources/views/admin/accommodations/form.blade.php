@@ -114,26 +114,81 @@
                                                                 <input type="text" name="slug" class="form-control" value="{{$obj->slug}}" id="slug">
                                                                 <small class="text-muted">The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
                                                             </div>
-                                                            <div class="form-group col-md-6">
+                                                            <div class="form-group col-md-4">
+                                                                <label>Tagline</label>
+                                                                <input type="text" name="tagline" class="form-control" value="{{$obj->tagline}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-4">
                                                                 <label>Title</label>
                                                                 <input type="text" name="title" class="form-control" value="{{$obj->title}}" >
                                                             </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label>Price Description</label>
-                                                                <input type="text" name="price_description" class="form-control" value="{{$obj->price_description}}" >
+                                                            <div class="form-group col-md-4">
+                                                                <label>Whatsapp Number</label>
+                                                                <input type="text" name="whatsapp_number" class="form-control" value="{{$obj->whatsapp_number}}" >
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Short Description</label>
                                                                 <textarea name="short_description" class="form-control" rows="2" id="short_description">{{$obj->short_description}}</textarea>
                                                             </div>
-                                                            <div class="form-group col-md-12">
-                                                                <label>Content</label>
-                                                                <textarea name="content" class="form-control editor" id="content">{{$obj->content}}</textarea>
-                                                            </div>
+                                                            
                                                         </div>
                                                     </div>                                           
                                                 </div><!--end card-body-->
                                             </div><!--end card-->
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Content
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row m-0">
+                                                        <div class="form-group col-md-4">
+                                                            <label>Features Tagline</label>
+                                                            <input type="text" name="features_tagline" class="form-control" value="{{$obj->features_tagline}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>Features Title</label>
+                                                            <input type="text" name="features_title" class="form-control" value="{{$obj->features_title}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>Features Listing Title</label>
+                                                            <input type="text" name="features_listing_title" class="form-control" value="{{$obj->features_listing_title}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label>Features Short Description</label>
+                                                            <textarea name="features_short_description" class="form-control" rows="2" id="features_short_description">{{$obj->features_short_description}}</textarea>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>All Features Tagline</label>
+                                                            <input type="text" name="all_features_tagline" class="form-control" value="{{$obj->all_features_tagline}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>All Features Title</label>
+                                                            <input type="text" name="all_features_title" class="form-control" value="{{$obj->all_features_title}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label>Content Tagline</label>
+                                                            <input type="text" name="content_tagline" class="form-control" value="{{$obj->content_tagline}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label>Content</label>
+                                                            <textarea name="content" class="form-control editor" id="content">{{$obj->content}}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Features
+                                                </div>
+                                                <div class="card-body">
+                                                    @php
+                                                        $features = [];
+                                                        if(count($obj->features))
+                                                            $features = $obj->features->toArray();
+                                                    @endphp
+                                                    <x-feature-select :selected="$features"></x-feature-select>
+                                                </div>
+                                            </div>
                                             <div class="card">
                                                 <div class="card-header">
                                                     Amenities
@@ -168,20 +223,18 @@
                                                     <div class="row add-multiple-image">
                                                         @if(count($obj->medias)>0)
                                                             @foreach($obj->medias as $key=>$media)
-                                                                <div class="col-md-4 mb-2">
-                                                                    @include('admin.media.set_file', ['file'=>$media, 'title'=>'Rental Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_edit_'.$key])
-                                                                </div>
+                                                                @include('admin.accommodations.media', ['item'=>$media, 'accommodation_media_id'=>$media->pivot->id])
                                                             @endforeach
                                                         @endif
                                                         <div class="col-md-4 mb-2">
-                                                            @include('admin.media.set_file', ['file'=>null, 'title'=>'Rental Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_1'])
+                                                            @include('admin.media.set_file', ['file'=>null, 'title'=>'Accommodation Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_1'])
                                                         </div>
                                                         <div class="col-md-4 mb-2">
-                                                            @include('admin.media.set_file', ['file'=>null, 'title'=>'Rental Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_2'])
+                                                            @include('admin.media.set_file', ['file'=>null, 'title'=>'Accommodation Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_2'])
                                                         </div>
                                                         <div class="col-md-4 mb-2" id="add-new-media-wrap">
                                                             <div style="display:none" id="image-clone-holder">
-                                                                @include('admin.media.set_file', ['file'=>null, 'title'=>'Rental Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'id_holder'])
+                                                                @include('admin.media.set_file', ['file'=>null, 'title'=>'Accommodation Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'id_holder'])
                                                             </div>
                                                             <div id="add-new-image-container">
                                                               <div id="add-new-image-content">
@@ -334,6 +387,38 @@
                                                 @endif
                                             <div class="card">
                                                 <div class="card-header">
+                                                    Feature's Image
+                                                </div>
+                                                <div class="card-body">
+                                                    @include('admin.media.set_file', ['file'=>$obj->features_image, 'title'=>'Features Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'features_image_id'])
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Amenities Image
+                                                </div>
+                                                <div class="card-body">
+                                                    @include('admin.media.set_file', ['file'=>$obj->amenities_image, 'title'=>'Amenities Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'amenities_image_id'])
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Activities Image
+                                                </div>
+                                                <div class="card-body">
+                                                    @include('admin.media.set_file', ['file'=>$obj->activities_image, 'title'=>'Activities Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'activities_image_id'])
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Featured Video
+                                                </div>
+                                                <div class="card-body">
+                                                    @include('admin.media.set_file', ['file'=>$obj->featured_video, 'title'=>'Featured Video', 'popup_type'=>'single_image', 'type'=>'Video', 'holder_attr'=>'featured_video_id'])
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
                                                     Icon Image
                                                 </div>
                                                 <div class="card-body">
@@ -427,6 +512,16 @@
                         return value.length > 2;
                     }
                 });
+
+                $('#featuremultiselect').multiselect({
+                    search: {
+                        left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                        right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                    },
+                    fireSearch: function(value) {
+                        return value.length > 2;
+                    }
+                });
             })
 
             var idInc = 3;
@@ -439,6 +534,54 @@
                     content = content.replaceAll("id_holder", img_id);
                     $(content).insertBefore('#add-new-media-wrap');
                     idInc++;
+                })
+
+                $(document).on('click', '#gallery-media-update-form', function(){
+                    if($('#galleryMediaUpdateForm #gallery-youtube-url').length){
+                        if($('#galleryMediaUpdateForm #gallery-youtube-url').val() == ""){
+                            miniweb_alert('Alert!', 'Youtube url cannot be null');
+                            return;
+                        }
+                    }
+                    var postData = new FormData( $('#galleryMediaUpdateForm')[0] );
+                    $.ajax({
+                        url : "{{route('admin.accommodations.media.update')}}",
+                        type: "POST",
+                        data : postData,
+                        processData: false,
+                        contentType: false,
+                        success:function(response, textStatus, jqXHR){
+                            if(typeof response.success != "undefined"){
+                                $('#gallery-item-'+response.id).replaceWith(response.html);
+                                miniweb_alert('Success!', 'Gallery successfully updated.');
+                                $(".jconfirm-closeIcon").trigger("click");
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            //if fails     
+                        }
+                    });
+                })
+
+                $(document).on('click', '.gallery-item-remove', function(e){
+                    e.preventDefault();
+                    var that = $(this);
+                    var delete_url = that.attr('href');
+                    $.confirm({
+                        title: 'Confirm!',
+                        content: 'Are you sure to delete this?',
+                        buttons: {
+                            confirm:{
+                                btnClass: 'btn-blue',
+                                action: function(){
+                                    that.parents('.gallery-item').remove();
+                                    $.get(delete_url);
+                                }
+                            },
+                            cancel: function () {
+                            },
+                        }
+                    });
                 })
             })
     </script>

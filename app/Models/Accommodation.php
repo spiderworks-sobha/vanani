@@ -43,6 +43,16 @@ class Accommodation extends Model
         return $this->belongsTo(Media::class, 'icon_image_id');
     }
 
+    public function features() :BelongsToMany
+    {
+        return $this->belongsToMany(Amenity::class, 'rental_feature', 'rental_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');
+    }
+
+    public function featured_features() :BelongsToMany
+    {
+        return $this->belongsToMany(Amenity::class, 'rental_feature', 'rental_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC')->limit(4);
+    }
+
     public function amenities() :BelongsToMany
     {
         return $this->belongsToMany(Amenity::class, 'accommodation_amenity', 'accommodation_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');
@@ -60,11 +70,36 @@ class Accommodation extends Model
 
     public function medias() :BelongsToMany
     {
-        return $this->belongsToMany(Media::class, 'accommodation_media', 'accommodation_id', 'media_id')->withPivot('created_by', 'updated_by', 'created_at', 'updated_at');
+        return $this->belongsToMany(Media::class, 'accommodation_media', 'accommodation_id', 'media_id')->withPivot('id', 'created_by', 'updated_by', 'created_at', 'updated_at');
+    }
+
+    public function featured_medias() :BelongsToMany
+    {
+        return $this->belongsToMany(Media::class, 'accommodation_media', 'accommodation_id', 'media_id')->withPivot('id', 'created_by', 'updated_by', 'created_at', 'updated_at')->wherePivot('is_featured', 1);
     }
 
     public function reviews(): MorphMany
     {
         return $this->morphMany(Review::class, 'reviewable')->orderBy('priority', 'ASC')->orderBy('created_at', 'DESC');
+    }
+
+    public function features_image(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'features_image_id');
+    }
+
+    public function amenities_image(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'amenities_image_id');
+    }
+
+    public function activities_image(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'activities_image_id');
+    }
+
+    public function featured_video(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'featured_video_id');
     }
 }
