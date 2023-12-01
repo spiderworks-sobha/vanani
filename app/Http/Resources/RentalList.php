@@ -18,15 +18,11 @@ class RentalList extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'title' => $this->title,
+            'tagline' => $this->tagline,
+            'whatsapp_number' => $this->whatsapp_number,
             'price_description' => $this->price_description,
             'short_description' => $this->short_description,
             'featured_image' => new Media($this->featured_image),
-            'extra' => [
-                "tag" => $this->extra_tag,
-                'title' => $this->extra_title,
-                'short_description' => $this->extra_short_description,
-                'extra_image' => new Media($this->extra_image)
-            ]
         ];
     }
 }

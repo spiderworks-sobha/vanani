@@ -33,7 +33,7 @@ class RentalController extends Controller
 
     public function featured(Request $request){
         try{
-            $rentals = Rental::with(['featured_image', 'extra_image'])->where('status', 1);
+            $rentals = Rental::with(['featured_image'])->where('status', 1);
             if($tags = $request->tags){
                 $rentals->whereHas('tags', function($query) use($tags){
                     $query->whereIn('rental_tag.tag_id', $tags);
