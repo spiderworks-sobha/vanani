@@ -20,7 +20,7 @@ class AccommodationList extends JsonResource
             'tagline' => $this->tagline,
             'title' => $this->title,
             'short_description' => $this->short_description,
-            'featured_image' => new MediaCollection($this->whenLoaded('featured_image')),
+            'featured_image' => new Media($this->whenLoaded('featured_image')),
             'featured_medias' => new MediaCollection($this->whenLoaded('featured_medias')),
             'featured_features' => new AmenityCollection($this->whenLoaded('featured_features')),
         ];
