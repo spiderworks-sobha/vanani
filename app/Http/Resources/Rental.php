@@ -48,7 +48,7 @@ class Rental extends JsonResource
             'bottom_description' => $this->bottom_description,
             'extra_js' => $this->extra_js,
             'features' => new AmenityCollection($this->features),
-            'medias' => new MediaCollection($this->medias),
+            'medias' => new RentalGalleryResourceCollection($this->medias),
             'reviews' => new ReviewCollection($this->reviews),
             'tags' => new TagCollection($this->tags),
             'faq' => new FaqCollection($this->faq)

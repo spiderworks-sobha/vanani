@@ -14,6 +14,10 @@ class RentalGalleryResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'title' => $this->pivot->title,
+            'description' => $this->pivot->description,
+            'media' => new Media($this)
+        ];
     }
 }
