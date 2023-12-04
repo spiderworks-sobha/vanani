@@ -80,3 +80,7 @@ Route::get('gallery/medias/{slug}', [GalleryController::class, 'medias'])->name(
 Route::get('sustainable-tourism', [SustainableTourismController::class, 'index'])->name('api.sustainable-tourism.index');
 Route::get('sustainable-tourism/{slug}', [SustainableTourismController::class, 'view'])->name('api.sustainable-tourism.view');
 
+Route::get('reviews', [TestimonialController::class, 'index'])->name('api.testimonials.index');
+Route::get('reviews/videos', [TestimonialController::class, 'videos'])->name('api.testimonials.videos');
+Route::get('reviews/texts', [TestimonialController::class, 'texts'])->name('api.testimonials.texts');
+

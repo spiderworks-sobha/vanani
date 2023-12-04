@@ -93,6 +93,10 @@
                                                                 <input type="number" name="priority" class="form-control numeric" value="{{$obj->priority}}" >
                                                             </div>
                                                             <div class="form-group col-md-12">
+                                                                <label>Title</label>
+                                                                <input type="text" name="title" class="form-control" value="{{$obj->title}}">
+                                                            </div>
+                                                            <div class="form-group col-md-12">
                                                                 <label>Type</label>
                                                                 <select name="review_type" class="w-100 webadmin-select2-input" id="type-select">
                                                                     <option value="Text" @if($obj->review_type == 'Text') selected="selected" @endif>Text</option>
@@ -129,6 +133,10 @@
                                                             <div class="custom-control custom-switch switch-primary float-left">
                                                                 <input type="checkbox" class="custom-control-input" value="1" id="status" name="status" @if(!$obj->id || $obj->status == 1) checked="" @endif>
                                                                 <label class="custom-control-label" for="status">Status</label>
+                                                            </div>
+                                                            <div class="custom-control custom-switch switch-primary float-right">
+                                                                <input type="checkbox" class="custom-control-input" value="1" id="is_featured" name="is_featured" @if($obj->is_featured == 1) checked="" @endif>
+                                                                <label class="custom-control-label" for="is_featured">Featured</label>
                                                             </div>
                                                         </div>
                                                         <div class="form-group w-100 mb-1">
