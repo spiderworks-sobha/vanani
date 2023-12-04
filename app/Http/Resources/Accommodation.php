@@ -45,7 +45,7 @@ class Accommodation extends JsonResource
             'activities' => new ActivityCollection($this->activities),
             'amenities' => new AmenityCollection($this->amenities),
             'features' => new AmenityCollection($this->features),
-            'medias' => new MediaCollection($this->medias),
+            'medias' => new AccommodationGalleryResourceCollection($this->medias),
             'tags' => new TagCollection($this->tags),
             'reviews' => new ReviewCollection($this->reviews),
             'faq' => new FaqCollection($this->faq),

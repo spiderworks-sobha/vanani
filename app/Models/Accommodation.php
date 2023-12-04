@@ -70,7 +70,7 @@ class Accommodation extends Model
 
     public function medias() :BelongsToMany
     {
-        return $this->belongsToMany(Media::class, 'accommodation_media', 'accommodation_id', 'media_id')->withPivot('id', 'created_by', 'updated_by', 'created_at', 'updated_at');
+        return $this->belongsToMany(Media::class, 'accommodation_media', 'accommodation_id', 'media_id')->withPivot('id', 'title', 'description', 'created_by', 'updated_by', 'created_at', 'updated_at');
     }
 
     public function featured_medias() :BelongsToMany
