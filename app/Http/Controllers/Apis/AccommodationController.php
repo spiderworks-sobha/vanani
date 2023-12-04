@@ -37,7 +37,7 @@ class AccommodationController extends Controller
             $accommodation = Accommodation::with(['featured_image', 'banner_image', 'features_image', 'amenities_image', 'activities_image', 'featured_video', 'reviews', 'og_image', 'amenities', 'activities', 'features', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
             if($accommodation){
                 $other_accommodations = [];
-                $tags = $accommodation->tags()->pluck('id')->toArray();
+                $tags = $accommodation->tags()->pluck('tags.id')->toArray();
                 if($tags){
                     $other_accommodations = Accommodation::with(['featured_features'])->where('status', 1)->whereHas('tags', function($query) use($tags){
                         $query->whereIn('accommodation_tag.tag_id', $tags);
