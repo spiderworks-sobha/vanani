@@ -48,7 +48,8 @@ class Accommodation extends JsonResource
             'medias' => new MediaCollection($this->medias),
             'tags' => new TagCollection($this->tags),
             'reviews' => new ReviewCollection($this->reviews),
-            'faq' => new FaqCollection($this->faq)
+            'faq' => new FaqCollection($this->faq),
+            'other_accommodations' => new AccommodationListCollection($this->other_accommodations)
         ];
     }
 }

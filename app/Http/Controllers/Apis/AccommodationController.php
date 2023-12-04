@@ -35,8 +35,17 @@ class AccommodationController extends Controller
     public function details(Request $request, string $slug){
         try{
             $accommodation = Accommodation::with(['featured_image', 'banner_image', 'features_image', 'amenities_image', 'activities_image', 'featured_video', 'reviews', 'og_image', 'amenities', 'activities', 'features', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
-            if($accommodation)
+            if($accommodation){
+                $other_accommodations = [];
+                $tags = $accommodation->tags()->pluck('id')->toArray();
+                if($tags){
+                    $other_accommodations = Accommodation::with(['featured_features'])->where('status', 1)->whereHas('tags', function($query) use($tags){
+                        $query->whereIn('accommodation_tag.tag_id', $tags);
+                    })->orderBy('priority', 'DESC')->take(3)->get();
+                }
+                $accommodation->other_accommodations = $other_accommodations;
                 return new ResourcesAccommodation($accommodation);
+            }
             else
                 return response()->json(['error' => "Rental not Found!"], 404);
         }
