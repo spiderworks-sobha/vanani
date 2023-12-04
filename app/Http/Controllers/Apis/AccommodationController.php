@@ -39,7 +39,7 @@ class AccommodationController extends Controller
                 $other_accommodations = [];
                 $tags = $accommodation->tags()->pluck('tags.id')->toArray();
                 if($tags){
-                    $other_accommodations = Accommodation::with(['featured_features'])->where('status', 1)->whereHas('tags', function($query) use($tags){
+                    $other_accommodations = Accommodation::with(['featured_image'])->where('status', 1)->whereHas('tags', function($query) use($tags){
                         $query->whereIn('accommodation_tag.tag_id', $tags);
                     })->where('id', '!=', $accommodation->id)->orderBy('priority', 'DESC')->take(3)->get();
                 }
