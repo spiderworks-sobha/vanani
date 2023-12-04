@@ -33,7 +33,7 @@ class AccommodationController extends Controller
 
 
     public function details(Request $request, string $slug){
-        try{
+        //try{
             $accommodation = Accommodation::with(['featured_image', 'banner_image', 'features_image', 'amenities_image', 'activities_image', 'featured_video', 'reviews', 'og_image', 'amenities', 'activities', 'features', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
             if($accommodation){
                 $other_accommodations = [];
@@ -48,10 +48,10 @@ class AccommodationController extends Controller
             }
             else
                 return response()->json(['error' => "Rental not Found!"], 404);
-        }
-        catch(\Exception $e){
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
+        // }
+        // catch(\Exception $e){
+        //     return response()->json(['error' => $e->getMessage()], 500);
+        // }
     }
 
     public function reviews(){
