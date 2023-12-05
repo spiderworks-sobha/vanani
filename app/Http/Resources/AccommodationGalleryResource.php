@@ -17,7 +17,7 @@ class AccommodationGalleryResource extends JsonResource
         return [
             'title' => $this->pivot->title,
             'description' => $this->pivot->description,
-            'video_preview_image' => $this->pivot->video_preview_image,
+            'video_preview_image' => ($this->pivot->video_preview_image)?asset($this->pivot->video_preview_image):null,
             'media' => new Media($this)
         ];
     }
