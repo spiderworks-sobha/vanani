@@ -208,6 +208,13 @@ class AccommodationController extends Controller
             $obj->media_id = $data['media_id'];
             $obj->title = $data['media_title'];
             $obj->description = $data['media_description'];
+            
+            if($request->file('video_cover') && $request->file('video_cover')->isValid()){
+                $upload = $this->uploadCover($request->file('video_cover'));
+                if($upload['success']) {
+                    $obj->video_preview_image = 'uploads/media/cover/'.$upload['filename'];
+                }
+            }
             $obj->is_featured = isset($data['is_featured'])?1:0;
             $obj->save();
 

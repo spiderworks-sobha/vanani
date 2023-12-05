@@ -70,12 +70,12 @@ class Accommodation extends Model
 
     public function medias() :BelongsToMany
     {
-        return $this->belongsToMany(Media::class, 'accommodation_media', 'accommodation_id', 'media_id')->withPivot('id', 'title', 'description', 'created_by', 'updated_by', 'created_at', 'updated_at');
+        return $this->belongsToMany(Media::class, 'accommodation_media', 'accommodation_id', 'media_id')->withPivot('id', 'title', 'description', 'video_preview_image', 'created_by', 'updated_by', 'created_at', 'updated_at');
     }
 
     public function featured_medias() :BelongsToMany
     {
-        return $this->belongsToMany(Media::class, 'accommodation_media', 'accommodation_id', 'media_id')->withPivot('id', 'created_by', 'updated_by', 'created_at', 'updated_at')->wherePivot('is_featured', 1);
+        return $this->belongsToMany(Media::class, 'accommodation_media', 'accommodation_id', 'media_id')->withPivot('id', 'video_preview_image', 'created_by', 'updated_by', 'created_at', 'updated_at')->wherePivot('is_featured', 1);
     }
 
     public function reviews(): MorphMany

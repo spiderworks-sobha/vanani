@@ -4,7 +4,18 @@
         <input type="hidden" name="rental_media_id" value="{{encrypt($file->id)}}" />
         <div class="row m-0">
             <div class="col-md-7">
-                @include('admin.media.set_file_simple', ['file'=>$file->media, 'title'=>'Update Gallery', 'type'=>'Image'])
+                @include('admin.media.set_file_simple', ['file'=>$file->media, 'title'=>'Update Gallery', 'type'=>'Image-Video'])
+                @if($file->media && $file->media->media_type == "Video")
+                <div class="video-cover-image-holder">
+                    <p class="mt-2">Video Preview Image</p>
+                    <div class="video-cover-image">
+                        <img id="video-cover-image" @if($file->video_preview_image) src="{{asset($file->video_preview_image)}}" @endif/>
+                    </div>
+                    <div class="video-cover-upload">
+                        <input type="file" class="form-control" name="video_cover" accept="image/*" onchange="loadFile(event)" />
+                    </div>
+                </div>
+                @endif
             </div>
             <div class="col-md-5 img-details-edit">
                 <div class="form-group required">
