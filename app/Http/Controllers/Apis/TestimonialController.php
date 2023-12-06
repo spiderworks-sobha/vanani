@@ -42,8 +42,13 @@ class TestimonialController extends Controller
         return response()->json(['data'=>$data]);
     }
 
-    protected function featured_reviews(){
-        return $featured_reviews = Review::with(['reviewable'])->where('status', 1)->orderBy('priority')->take(2)->get();
+    public function featured(){
+        $featured_reviews = $this->featured_reviews(10);
+        return new ReviewCollection($featured_reviews);
+    }
+
+    protected function featured_reviews($limit=2){
+        return $featured_reviews = Review::with(['reviewable'])->where('status', 1)->orderBy('priority')->take($limit)->get();
     }
 
     protected function latest_reviews($limit=10){

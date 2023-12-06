@@ -178,6 +178,57 @@
                                             </div>
                                             <div class="card">
                                                 <div class="card-header">
+                                                    Discount
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row m-0">
+                                                        <div class="form-group col-md-6">
+                                                            <label>Tagline</label>
+                                                            <input type="text" name="discount_tagline" class="form-control" value="{{$obj->discount_tagline}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label>Title</label>
+                                                            <input type="text" name="discount_title" class="form-control" value="{{$obj->discount_title}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>Discount button text</label>
+                                                            <input type="text" name="discount_button_text" class="form-control" value="{{$obj->discount_button_text}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>Discount button url</label>
+                                                            <input type="text" name="discount_button_url" class="form-control" value="{{$obj->discount_button_url}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>Discount button target</label>
+                                                            <select name="discount_button_target" class="form-control">
+                                                                <option value="" @if($obj->discount_button_target == "") selected="selected" @endif></option>
+                                                                <option value="_blank" @if($obj->discount_button_target == "_blank") selected="selected" @endif>_blank</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            <label>Bottom Text</label>
+                                                            <input type="text" name="discount_bottom_text" class="form-control" value="{{$obj->discount_bottom_text}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>Bottom button text</label>
+                                                            <input type="text" name="discount_bottom_button_text" class="form-control" value="{{$obj->discount_bottom_button_text}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>Bottom button url</label>
+                                                            <input type="text" name="discount_bottom_button_url" class="form-control" value="{{$obj->discount_bottom_button_url}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>Bottom button target</label>
+                                                            <select name="discount_bottom_button_target" class="form-control">
+                                                                <option value="" @if($obj->discount_bottom_button_target == "") selected="selected" @endif></option>
+                                                                <option value="_blank" @if($obj->discount_bottom_button_target == "_blank") selected="selected" @endif>_blank</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
                                                     Features
                                                 </div>
                                                 <div class="card-body">

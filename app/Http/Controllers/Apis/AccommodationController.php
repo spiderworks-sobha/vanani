@@ -23,12 +23,23 @@ class AccommodationController extends Controller
                     $query->whereIn('accommodation_tag.tag_id', $tags);
                 });
             }
-            $accommodations = $accommodations->where('is_featured', '!=', 1)->orderBy('priority', 'DESC')->paginate($limit);
+            $accommodations = $accommodations->orderBy('priority', 'DESC')->paginate($limit);
             return new AccommodationListCollection($accommodations);
         }
         catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    public function featured(Request $request){
+        $accommodations = Accommodation::with(['featured_image'])->where('status', 1);
+        if($tags = $request->tags){
+            $accommodations->whereHas('tags', function($query) use($tags){
+                $query->whereIn('accommodation_tag.tag_id', $tags);
+            }); 
+        }
+        $accommodations = $accommodations->where('is_featured', 1)->orderBy('priority', 'DESC')->take(10)->get();
+        return new AccommodationListCollection($accommodations);
     }
 
 

@@ -24,21 +24,58 @@
             <input type="text" name="content[section1_banner_button_text]" class="form-control" @if($obj->content && isset($obj->content['section1_banner_button_text'])) value="{{$obj->content['section1_banner_button_text']}}" @endif >
         </div>           
     </fieldset><!--end fieldset--> 
-    <h3>Section 3 & Detail page</h3>
+    <h3>Section 3 & Detail Page<br/>(Testimonials)</h3>
     <fieldset class="row">                                                                               
         <div class="form-group col-md-12">
             <label>Reviews Title</label>
             <input type="text" name="content[section3_reviews_title]" class="form-control" @if($obj->content && isset($obj->content['section3_reviews_title'])) value="{{$obj->content['section3_reviews_title']}}" @endif >
+        </div>    
+    </fieldset><!--end fieldset-->
+    <h3>Section 3 (Discount)</h3>
+    <fieldset class="row">                                                                               
+        <div class="form-group col-md-6">
+            <label>Tagline</label>
+            <input type="text" name="content[section3_discount_tagline]" class="form-control" @if($obj->content && isset($obj->content['section3_discount_tagline'])) value="{{$obj->content['section3_discount_tagline']}}" @endif >
+        </div>
+        <div class="form-group col-md-6">
+            <label>Title</label>
+            <input type="text" name="content[section3_discount_title]" class="form-control" @if($obj->content && isset($obj->content['section3_discount_title'])) value="{{$obj->content['section3_discount_title']}}" @endif >
+        </div>
+        <div class="form-group col-md-4">
+            <label>Bottom Link Text</label>
+            <input type="text" name="content[section3_discount_button_text]" class="form-control" @if($obj->content && isset($obj->content['section3_discount_button_text'])) value="{{$obj->content['section3_discount_button_text']}}" @endif >
+        </div>  
+        <div class="form-group col-md-4">
+            <label>Bottom Link Url</label>
+            <input type="text" name="content[section3_discount_button_url]" class="form-control" @if($obj->content && isset($obj->content['section3_discount_button_url'])) value="{{$obj->content['section3_discount_button_url']}}" @endif >
+        </div>
+        <div class="form-group col-md-4">
+            <label>Bottom Link Target</label>
+            <select name="content[section3_discount_button_target]" class="form-control" id="inputStatus">
+                <option value="" @if($obj->content && isset($obj->content['section3_discount_button_target']) && $obj->content['section3_discount_button_target'] == "") selected="selected" @endif></option>
+                <option value="_blank" @if($obj->content && isset($obj->content['section3_discount_button_target']) && $obj->content['section3_discount_button_target'] == "_blank") selected="selected" @endif>_blank</option>
+            </select>
         </div>
         <div class="form-group col-md-12">
-            <label>Reviews statistics top</label>
-            <input type="text" name="content[section3_reviews_statistics_top]" class="form-control" @if($obj->content && isset($obj->content['section3_reviews_statistics_top'])) value="{{$obj->content['section3_reviews_statistics_top']}}" @endif >
+            <label>Bottom Text</label>
+            <input type="text" name="content[section3_bottom_text]" class="form-control" @if($obj->content && isset($obj->content['section3_bottom_text'])) value="{{$obj->content['section3_bottom_text']}}" @endif >
         </div>
-        <div class="form-group col-md-12">
-            <label>Reviews statistics bottom</label>
-            <input type="text" name="content[section3_reviews_statistics_bottom]" class="form-control" @if($obj->content && isset($obj->content['section3_reviews_statistics_bottom'])) value="{{$obj->content['section3_reviews_statistics_bottom']}}" @endif >
-        </div>      
-    </fieldset><!--end fieldset-->                                        
+        <div class="form-group col-md-4">
+            <label>Bottom Link Text</label>
+            <input type="text" name="content[section3_bottom_button_text]" class="form-control" @if($obj->content && isset($obj->content['section3_bottom_button_text'])) value="{{$obj->content['section3_bottom_button_text']}}" @endif >
+        </div>  
+        <div class="form-group col-md-4">
+            <label>Bottom Link Url</label>
+            <input type="text" name="content[section3_bottom_button_url]" class="form-control" @if($obj->content && isset($obj->content['section3_bottom_button_url'])) value="{{$obj->content['section3_bottom_button_url']}}" @endif >
+        </div>
+        <div class="form-group col-md-4">
+            <label>Bottom Link Target</label>
+            <select name="content[section3_bottom_button_target]" class="form-control" id="inputStatus">
+                <option value="" @if($obj->content && isset($obj->content['section3_bottom_button_target']) && $obj->content['section3_bottom_button_target'] == "") selected="selected" @endif></option>
+                <option value="_blank" @if($obj->content && isset($obj->content['section3_bottom_button_target']) && $obj->content['section3_bottom_button_target'] == "_blank") selected="selected" @endif>_blank</option>
+            </select>
+        </div>    
+    </fieldset><!--end fieldset-->                               
     <h3>Section 4</h3>
     <fieldset class="row">                                                                               
         <div class="form-group col-md-12">
