@@ -48,6 +48,11 @@ class Rental extends Model
         return $this->belongsTo(Media::class, 'featured_video_id');
     }
 
+    public function home_image(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'featured_home_listing_image_id');
+    }
+
     public function amenities() :BelongsToMany
     {
         return $this->belongsToMany(Amenity::class, 'rental_amenity', 'rental_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');

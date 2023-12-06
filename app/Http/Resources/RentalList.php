@@ -22,9 +22,16 @@ class RentalList extends JsonResource
             'whatsapp_number' => $this->whatsapp_number,
             'price_description' => $this->price_description,
             'short_description' => $this->short_description,
-            'featured_image' => new Media($this->featured_image),
+            'home_featured_listing' =>[
+                'tagline' => $this->featured_home_listing_tagline,
+                'title' => $this->featured_home_listing_tite,
+                'sub_title' => $this->featured_home_listing_sub_heading,
+                'description' => $this->featured_home_listing_description,
+                'image' => new Media($this->whenLoaded('home_image')),
+            ],
+            'featured_image' => new Media($this->whenLoaded('featured_image')),
             'featured_medias' => new MediaCollection($this->whenLoaded('featured_medias')),
-            'medias' => new MediaCollection($this->medias),
+            'medias' => new MediaCollection($this->whenLoaded('medias')),
         ];
     }
 }

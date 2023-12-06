@@ -425,6 +425,33 @@
                                                     </div>
                                                 </div>
                                                 @endif
+
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Featured Listing in Home Page
+                                                </div>
+                                                <div class="card-body row">
+                                                    <div class="form-group col-md-12">
+                                                        <label>Tagline</label>
+                                                        <input type="text" class="form-control" name="featured_home_listing_tagline" id="featured_home_listing_tagline" value="{{$obj->featured_home_listing_tagline}}">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Title</label>
+                                                        <input type="text" class="form-control" name="featured_home_listing_tite" id="featured_home_listing_tite" value="{{$obj->featured_home_listing_tite}}">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label>Sub Title</label>
+                                                        <input type="text" class="form-control" name="featured_home_listing_sub_heading" id="featured_home_listing_sub_heading" value="{{$obj->featured_home_listing_sub_heading}}">
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        <label class="">Description</label>
+                                                        <textarea name="featured_home_listing_description" class="form-control" rows="3" id="featured_home_listing_description">{{$obj->featured_home_listing_description}}</textarea>
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        @include('admin.media.set_file', ['file'=>$obj->home_image, 'title'=>'Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'featured_home_listing_image_id'])
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="card">
                                                 <div class="card-header">
                                                     Featured Video
