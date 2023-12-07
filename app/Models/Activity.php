@@ -20,4 +20,9 @@ class Activity extends Model
     {
         return $this->belongsTo(Media::class, 'icon_image_id');
     }
+
+    public function featured_image(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'featured_image_id');
+    }
 }

@@ -81,7 +81,7 @@
                                             @if(View::exists('admin.static_pages._partials.'.$obj->slug))
                                                 <div class="card">
                                                     <div class="card-header">
-                                                        CONTENT
+                                                        CONTENT {{$obj->slug}}
                                                     </div>
                                                     <div class="card-body text-center">
                                                         @include('admin.static_pages._partials.'.$obj->slug)

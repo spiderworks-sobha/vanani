@@ -17,7 +17,8 @@ class Amenity extends JsonResource
         return [
             'name'=> $this->name,
             'short_description' => $this->short_description,
-            'icon' => new Media($this->icon)
+            'icon' => new Media($this->icon),
+            'featured_image' => new Media($this->featured_image)
         ];
     }
 }

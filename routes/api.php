@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Apis\GalleryController;
 use App\Http\Controllers\Apis\AccommodationController;
+use App\Http\Controllers\Apis\ActivityController;
+use App\Http\Controllers\Apis\AmenityController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apis\BlogController;
@@ -83,5 +85,11 @@ Route::get('sustainable-tourism/{slug}', [SustainableTourismController::class, '
 Route::get('reviews', [TestimonialController::class, 'index'])->name('api.testimonials.index');
 Route::get('reviews/featured', [TestimonialController::class, 'featured'])->name('api.testimonials.featured');
 Route::get('reviews/videos', [TestimonialController::class, 'videos'])->name('api.testimonials.videos');
-Route::get('reviews/texts', [TestimonialController::class, 'texts'])->name('api.testimonials.texts');
+Route::get('reviews/texts', [TestimonialController::class, 'texts'])->name('api.testimonialss.texts');
+
+Route::get('activities', [ActivityController::class, 'index'])->name('api.activities.index');
+Route::get('activities/featured', [ActivityController::class, 'featured'])->name('api.activities.featured');
+
+Route::get('amenities', [AmenityController::class, 'index'])->name('api.amenities.index');
+Route::get('amenities/featured', [AmenityController::class, 'featured'])->name('api.amenities.featured');
 
