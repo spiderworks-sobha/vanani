@@ -136,15 +136,15 @@
                                             </div><!--end card-->
                                             <div class="card">
                                                 <div class="card-header">
-                                                    Amenities
+                                                    Attractions
                                                 </div>
                                                 <div class="card-body">
                                                     @php
-                                                        $amenities = [];
-                                                        if(count($obj->amenities))
-                                                            $amenities = $obj->amenities->toArray();
+                                                        $attractions = [];
+                                                        if(count($obj->attractions))
+                                                            $attractions = $obj->attractions->toArray();
                                                     @endphp
-                                                    <x-aminity-select :selected="$amenities"></x-amenity-select>
+                                                    <x-attraction-select :selected="$attractions"></x-attraction-select>
                                                 </div>
                                             </div>
                                             <div class="card">
@@ -158,38 +158,6 @@
                                                             $activities = $obj->activities->toArray();
                                                     @endphp
                                                     <x-activity-select :selected="$activities"></x-activity-select>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    Medias
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="row add-multiple-image">
-                                                        @if(count($obj->medias)>0)
-                                                            @foreach($obj->medias as $key=>$media)
-                                                                <div class="col-md-4 mb-2">
-                                                                    @include('admin.media.set_file', ['file'=>$media, 'title'=>'Rental Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_edit_'.$key])
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-                                                        <div class="col-md-4 mb-2">
-                                                            @include('admin.media.set_file', ['file'=>null, 'title'=>'Rental Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_1'])
-                                                        </div>
-                                                        <div class="col-md-4 mb-2">
-                                                            @include('admin.media.set_file', ['file'=>null, 'title'=>'Rental Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_2'])
-                                                        </div>
-                                                        <div class="col-md-4 mb-2" id="add-new-media-wrap">
-                                                            <div style="display:none" id="image-clone-holder">
-                                                                @include('admin.media.set_file', ['file'=>null, 'title'=>'Rental Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'id_holder'])
-                                                            </div>
-                                                            <div id="add-new-image-container">
-                                                              <div id="add-new-image-content">
-                                                                <a href="javascript:void(0)" ><i class="fas fa-plus-circle text-primary" id="add-new-media"></i></a>
-                                                              </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="card">
@@ -408,7 +376,7 @@
             });
 
             $(function(){
-                $('#amenitymultiselect').multiselect({
+                $('#attractionmultiselect').multiselect({
                     search: {
                         left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
                         right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',

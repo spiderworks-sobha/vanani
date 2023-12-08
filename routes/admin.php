@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\AdminLinkController;
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\AttractionController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\MenuController;
@@ -547,6 +548,16 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
         Route::post('sustainable-tourism-processes/update', [SustainableTourismProcessController::class, 'update'])->name('admin.sustainable-tourism-processes.update');
         Route::get('sustainable-tourism-processes/change-status/{id}', [SustainableTourismProcessController::class, 'changeStatus'])->name('admin.sustainable-tourism-processes.change-status');
         Route::get('sustainable-tourism-processes/show/{id}', [SustainableTourismProcessController::class, 'show'])->name('admin.sustainable-tourism-processes.show');
+
+        //attractions
+        Route::get('attractions', [AttractionController::class, 'index'])->name('admin.attractions.index');
+        Route::get('attractions/create', [AttractionController::class, 'create'])->name('admin.attractions.create');
+        Route::get('attractions/edit/{id}', [AttractionController::class, 'edit'])->name('admin.attractions.edit');
+        Route::get('attractions/destroy/{id}', [AttractionController::class, 'destroy'])->name('admin.attractions.destroy');    
+        Route::post('attractions/store', [AttractionController::class, 'store'])->name('admin.attractions.store');
+        Route::post('attractions/update', [AttractionController::class, 'update'])->name('admin.attractions.update');
+        Route::get('attractions/change-status/{id}', [AttractionController::class, 'changeStatus'])->name('admin.attractions.change-status');
+        Route::get('attractions/show/{id}', [AttractionController::class, 'show'])->name('admin.attractions.show');
 	});
 
     Route::get('/{id?}', [AuthenticateSessionOtpController::class, 'create'])->name('admin.auth.login');

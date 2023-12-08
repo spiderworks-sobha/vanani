@@ -44,10 +44,7 @@ class AmenityController extends Controller
         $request->validated();
         $data = $request->all();
         $data['status'] = isset($data['status'])?1:0;
-        if(empty($data['priority'])){
-            $last = $this->model->select('id')->orderBy('id', 'DESC')->first();
-            $data['priority'] = ($last)?$last->id+1:1;
-        }
+        $data['priority'] = !empty($data['priority'])?$data['priority']:0;
         $this->model->fill($data);
         $this->model->save();
 

@@ -43,11 +43,22 @@
                                                                 <label>Content</label>
                                                                 <textarea name="content[description_1]" class="form-control">@if($obj->content && isset($obj->content['description_1'])) {{$obj->content['description_1']}} @endif</textarea>
                                                             </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label>Category Link Text</label>
-                                                                <input type="text" name="content[category_link_text]" class="form-control" @if($obj->content && isset($obj->content['category_link_text'])) value="{{$obj->content['category_link_text']}}" @endif >
-                                                            </div>                                                                                       
-                                                            <div class="form-group col-md-6">
+                                                            <div class="form-group col-md-4">
+                                                                <label>Link Text</label>
+                                                                <input type="text" name="content[link_text_1]" class="form-control" @if($obj->content && isset($obj->content['link_text_1'])) value="{{$obj->content['link_text_1']}}" @endif >
+                                                            </div>  
+                                                            <div class="form-group col-md-4">
+                                                                <label>Link Url</label>
+                                                                <input type="text" name="content[link_url_1]" class="form-control" @if($obj->content && isset($obj->content['link_url_1'])) value="{{$obj->content['link_url_1']}}" @endif >
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Link Target</label>
+                                                                <select name="content[link_target_1]" class="form-control" id="inputStatus">
+                                                                    <option value="" @if($obj->content && isset($obj->content['link_target_1']) && $obj->content['link_target_1'] == "") selected="selected" @endif></option>
+                                                                    <option value="_blank" @if($obj->content && isset($obj->content['link_target_1']) && $obj->content['link_target_1'] == "_blank") selected="selected" @endif>_blank</option>
+                                                                </select>
+                                                            </div>                                                                                    
+                                                            <div class="form-group col-md-12">
                                                                 <label>Enquiry Text</label>
                                                                 <input type="text" name="content[enquiry_text]" class="form-control" @if($obj->content && isset($obj->content['enquiry_text'])) value="{{$obj->content['enquiry_text']}}" @endif >
                                                             </div>                                                                           

@@ -43,9 +43,9 @@ class Package extends Model
         return $this->belongsTo(Media::class, 'icon_image_id');
     }
 
-    public function amenities() :BelongsToMany
+    public function attractions() :BelongsToMany
     {
-        return $this->belongsToMany(Amenity::class, 'package_amenity', 'package_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');
+        return $this->belongsToMany(Attraction::class, 'package_attraction', 'package_id', 'attraction_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');
     }
 
     public function activities() :BelongsToMany
@@ -60,7 +60,12 @@ class Package extends Model
 
     public function medias() :BelongsToMany
     {
-        return $this->belongsToMany(Media::class, 'package_media', 'package_id', 'media_id')->withPivot('created_by', 'updated_by', 'created_at', 'updated_at');
+        return $this->belongsToMany(Media::class, 'package_media', 'package_id', 'media_id')->withPivot('id', 'title', 'description', 'video_preview_image', 'created_by', 'updated_by', 'created_at', 'updated_at');
+    }
+
+    public function featured_medias() :BelongsToMany
+    {
+        return $this->belongsToMany(Media::class, 'package_media', 'package_id', 'media_id')->withPivot('id', 'video_preview_image', 'created_by', 'updated_by', 'created_at', 'updated_at')->wherePivot('is_featured', 1);
     }
 
     public function reviews(): MorphMany

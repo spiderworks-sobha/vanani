@@ -74,43 +74,53 @@ class PackageController extends Controller
         $data = $request->all();
         $data['status'] = isset($data['status'])?1:0;
         $data['is_featured'] = isset($data['is_featured'])?1:0;
-        if(empty($data['priority'])){
-            $last = $this->model->select('id')->orderBy('id', 'DESC')->first();
-            $data['priority'] = ($last)?$last->id+1:1;
-        }
+        $data['priority'] = !empty($data['priority'])?$data['priority']:0;
         $this->model->fill($data);
         if($this->model->save()){
-            $this->saveAmenities($this->model, $data['amenity_to']);
+            $data['attraction_to'] = !empty($data['attraction_to'])?$data['attraction_to']:[];
+            $data['activity_to'] = !empty($data['activity_to'])?$data['activity_to']:[];
+            $data['tags'] = !empty($data['tags'])?$data['tags']:[];
+            $this->saveAttractions($this->model, $data['attraction_to']);
             $this->saveActivities($this->model, $data['activity_to']);
-            $medias = (!empty($data['rental_media']))?$data['rental_media']:[];
-            $this->saveRentalMedia($this->model, $medias);
+            $medias = (!empty($data['package_media']))?$data['package_media']:[];
+            $this->savePackageMedia($this->model, $medias);
             $this->saveTags($this->model, $data['tags']);
         }
 
         return Redirect::to(route($this->route. '.edit', ['id'=> encrypt($this->model->id)]))->withSuccess('Package successfully saved!');
     }
 
-    protected function saveAmenities($accommodation, $amenities=[]): void
+    protected function saveAttractions($package, $attractions=[]): void
     {
-        $aminity_array = [];
-        if($amenities)
-            foreach($amenities as $key=>$aminity){
-                $aminity_array[$aminity] = ['priority'=>$key, 'created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
+        $attraction_array = [];
+        if($attractions)
+            foreach($attractions as $key=>$attraction){
+                $attraction_array[$attraction] = ['priority'=>$key, 'created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
             }
-        $accommodation->amenities()->sync($aminity_array);
+        $package->attractions()->sync($attraction_array);
     }
 
-    protected function saveActivities($accommodation, $activities=[]): void
+    protected function saveActivities($package, $activities=[]): void
     {
         $activity_array = [];
         if($activities)
             foreach($activities as $key=>$activity){
                 $activity_array[$activity] = ['priority'=>$key, 'created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
             }
-        $accommodation->activities()->sync($activity_array);
+        $package->activities()->sync($activity_array);
     }
 
-    protected function saveRentalMedia($accommodation, $medias=[]): void
+    protected function saveTags($package, $tags=[]): void
+    {
+        $tag_array = [];
+        if($tags)
+            foreach($tags as $key=>$tag){
+                $tag_array[$tag] = ['created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
+            }
+        $package->tags()->sync($tag_array);
+    }
+
+    protected function savePackageMedia($package, $medias=[]): void
     {
         $media_array = [];
         if($medias)
@@ -118,17 +128,7 @@ class PackageController extends Controller
                 if(!empty($media))
                     $media_array[$media] = ['created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
             }
-        $accommodation->medias()->sync($media_array);
-    }
-
-    protected function saveTags($accommodation, $tags=[]): void
-    {
-        $tag_array = [];
-        if($tags)
-            foreach($tags as $key=>$tag){
-                $tag_array[$tag] = ['created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
-            }
-        $accommodation->tags()->sync($tag_array);
+        $package->medias()->attach($media_array);
     }
 
     public function update(AdminPackage $request)
@@ -141,10 +141,13 @@ class PackageController extends Controller
             $data['is_featured'] = isset($data['is_featured'])?1:0;
             $data['priority'] = !empty($data['priority'])?$data['priority']:0;
             if($obj->update($data)){
-                $this->saveAmenities($obj, $data['amenity_to']);
+                $data['attraction_to'] = !empty($data['attraction_to'])?$data['attraction_to']:[];
+                $data['activity_to'] = !empty($data['activity_to'])?$data['activity_to']:[];
+                $data['tags'] = !empty($data['tags'])?$data['tags']:[];
+                $this->saveAttractions($obj, $data['attraction_to']);
                 $this->saveActivities($obj, $data['activity_to']);
                 $medias = (!empty($data['rental_media']))?$data['rental_media']:[];
-                $this->saveRentalMedia($obj, $medias);
+                $this->savePackageMedia($obj, $medias);
                 $this->saveTags($obj, $data['tags']);
             }
             return Redirect::to(route($this->route. '.edit', ['id'=>encrypt($id)]))->withSuccess('Package successfully updated!');
