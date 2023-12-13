@@ -67,6 +67,7 @@ class MenuController extends Controller
         $key = 0;
         foreach($pages as $page){
             $menu['menu'][$key]['title'] = $page->title;
+            $menu['menu'][$key]['type'] = $page->slug;
             if($page->menu_icon){
                 $menu['menu'][$key]['icon'] = [
                     "file_name" => $page->menu_icon->file_name,

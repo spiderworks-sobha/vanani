@@ -114,13 +114,17 @@
                                                                 <input type="text" name="slug" class="form-control" value="{{$obj->slug}}" id="slug">
                                                                 <small class="text-muted">The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
                                                             </div>
-                                                            <div class="form-group col-md-6">
+                                                            <div class="form-group col-md-5">
                                                                 <label>Title</label>
                                                                 <input type="text" name="title" class="form-control" value="{{$obj->title}}" >
                                                             </div>
-                                                            <div class="form-group col-md-6">
-                                                                <label>Price Description</label>
-                                                                <input type="text" name="price_description" class="form-control" value="{{$obj->price_description}}" >
+                                                            <div class="form-group col-md-5">
+                                                                <label>Tagline</label>
+                                                                <input type="text" name="tagline" class="form-control" value="{{$obj->tagline}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-2">
+                                                                <label>No. of Days</label>
+                                                                <input type="text" name="no_of_days" class="form-control" value="{{$obj->no_of_days}}" >
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Short Description</label>
@@ -158,6 +162,36 @@
                                                             $activities = $obj->activities->toArray();
                                                     @endphp
                                                     <x-activity-select :selected="$activities"></x-activity-select>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Medias
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row add-multiple-image">
+                                                        @if(count($obj->medias)>0)
+                                                            @foreach($obj->medias as $key=>$media)
+                                                                @include('admin.packages.media', ['item'=>$media, 'package_media_id'=>$media->pivot->id])
+                                                            @endforeach
+                                                        @endif
+                                                        <div class="col-md-4 mb-2">
+                                                            @include('admin.media.set_file', ['file'=>null, 'title'=>'Package Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_1'])
+                                                        </div>
+                                                        <div class="col-md-4 mb-2">
+                                                            @include('admin.media.set_file', ['file'=>null, 'title'=>'Package Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'rental_media_2'])
+                                                        </div>
+                                                        <div class="col-md-4 mb-2" id="add-new-media-wrap">
+                                                            <div style="display:none" id="image-clone-holder">
+                                                                @include('admin.media.set_file', ['file'=>null, 'title'=>'Package Media', 'popup_type'=>'single_image', 'type'=>'Image-Video', 'holder_attr'=>'rental_media[]', 'id'=>'id_holder'])
+                                                            </div>
+                                                            <div id="add-new-image-container">
+                                                              <div id="add-new-image-content">
+                                                                <a href="javascript:void(0)" ><i class="fas fa-plus-circle text-primary" id="add-new-media"></i></a>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="card">
@@ -279,6 +313,18 @@
                                                             @foreach($tags as $tag)
                                                                 <option value="{{$tag->id}}" @if(in_array($tag->id, $selected_tags)) selected="selected" @endif>{{$tag->name}}</option>
                                                             @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Listing
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group col-md-12">
+                                                        <select name="listings_id" class="w-100 webadmin-select2-input form-control" data-select2-url="{{route('admin.select2.list')}}">
+
                                                         </select>
                                                     </div>
                                                 </div>

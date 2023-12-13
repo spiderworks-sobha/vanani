@@ -528,6 +528,9 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
         Route::get('packages/change-status/{id}', [PackageController::class, 'changeStatus'])->name('admin.packages.change-status');
         Route::get('packages/show/{id}', [PackageController::class, 'show'])->name('admin.packages.show');
         Route::get('packages/show-on-offer/{id}', [PackageController::class, 'showOnOffer'])->name('admin.packages.show-on-offer');
+        Route::get('packages/media/edit/{id}', [PackageController::class, 'media_edit'])->name('admin.packages.media.edit');
+        Route::post('packages/media/update', [PackageController::class, 'media_update'])->name('admin.packages.media.update');
+        Route::get('packages/media/destroy/{id}', [PackageController::class, 'media_destroy'])->name('admin.packages.media.destroy');
 
         //reviews
         Route::get('/reviews/edit/{id}', [ReviewController::class, 'edit'])->name('admin.reviews.edit');

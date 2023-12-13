@@ -72,4 +72,9 @@ class Package extends Model
     {
         return $this->morphMany(Review::class, 'reviewable')->orderBy('priority', 'ASC')->orderBy('created_at', 'DESC');
     }
+
+    public function listing(): BelongsTo
+    {
+        return $this->belongsTo(Listing::class, 'listings_id');
+    }
 }
