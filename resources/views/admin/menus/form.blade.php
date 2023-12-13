@@ -103,25 +103,9 @@
                                                     $menu = Config('admin.menu.items');
                                                     $i = 0;
                                                 @endphp
-                                                @foreach($menu as $item)
-                                                    @if(method_exists($item['model'], 'create_admin_menu'))
-                                                        @php
-                                                            $model = new $item['model'];
-                                                            $i++;
-                                                        @endphp
-                                                        <div class="accord-header">{{$item['title']}}<span class="float-right fa fa-angle-down toggle-arraow"></span></div>
-                                                        <div class="accord-content @if($i == 1) accord-on @endif">
-                                                          @if($list = $model->create_admin_menu())
-                                                              {!! $list !!}
-                                                            <p class="text-right">
-                                                              <button type="button" class="btn btn-primary btn-sm add-links" data-identifier="{{$item['identifier']}}">Add to Menu</button>
-                                                            </p>
-                                                          @endif
-                                                        </div>
-                                                    @endif
-                                                @endforeach
-                                                <div class="accord-header">Custom Links<span class="float-right fa fa-angle-down toggle-arraow"></span></div>
-                                                <div class="accord-content">
+                                               
+                                                <div class="accord-header">Links<span class="float-right fa fa-angle-down toggle-arraow"></span></div>
+                                                <div class="accord-content accord-on">
                                                   <div class="form-group mb-2">
                                                     <label for="exampleInputPassword1">Link Text</label>
                                                     <input type="text" name="custom_link_text" class="form-control" id="inputCustomLinkText">
