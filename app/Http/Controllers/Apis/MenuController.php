@@ -107,13 +107,13 @@ class MenuController extends Controller
     protected function getServicesMenu($type){
         $data = [];
         if($type == 'accommodations')
-            $data = Accommodation::select('title', \DB::raw('CONCAT("accommodations/", slug)'))->where('status', 1)->where('show_on_menu', 1)->orderBy('priority')->get()->toArray();
+            $data = Accommodation::select('title', \DB::raw('CONCAT("accommodations/", slug) as slug'))->where('status', 1)->where('show_on_menu', 1)->orderBy('priority')->get()->toArray();
 
         if($type == 'rentals')
-            $data = Rental::select('title', \DB::raw('CONCAT("rentals/", slug)'))->where('status', 1)->where('show_on_menu', 1)->orderBy('priority')->get()->toArray();
+            $data = Rental::select('title', \DB::raw('CONCAT("rentals/", slug) as slug'))->where('status', 1)->where('show_on_menu', 1)->orderBy('priority')->get()->toArray();
 
         if($type == 'packages')
-            $data = Package::select('title', \DB::raw('CONCAT("packages/", slug)'))->where('status', 1)->where('show_on_menu', 1)->orderBy('priority')->get()->toArray();
+            $data = Package::select('title', \DB::raw('CONCAT("packages/", slug) as slug'))->where('status', 1)->where('show_on_menu', 1)->orderBy('priority')->get()->toArray();
 
         return $data;
     }
