@@ -74,6 +74,7 @@ class PackageController extends Controller
         $data = $request->all();
         $data['status'] = isset($data['status'])?1:0;
         $data['is_featured'] = isset($data['is_featured'])?1:0;
+        $data['show_on_menu'] = isset($data['show_on_menu'])?1:0;
         $data['priority'] = !empty($data['priority'])?$data['priority']:0;
         $this->model->fill($data);
         if($this->model->save()){
@@ -139,6 +140,7 @@ class PackageController extends Controller
         if($obj = $this->model->find($id)){
             $data['status'] = isset($data['status'])?1:0;
             $data['is_featured'] = isset($data['is_featured'])?1:0;
+            $data['show_on_menu'] = isset($data['show_on_menu'])?1:0;
             $data['priority'] = !empty($data['priority'])?$data['priority']:0;
             if($obj->update($data)){
                 $data['attraction_to'] = !empty($data['attraction_to'])?$data['attraction_to']:[];

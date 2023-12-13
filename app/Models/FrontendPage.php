@@ -22,7 +22,7 @@ class FrontendPage extends Model
     
     protected $table = 'frontend_pages';
 
-     protected $fillable = array('slug', 'name', 'title', 'content', 'browser_title', 'meta_description', 'meta_keywords', 'bottom_description', 'og_title', 'og_description', 'og_image_id', 'extra_js', 'status');
+     protected $fillable = array('slug', 'name', 'title', 'content', 'browser_title', 'menu_icon_id', 'menu_background_id', 'meta_description', 'meta_keywords', 'bottom_description', 'og_title', 'og_description', 'og_image_id', 'extra_js', 'status');
 
     protected $dates = ['created_at','updated_at'];
 
@@ -45,6 +45,16 @@ class FrontendPage extends Model
     public function og_image()
     {
     	return $this->belongsTo('App\Models\Media', 'og_image_id');
+    }
+
+    public function menu_icon()
+    {
+    	return $this->belongsTo('App\Models\Media', 'menu_icon_id');
+    }
+
+    public function menu_bg_image()
+    {
+    	return $this->belongsTo('App\Models\Media', 'menu_background_id');
     }
 
     public function menu()

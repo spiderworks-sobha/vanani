@@ -380,6 +380,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-footer text-muted">
+                                                    <div class="custom-control custom-switch switch-primary float-left">
+                                                        <input type="checkbox" class="custom-control-input" value="1" id="show_on_menu" name="show_on_menu" @if($obj->show_on_menu == 1) checked="checked" @endif>
+                                                        <label class="custom-control-label" for="show_on_menu">Show on Menu</label>
+                                                    </div>
                                                     <button class="btn btn-sm btn-primary float-right">Save</button>
                                                 </div>
                                             </div>

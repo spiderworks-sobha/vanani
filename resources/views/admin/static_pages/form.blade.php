@@ -193,6 +193,24 @@
                                                 </div>
                                             </div>
                                             @endif
+                                            @if($obj->slug == "accommodations" || $obj->slug == "rentals" || $obj->slug == "packages")
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Menu Icon
+                                                    </div>
+                                                    <div class="card-body">
+                                                        @include('admin.media.set_file', ['file'=>$obj->menu_icon, 'title'=>'Menu Icon', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'menu_icon_id'])
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Menu Background Image
+                                                    </div>
+                                                    <div class="card-body">
+                                                        @include('admin.media.set_file', ['file'=>$obj->menu_bg_image, 'title'=>'Menu Background Image', 'popup_type'=>'single_image', 'type'=>'Image', 'holder_attr'=>'menu_background_id'])
+                                                    </div>
+                                                </div>
+                                            @endif
                                             <div class="card">
                                                 <div class="card-header">
                                                     OG Image
