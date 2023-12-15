@@ -1,7 +1,7 @@
 <div class="settings-item w-100 confirm-wrap" id="media-item-edit">
     <form method="POST" action="{{ route('admin.rentals.media.update') }}" id="galleryMediaUpdateForm" enctype="multipart/form-data">
         @csrf
-        <input type="hidden" name="rental_media_id" value="{{encrypt($file->id)}}" />
+        <input type="hidden" name="package_media_id" value="{{encrypt($file->id)}}" />
         <div class="row m-0">
             <div class="col-md-7">
                 @include('admin.media.set_file_simple', ['file'=>$file->media, 'title'=>'Update Gallery', 'type'=>'Image-Video'])

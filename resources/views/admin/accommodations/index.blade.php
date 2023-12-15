@@ -58,7 +58,7 @@
                                             <th class="table-width-120">Slug</th>
                                             <th class="table-width-120">Name</th>
                                             <th class="table-width-120">Last Updated On</th>
-                                            <th class="nosearch table-width-10 text-center @fieldshow(events-priority) @else nodisplay @endfieldshow">Priority</th>
+                                            <th class="nosearch table-width-10 text-center">Priority</th>
                                             <th class="nosort nosearch table-width-10">Reviews</th>
                                             <th class="nosort nosearch table-width-10">Show on Offer</th>
                                             <th class="nosort nosearch table-width-10">Status</th>

@@ -10,6 +10,7 @@ use App\Http\Controllers\Apis\BlogController;
 use App\Http\Controllers\Apis\AuthController;
 use App\Http\Controllers\Apis\CommonController;
 use App\Http\Controllers\Apis\MenuController;
+use App\Http\Controllers\Apis\PackageController;
 use App\Http\Controllers\Apis\PartnerController;
 use App\Http\Controllers\Apis\ProductController;
 use App\Http\Controllers\Apis\TeamController;
@@ -71,10 +72,9 @@ Route::get('accommodations/featured', [AccommodationController::class, 'featured
 Route::get('accommodations/reviews', [AccommodationController::class, 'reviews'])->name('accommodations.reviews');
 Route::get('accommodations/{slug}', [AccommodationController::class, 'details'])->name('accommodations.details');
 
-Route::get('packages', [AccommodationController::class, 'index'])->name('packages.index');
-Route::get('packages/featured', [AccommodationController::class, 'featured'])->name('packages.featured');
-Route::get('packages/reviews', [AccommodationController::class, 'reviews'])->name('packages.reviews');
-Route::get('packages/{slug}', [AccommodationController::class, 'details'])->name('packages.details');
+Route::get('packages', [PackageController::class, 'index'])->name('packages.index');
+Route::get('packages/reviews', [PackageController::class, 'reviews'])->name('packages.reviews');
+Route::get('packages/{slug}', [PackageController::class, 'details'])->name('packages.details');
 
 Route::get('gallery', [GalleryController::class, 'index'])->name('api.gallery.index');
 Route::get('gallery/{slug}', [GalleryController::class, 'view'])->name('api.gallery.view');

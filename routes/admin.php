@@ -39,6 +39,7 @@ use App\Http\Controllers\Admin\Auth\AuthenticateSessionOtpController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\PackageScheduleController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\RentalController;
 use App\Http\Controllers\Admin\ReviewController;
@@ -518,19 +519,30 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
         Route::post('accommodations/media/update', [AccommodationController::class, 'media_update'])->name('admin.accommodations.media.update');
         Route::get('accommodations/media/destroy/{id}', [AccommodationController::class, 'media_destroy'])->name('admin.accommodations.media.destroy');
 
-        //packages
-        Route::get('packages', [PackageController::class, 'index'])->name('admin.packages.index');
-        Route::get('packages/create', [PackageController::class, 'create'])->name('admin.packages.create');
-        Route::get('packages/edit/{id}', [PackageController::class, 'edit'])->name('admin.packages.edit');
-        Route::get('packages/destroy/{id}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');    
-        Route::post('packages/store', [PackageController::class, 'store'])->name('admin.packages.store');
-        Route::post('packages/update', [PackageController::class, 'update'])->name('admin.packages.update');
-        Route::get('packages/change-status/{id}', [PackageController::class, 'changeStatus'])->name('admin.packages.change-status');
-        Route::get('packages/show/{id}', [PackageController::class, 'show'])->name('admin.packages.show');
-        Route::get('packages/show-on-offer/{id}', [PackageController::class, 'showOnOffer'])->name('admin.packages.show-on-offer');
-        Route::get('packages/media/edit/{id}', [PackageController::class, 'media_edit'])->name('admin.packages.media.edit');
-        Route::post('packages/media/update', [PackageController::class, 'media_update'])->name('admin.packages.media.update');
-        Route::get('packages/media/destroy/{id}', [PackageController::class, 'media_destroy'])->name('admin.packages.media.destroy');
+        Route::group(['prefix' => 'packages'], function () {
+            //packages
+            Route::get('/', [PackageController::class, 'index'])->name('admin.packages.index');
+            Route::get('create', [PackageController::class, 'create'])->name('admin.packages.create');
+            Route::get('edit/{id}', [PackageController::class, 'edit'])->name('admin.packages.edit');
+            Route::get('destroy/{id}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');    
+            Route::post('store', [PackageController::class, 'store'])->name('admin.packages.store');
+            Route::post('update', [PackageController::class, 'update'])->name('admin.packages.update');
+            Route::get('change-status/{id}', [PackageController::class, 'changeStatus'])->name('admin.packages.change-status');
+            Route::get('show/{id}', [PackageController::class, 'show'])->name('admin.packages.show');
+            Route::get('show-on-offer/{id}', [PackageController::class, 'showOnOffer'])->name('admin.packages.show-on-offer');
+            Route::get('media/edit/{id}', [PackageController::class, 'media_edit'])->name('admin.packages.media.edit');
+            Route::post('media/update', [PackageController::class, 'media_update'])->name('admin.packages.media.update');
+            Route::get('media/destroy/{id}', [PackageController::class, 'media_destroy'])->name('admin.packages.media.destroy');
+
+            //package schedule
+            Route::get('schedule/edit/{id}', [PackageScheduleController::class, 'edit'])->name('admin.packages.schedule.edit');
+            Route::get('schedule/destroy/{id}', [PackageScheduleController::class, 'destroy'])->name('admin.packages.schedule.destroy');
+            Route::post('schedule/store', [PackageScheduleController::class, 'store'])->name('admin.packages.schedule.store');
+            Route::post('schedule/update', [PackageScheduleController::class, 'update'])->name('admin.packages.schedule.update');
+            Route::post('schedule/re-order', [PackageScheduleController::class, 'order_store'])->name('admin.packages.schedule.re-order');
+            Route::get('schedule/create/{related_id}', [PackageScheduleController::class, 'create'])->name('admin.packages.schedule.create');
+            Route::get('schedule/{related_id}', [PackageScheduleController::class, 'index'])->name('admin.packages.schedule.index');
+        });
 
         //reviews
         Route::get('/reviews/edit/{id}', [ReviewController::class, 'edit'])->name('admin.reviews.edit');

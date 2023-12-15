@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\BaseController as Controller;
 use App\Http\Requests\Admin\Package as AdminPackage;
 use App\Traits\ResourceTrait;
 use App\Models\Package;
+use App\Models\PackageMedia;
+use Symfony\Component\HttpFoundation\Request;
 use App\Models\Tag;
-use Redirect;
+use Redirect, View;
 
 class PackageController extends Controller
 {
@@ -34,6 +36,9 @@ class PackageController extends Controller
     {
         $route = $this->route;
         return $this->initDTData($collection)
+            ->addColumn('reviews', function($obj){
+                return '<a href="'.route('admin.reviews.index', ['packages', $obj->id]).'" target="_blank"><i class="fas fa-eye"></i></a>';
+            })
             ->editColumn('show_on_offer', function($obj) use($route) { 
                 if($obj->show_on_offer == 1)
                 {
@@ -46,7 +51,7 @@ class PackageController extends Controller
                         return '<i class="h5 text-danger fa fa-times-circle"></i>';
                 }
             })
-            ->rawColumns(['action_edit', 'action_delete', 'status', 'show_on_offer']);
+            ->rawColumns(['action_edit', 'action_delete', 'status', 'show_on_offer', 'reviews']);
     }
 
     protected function getSearchSettings(){}
@@ -173,5 +178,48 @@ class PackageController extends Controller
             return response()->json(['success'=> 'Success']);
         }
         return $this->redirect('notfound');
+    }
+
+    public function media_edit($id){
+        $id = decrypt($id);
+		if($file = PackageMedia::find($id))
+		{
+			return view($this->views.'.media_form', array('file'=>$file));
+		}
+    }
+
+    public function media_update(Request $request){
+        $data = $request->all();
+        $id = decrypt($data['package_media_id']);
+        if($obj = PackageMedia::find($id)){
+            $obj->media_id = $data['media_id'];
+            $obj->title = $data['media_title'];
+            $obj->description = $data['media_description'];
+            
+            if($request->file('video_cover') && $request->file('video_cover')->isValid()){
+                $upload = $this->uploadCover($request->file('video_cover'));
+                if($upload['success']) {
+                    $obj->video_preview_image = 'uploads/media/cover/'.$upload['filename'];
+                }
+            }
+            $obj->is_featured = isset($data['is_featured'])?1:0;
+            $obj->save();
+
+            $file_view = View::make($this->views.'.media', [ 'item' => $obj->media, 'package_media_id'=>$obj->id]);
+            $file_html = $file_view->render();
+            return response()->json(['success'=>1, 'html'=>$file_html, 'id'=>$obj->id]);
+
+        } else {
+            return $this->redirect('notfound');
+        }
+    }
+
+    public function media_destroy($id){
+        $id = decrypt($id);
+		if($file = PackageMedia::find($id))
+		{
+            $file->delete();
+            return response()->json(['success'=>1]);
+		}
     }
 }

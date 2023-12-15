@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\BaseModel as Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -76,5 +77,15 @@ class Package extends Model
     public function listing(): BelongsTo
     {
         return $this->belongsTo(Listing::class, 'listings_id');
+    }
+
+    public function schedules(): HasMany
+    {
+        return $this->hasMany(PackageSchedule::class, 'package_id')->orderBy('priority');
+    }
+
+    public function featured_video(): BelongsTo
+    {
+        return $this->belongsTo(Media::class, 'featured_video_id');
     }
 }

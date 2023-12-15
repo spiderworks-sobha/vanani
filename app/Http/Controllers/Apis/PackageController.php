@@ -17,29 +17,13 @@ class PackageController extends Controller
         try{
             $data = $request->all();
             $limit = !empty($data['limit'])?(int)$data['limit']:10;
-            $packages = Package::with(['featured_image'])->where('status', 1);
+            $packages = Package::with(['featured_medias', 'listing', 'listing.list'])->where('status', 1);
             if($tags = $request->tags){
                 $packages->whereHas('tags', function($query) use($tags){
                     $query->whereIn('package_tag.tag_id', $tags);
                 });
             }
-            $packages = $packages->where('is_featured', '!=', 1)->orderBy('priority', 'DESC')->paginate($limit);
-            return new PackageListCollection($packages);
-        }
-        catch(\Exception $e){
-            return response()->json(['error' => $e->getMessage()], 500);
-        }
-    }
-
-    public function featured(Request $request){
-        try{
-            $packages = Package::with(['featured_image'])->where('status', 1);
-            if($tags = $request->tags){
-                $packages->whereHas('tags', function($query) use($tags){
-                    $query->whereIn('package_tag.tag_id', $tags);
-                });
-            }
-            $packages = $packages->where('is_featured', 1)->orderBy('priority', 'DESC')->get();
+            $packages = $packages->orderBy('priority', 'DESC')->paginate($limit);
             return new PackageListCollection($packages);
         }
         catch(\Exception $e){
@@ -49,11 +33,20 @@ class PackageController extends Controller
 
     public function details(Request $request, string $slug){
         try{
-            $package = Package::with(['featured_image', 'banner_image', 'og_image', 'amenities', 'activities', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
-            if($package)
+            $package = Package::with(['featured_image', 'banner_image', 'schedules', 'featured_video', 'reviews', 'og_image', 'attractions', 'activities', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
+            if($package){
+                $other_packages = [];
+                $tags = $package->tags()->pluck('tags.id')->toArray();
+                if($tags){
+                    $other_packages = Package::with(['featured_image'])->where('status', 1)->whereHas('tags', function($query) use($tags){
+                        $query->whereIn('package_tag.tag_id', $tags);
+                    })->where('id', '!=', $package->id)->orderBy('priority', 'DESC')->take(3)->get();
+                }
+                $package->other_packages = $other_packages;
                 return new ResourcesPackage($package);
+            }
             else
-                return response()->json(['error' => "Rental not Found!"], 404);
+                return response()->json(['error' => "Package not Found!"], 404);
         }
         catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], 500);

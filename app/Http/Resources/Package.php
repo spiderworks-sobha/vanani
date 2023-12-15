@@ -17,11 +17,12 @@ class Package extends JsonResource
         return [
             'slug' => $this->slug,
             'title' => $this->title,
-            'price_description' => $this->price_description,
+            'tagline' => $this->tagline,
             'short_description' => $this->short_description,
             'content' => $this->content,
             'featured_image' => new Media($this->featured_image),
             'banner_image' => new Media($this->banner_image),
+            'featured_video' => new Media($this->featured_video),
             'browser_title' => $this->browser_title,
             'og_title' => $this->og_title,
             'meta_description' => $this->meta_description,
@@ -31,10 +32,13 @@ class Package extends JsonResource
             'bottom_description' => $this->bottom_description,
             'extra_js' => $this->extra_js,
             'activities' => new ActivityCollection($this->activities),
-            'amenities' => new AmenityCollection($this->amenities),
-            'medias' => new MediaCollection($this->medias),
+            'attractions' => new AttractionCollection($this->attractions),
+            'medias' => new PackageGalleryCollection($this->medias),
+            'schedules' => new PackageScheduleCollection($this->schedules),
             'tags' => new TagCollection($this->tags),
-            'faq' => new FaqCollection($this->faq)
+            'reviews' => new ReviewCollection($this->reviews),
+            'faq' => new FaqCollection($this->faq),
+            'other_packages' => new PackageListCollection($this->other_packages)
         ];
     }
 }

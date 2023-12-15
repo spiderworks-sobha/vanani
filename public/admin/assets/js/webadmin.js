@@ -148,6 +148,15 @@ $(function(){
                                         save_order();
                                     }
                                 });
+
+                                if($('#accordionSchedule').length){
+                                    $('#accordionSchedule').sortable({
+                                        axis: 'y',
+                                        update: function (event, ui) {
+                                            save_schedule_order();
+                                        }
+                                    });
+                                }
                             }
 
                             if($('.fileinput').length)

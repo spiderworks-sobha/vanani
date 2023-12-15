@@ -324,7 +324,9 @@
                                                 <div class="card-body">
                                                     <div class="form-group col-md-12">
                                                         <select name="listings_id" class="w-100 webadmin-select2-input form-control" data-select2-url="{{route('admin.select2.list')}}">
-
+                                                            @if($obj->listings_id)
+                                                                <option value="{{$obj->listing->id}}" selected >{{$obj->listing->listing_name}}</option>
+                                                            @endif
                                                         </select>
                                                     </div>
                                                 </div>
@@ -349,7 +351,23 @@
                                                         <a href="{{route('admin.faq.index', [$obj->id, 'Package'])}}" class="webadmin-open-ajax-popup btn btn-sm btn-warning" title="SET FAQ" data-popup-size="large">@if(count($obj->faq)>0) Update FAQ @else Add FAQ @endif</a>
                                                     </div>
                                                 </div>
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        SCHEDULES
+                                                    </div>
+                                                    <div class="card-body text-center">
+                                                        <a href="{{route('admin.packages.schedule.index', [$obj->id])}}" class="webadmin-open-ajax-popup btn btn-sm btn-warning" title="SCHEDULES" data-popup-size="large">Schedules</a>
+                                                    </div>
+                                                </div>
                                                 @endif
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Featured Video
+                                                </div>
+                                                <div class="card-body">
+                                                    @include('admin.media.set_file', ['file'=>$obj->featured_video, 'title'=>'Featured Video', 'popup_type'=>'single_image', 'type'=>'Video', 'holder_attr'=>'featured_video_id'])
+                                                </div>
+                                            </div>
                                             <div class="card">
                                                 <div class="card-header">
                                                     Icon Image
@@ -458,7 +476,149 @@
                     $(content).insertBefore('#add-new-media-wrap');
                     idInc++;
                 })
+
+                $(document).on('click', '#gallery-media-update-form', function(){
+                    if($('#galleryMediaUpdateForm #gallery-youtube-url').length){
+                        if($('#galleryMediaUpdateForm #gallery-youtube-url').val() == ""){
+                            miniweb_alert('Alert!', 'Youtube url cannot be null');
+                            return;
+                        }
+                    }
+                    var postData = new FormData( $('#galleryMediaUpdateForm')[0] );
+                    $.ajax({
+                        url : "{{route('admin.packages.media.update')}}",
+                        type: "POST",
+                        data : postData,
+                        processData: false,
+                        contentType: false,
+                        success:function(response, textStatus, jqXHR){
+                            if(typeof response.success != "undefined"){
+                                $('#gallery-item-'+response.id).replaceWith(response.html);
+                                miniweb_alert('Success!', 'Gallery successfully updated.');
+                                $(".jconfirm-closeIcon").trigger("click");
+                            }
+                        },
+                        error: function(jqXHR, textStatus, errorThrown){
+                            //if fails     
+                        }
+                    });
+                })
+
+                $(document).on('click', '.gallery-item-remove', function(e){
+                    e.preventDefault();
+                    var that = $(this);
+                    var delete_url = that.attr('href');
+                    $.confirm({
+                        title: 'Confirm!',
+                        content: 'Are you sure to delete this?',
+                        buttons: {
+                            confirm:{
+                                btnClass: 'btn-blue',
+                                action: function(){
+                                    that.parents('.gallery-item').remove();
+                                    $.get(delete_url);
+                                }
+                            },
+                            cancel: function () {
+                            },
+                        }
+                    });
+                })
             })
+
+            $(function(){
+                $(document).on('click', '#add-schedule-btn', function(){
+                    var obj = $(this);
+                    schedule_validate();
+                    if($('#scheduleForm').valid())
+                    {
+                        obj.prop('disabled', true).text('Processing');
+                        var url = $('#scheduleForm').attr('action');
+                        var data = $('#scheduleForm').serialize();
+                        $.post(url, data, function(result){
+                            $('#schedule-form').html(result.form_html);
+                            $('#schedule-listing').html(result.list_html);
+                            $.alert(result.message);
+                            obj.prop('disabled', false).text('Save');
+                        })
+                    }
+                });
+
+                $(document).on('click', '#schedule-create-new', function(e){
+                    e.preventDefault();
+                    var url = $(this).attr('href');
+                    $.get(url, function(result){
+                        $('#schedule-form').html(result);
+                    })
+                });
+
+                $(document).on('click', '.edit-schedule-btn', function(e){
+                    e.preventDefault();
+                    var url = $(this).attr('href');
+                    $.get(url, function(result){
+                        $('#schedule-form').html(result);
+                    })
+                })
+
+                $(document).on('click', '.delete-schedule-btn', function(e){
+                    e.preventDefault();
+                    var obj = $(this);
+                    var message = obj.data('message');
+                    var url = obj.attr('href');
+                    $.confirm({
+                            title: 'Warning',
+                            content: message,
+                            closeAnimation: 'scale',
+                            opacity: 0.5,
+                            buttons: {
+                                'ok_button': {
+                                    text: 'Proceed',
+                                    btnClass: 'btn-blue',
+                                    action: function(){
+                                        var obj2 = this;
+                                        obj2.buttons.ok_button.setText('Processing..'); // setText for 'hello' button
+                                        obj2.buttons.ok_button.disable();
+                                        $.get(url).done(function (data) {
+                                            obj2.$$close_button.trigger('click');
+                                            if(data.success)
+                                                obj.parents('.schedules-item-card').remove();
+                                            $.alert(data.message);
+                                        });
+                                        return false;
+                                    }
+                                },
+                                close_button: {
+                                    text: 'Cancel',
+                                    action: function () {
+                                    }
+                                },
+                            }
+                        });
+                })
+            })
+
+            var save_schedule_order = function()
+            {
+                var ids = [];
+                $('#accordionSchedule .card').each(function(){
+                    ids.push($(this).attr('id'));
+                });
+                $.post(base_url+'/packages/schedule/re-order', {ids: ids, '_token':_token}, function(){
+
+                });
+            }
+
+            var schedule_validate = function(){
+                $('#scheduleForm').validate({
+                    ignore: [],
+                    rules: {
+                        "title": "required",
+                    },
+                    messages: {
+                        "title": "Title cannot be blank",
+                    },
+                });
+            };
     </script>
 @parent
 @endsection

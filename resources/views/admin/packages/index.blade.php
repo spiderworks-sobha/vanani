@@ -58,7 +58,8 @@
                                             <th class="table-width-120">Slug</th>
                                             <th class="table-width-120">Name</th>
                                             <th class="table-width-120">Last Updated On</th>
-                                            <th class="nosearch table-width-10 text-center @fieldshow(events-priority) @else nodisplay @endfieldshow">Priority</th>
+                                            <th class="nosearch table-width-10 text-center">Priority</th>
+                                            <th class="nosort nosearch table-width-10">Reviews</th>
                                             <th class="nosort nosearch table-width-10">Show on Offer</th>
                                             <th class="nosort nosearch table-width-10">Status</th>
                                             <th class="nosort nosearch table-width-10">@if(auth()->user()->can($permissions['edit'])) Edit @else View @endif</th>
@@ -93,6 +94,7 @@
             {data: 'name', name: 'name'},
             {data: 'date', name: 'updated_at'},
             {data: 'priority', name: 'priority', className: 'text-center'},
+            {data: 'reviews', name: 'reviews'},
             {data: 'show_on_offer', name: 'show_on_offer'},
             {data: 'status', name: 'status'},
             {data: 'action_edit', name: 'action_edit'},
