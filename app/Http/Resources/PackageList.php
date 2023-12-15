@@ -21,7 +21,7 @@ class PackageList extends JsonResource
             'title' => $this->title,
             'short_description' => $this->short_description,
             'featured_image' => new Media($this->whenLoaded('featured_image')),
-            'featured_medias' => new MediaCollection($this->whenLoaded('featured_medias')),
+            'featured_medias' => new PackageGalleryCollection($this->whenLoaded('featured_medias')),
             'list' => (!empty($this->listing))? new ListingResourceCollection($this->listing->list): [],
         ];
     }
