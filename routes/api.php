@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Apis\BlogController;
 use App\Http\Controllers\Apis\AuthController;
+use App\Http\Controllers\Apis\AwardController;
 use App\Http\Controllers\Apis\CommonController;
 use App\Http\Controllers\Apis\MenuController;
 use App\Http\Controllers\Apis\PackageController;
@@ -53,7 +54,12 @@ Route::get('products/home-bottom', [ProductController::class, 'home_bottom'])->n
 Route::get('testimonials', [TestimonialController::class, 'index'])->name('api.testimonials.index');
 
 Route::get('members', [TeamController::class, 'index'])->name('api.members.index');
+
 Route::get('partners', [PartnerController::class, 'index'])->name('api.partners.index');
+Route::get('partners/featured', [PartnerController::class, 'featured'])->name('api.partners.featured');
+
+Route::get('awards', [AwardController::class, 'index'])->name('api.partners.index');
+Route::get('awards/latest', [AwardController::class, 'latest'])->name('api.partners.latest');
 
 Route::get('page/{slug}', [CommonController::class, 'page'])->name('api.page');
 Route::get('widget/{code}', [CommonController::class, 'widget'])->name('api.widget');

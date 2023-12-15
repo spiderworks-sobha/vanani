@@ -29,14 +29,14 @@
                                 <div class="row">
                                     <div class="col">
                                         @if($obj->id)
-                                            <h4 class="page-title">Edit Partner</h4>
+                                            <h4 class="page-title">Edit Award</h4>
                                         @else
-                                            <h4 class="page-title">Create new Partner</h4>
+                                            <h4 class="page-title">Create new Award</h4>
                                         @endif
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Admin</a></li>
-                                            <li class="breadcrumb-item"><a href="{{ route($route.'.index') }}">All Partners</a></li>
-                                            <li class="breadcrumb-item active">@if($obj->id)Edit @else Create new @endif Partner</li>
+                                            <li class="breadcrumb-item"><a href="{{ route($route.'.index') }}">All Awards</a></li>
+                                            <li class="breadcrumb-item active">@if($obj->id)Edit @else Create new @endif Award</li>
                                         </ol>
                                     </div><!--end col-->
                                     @if(auth()->user()->can($permissions['create']))
@@ -97,10 +97,6 @@
                                                             <div class="custom-control custom-switch switch-primary float-left">
                                                                 <input type="checkbox" class="custom-control-input" value="1" id="status" name="status" @if(!$obj->id || $obj->status == 1) checked="" @endif>
                                                                 <label class="custom-control-label" for="status">Status</label>
-                                                            </div>
-                                                            <div class="custom-control custom-switch switch-primary float-right">
-                                                                <input type="checkbox" class="custom-control-input" value="1" id="is_featured" name="is_featured" @if($obj->is_featured == 1) checked="checked" @endif>
-                                                                <label class="custom-control-label" for="is_featured">Featured</label>
                                                             </div>
                                                         </div>
                                                         <div class="form-group w-100 mb-1">
@@ -169,7 +165,7 @@
                 "name": "required",
               },
               messages: {
-                "name": "Partner name cannot be blank",
+                "name": "Award name cannot be blank",
               },
             });
     </script>

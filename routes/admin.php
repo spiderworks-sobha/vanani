@@ -36,6 +36,7 @@ use App\Http\Controllers\Admin\JobApplicationController;
 use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\ListigItemController;
 use App\Http\Controllers\Admin\Auth\AuthenticateSessionOtpController;
+use App\Http\Controllers\Admin\AwardController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PackageController;
@@ -573,6 +574,16 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
         Route::post('attractions/update', [AttractionController::class, 'update'])->name('admin.attractions.update');
         Route::get('attractions/change-status/{id}', [AttractionController::class, 'changeStatus'])->name('admin.attractions.change-status');
         Route::get('attractions/show/{id}', [AttractionController::class, 'show'])->name('admin.attractions.show');
+
+         //awards
+         Route::get('awards', [AwardController::class, 'index'])->name('admin.awards.index');
+         Route::get('awards/create', [AwardController::class, 'create'])->name('admin.awards.create');
+         Route::get('awards/edit/{id}', [AwardController::class, 'edit'])->name('admin.awards.edit');
+         Route::get('awards/destroy/{id}', [AwardController::class, 'destroy'])->name('admin.awards.destroy');
+         Route::get('awards/change-status/{id}', [AwardController::class, 'changeStatus'])->name('admin.awards.change-status');
+         Route::post('awards/store', [AwardController::class, 'store'])->name('admin.awards.store');
+         Route::post('awards/update', [AwardController::class, 'update'])->name('admin.awards.update');
+         Route::get('awards/show/{id}', [AwardController::class, 'show'])->name('admin.awards.show');
 	});
 
     Route::get('/{id?}', [AuthenticateSessionOtpController::class, 'create'])->name('admin.auth.login');

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\BaseController as Controller;
-use App\Http\Requests\Admin\PartnerRequest;
+use App\Http\Requests\Admin\AwardRequest;
 use App\Traits\ResourceTrait;
-use App\Models\Partner;
+use App\Models\Award;
 
-class PartnerController extends Controller
+class AwardController extends Controller
 {
     use ResourceTrait;
 
@@ -15,11 +15,11 @@ class PartnerController extends Controller
     {
         parent::__construct();
 
-        $this->model = new Partner;
-        $this->route .= '.partners';
-        $this->views .= '.partners';
+        $this->model = new Award;
+        $this->route .= '.awards';
+        $this->views .= '.awards';
 
-        $this->permissions = ['list'=>'partner_listing', 'create'=>'partner_adding', 'edit'=>'partner_editing', 'delete'=>'partner_deleting'];
+        $this->permissions = ['list'=>'award_listing', 'create'=>'award_adding', 'edit'=>'award_editing', 'delete'=>'award_deleting'];
         $this->resourceConstruct();
 
     }
@@ -36,12 +36,12 @@ class PartnerController extends Controller
 
     protected function getSearchSettings(){}
 
-    public function store(PartnerRequest $request){
+    public function store(AwardRequest $request){
         $request->validated();
         return $this->_store($request->all());
     }
 
-    public function update(PartnerRequest $request)
+    public function update(AwardRequest $request)
     {
         $request->validated();
         return $this->_update(decrypt($request->id), $request->all());
