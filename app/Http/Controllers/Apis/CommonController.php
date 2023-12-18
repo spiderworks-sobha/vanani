@@ -9,9 +9,11 @@ use App\Models\SliderPhoto;
 use App\Models\FrontendPage;
 use App\Http\Resources\FrontendPage as FrontendPageResource;
 use App\Http\Resources\HomeWhatWeOfferCollection;
+use App\Http\Resources\Page as ResourcesPage;
 use App\Http\Resources\Widget as WidgetResource;
 use App\Models\Accommodation;
 use App\Models\Package;
+use App\Models\Page;
 use App\Models\Rental;
 use App\Models\Widget;
 use DB;
@@ -100,6 +102,14 @@ class CommonController extends Controller
         $package->type = "Package";
         $data[] = $package;
         return new HomeWhatWeOfferCollection($data);
+    }
+
+    public function company_pages($slug){
+        $page = Page::where('slug', $slug)->where('status', 1)->first();
+        if(!$page)
+            return response()->json(['error' => 'Page not Found!'], 404);
+
+        return new ResourcesPage($page);
     }
     
 }

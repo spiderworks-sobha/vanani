@@ -22,7 +22,7 @@ class Page extends Model
     protected $table = 'pages';
 
 
-    protected $fillable = array('slug', 'name', 'title', 'content', 'parent_id', 'featured_image_id', 'banner_image_id', 'browser_title', 'meta_description', 'meta_keywords', 'bottom_description', 'og_title', 'og_description', 'og_image_id', 'extra_js', 'status');
+    protected $fillable = array('slug', 'name', 'title', 'tagline', 'content', 'parent_id', 'featured_image_id', 'banner_image_id', 'browser_title', 'meta_description', 'meta_keywords', 'bottom_description', 'og_title', 'og_description', 'og_image_id', 'extra_js', 'status');
 
     protected $dates = ['created_at','updated_at'];
 

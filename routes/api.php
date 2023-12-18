@@ -65,6 +65,7 @@ Route::get('page/{slug}', [CommonController::class, 'page'])->name('api.page');
 Route::get('widget/{code}', [CommonController::class, 'widget'])->name('api.widget');
 Route::get('menu/header', [MenuController::class, 'header'])->name('api.menu.header');
 Route::get('menu/{menu_position}', [MenuController::class, 'index'])->name('api.menu');
+Route::get('company-pages/{slug}', [CommonController::class, 'company_pages'])->name('api.company-pages');
 
 Route::get('tags', [CommonController::class, 'tags'])->name('api.tags');
 
