@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Apis;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomPackageRequest;
+use App\Http\Resources\CustomPackage as ResourcesCustomPackage;
 use App\Http\Resources\Package as ResourcesPackage;
 use App\Http\Resources\PackageListCollection;
 use App\Models\Package;
 use App\Http\Resources\ReviewCollection;
+use App\Models\CustomPackage;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -61,5 +64,18 @@ class PackageController extends Controller
         catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+
+    public function custom_package_save(CustomPackageRequest $request){
+        $request->validated();
+        $custom_package = new CustomPackage();
+        $custom_package->fill($request->all());
+        if($custom_package->save()){
+            if($request->activities){
+                $custom_package->activities()->sync($request->activities);
+            }
+        }
+        return response()->json(['success'=>1, 'data'=> new ResourcesCustomPackage($custom_package), 'message' => "Custom package successfully created"]);
     }
 }

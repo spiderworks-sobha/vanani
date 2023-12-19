@@ -111,5 +111,10 @@ class CommonController extends Controller
 
         return new ResourcesPage($page);
     }
+
+    public function countries(){
+        $countries = \DB::table('countries')->select('name')->get();
+        return response()->json(['data'=>$countries]);
+    }
     
 }

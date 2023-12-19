@@ -68,6 +68,7 @@ Route::get('menu/{menu_position}', [MenuController::class, 'index'])->name('api.
 Route::get('company-pages/{slug}', [CommonController::class, 'company_pages'])->name('api.company-pages');
 
 Route::get('tags', [CommonController::class, 'tags'])->name('api.tags');
+Route::get('countries', [CommonController::class, 'countries'])->name('api.countries');
 
 Route::get('rentals', [RentalController::class, 'index'])->name('rentals.index');
 Route::get('rentals/featured', [RentalController::class, 'featured'])->name('rentals.featured');
@@ -82,6 +83,7 @@ Route::get('accommodations/{slug}', [AccommodationController::class, 'details'])
 Route::get('packages', [PackageController::class, 'index'])->name('packages.index');
 Route::get('packages/reviews', [PackageController::class, 'reviews'])->name('packages.reviews');
 Route::get('packages/{slug}', [PackageController::class, 'details'])->name('packages.details');
+Route::post('custom-package/save', [PackageController::class, 'custom_package_save'])->name('packages.custom-package.save');
 
 Route::get('gallery', [GalleryController::class, 'index'])->name('api.gallery.index');
 Route::get('gallery/{slug}', [GalleryController::class, 'view'])->name('api.gallery.view');
