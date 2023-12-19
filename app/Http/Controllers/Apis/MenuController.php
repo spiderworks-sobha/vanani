@@ -44,7 +44,7 @@ class MenuController extends Controller
                 elseif ($item->menu_type == 'pages_link' && $item->linkable)
                 {
                     if($item->linkable)
-                        $menu_items[$key]['url'] = 'company/'.$item->linkable->slug;
+                        $menu_items[$key]['url'] = $item->linkable->slug;
                 }
                 elseif($item->menu_type == 'frontend_pages_link' && $item->linkable)
                 {
