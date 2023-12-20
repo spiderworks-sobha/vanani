@@ -15,6 +15,7 @@ class Accommodation extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'slug' => $this->slug,
             'title' => $this->title,
             'tagline' => $this->tagline,

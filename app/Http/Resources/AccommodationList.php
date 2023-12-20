@@ -15,6 +15,7 @@ class AccommodationList extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
             'tagline' => $this->tagline,
