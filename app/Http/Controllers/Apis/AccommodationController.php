@@ -17,7 +17,7 @@ class AccommodationController extends Controller
         try{
             $data = $request->all();
             $limit = !empty($data['limit'])?(int)$data['limit']:10;
-            $accommodations = Accommodation::with(['featured_medias', 'featured_features'])->where('status', 1);
+            $accommodations = Accommodation::with(['featured_medias', 'featured_features', 'featured_image'])->where('status', 1);
             if($tags = $request->tags){
                 $accommodations->whereHas('tags', function($query) use($tags){
                     $query->whereIn('accommodation_tag.tag_id', $tags);
