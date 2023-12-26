@@ -127,12 +127,13 @@
                                                                 <input type="text" name="no_of_days" class="form-control" value="{{$obj->no_of_days}}" >
                                                             </div>
                                                             <div class="form-group col-md-12">
-                                                                <label>Short Description</label>
-                                                                <textarea name="short_description" class="form-control" rows="2" id="short_description">{{$obj->short_description}}</textarea>
+                                                                <label>Inclution Summary</label>
+                                                                <input type="text" name="summary" class="form-control" value="{{$obj->summary}}" >
+                                                                <small class="text-muted">Comma (,) separated</small>
                                                             </div>
                                                             <div class="form-group col-md-12">
-                                                                <label>Content</label>
-                                                                <textarea name="content" class="form-control editor" id="content">{{$obj->content}}</textarea>
+                                                                <label>Short Description</label>
+                                                                <textarea name="short_description" class="form-control" rows="2" id="short_description">{{$obj->short_description}}</textarea>
                                                             </div>
                                                         </div>
                                                     </div>                                           
@@ -149,19 +150,6 @@
                                                             $attractions = $obj->attractions->toArray();
                                                     @endphp
                                                     <x-attraction-select :selected="$attractions"></x-attraction-select>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    Activities
-                                                </div>
-                                                <div class="card-body">
-                                                    @php
-                                                        $activities = [];
-                                                        if(count($obj->activities))
-                                                            $activities = $obj->activities->toArray();
-                                                    @endphp
-                                                    <x-activity-select :selected="$activities"></x-activity-select>
                                                 </div>
                                             </div>
                                             <div class="card">
@@ -296,14 +284,31 @@
                                                     <button class="btn btn-sm btn-primary float-right">Save</button>
                                                 </div>
                                             </div>
-
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    Accommodations
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="form-group col-md-12">
+                                                        @php
+                                                            $selected_accommodations = [];
+                                                            if($obj->id && count($obj->accommodations))
+                                                                $selected_accommodations = $obj->accommodations->pluck('id')->toArray();
+                                                        @endphp
+                                                        <select name="accommodations[]" class="w-100 webadmin-select2-input" data-placeholder="Select Accommodation" multiple>
+                                                            @foreach($accommodations as $accommodation)
+                                                                <option value="{{$accommodation->id}}" @if(in_array($accommodation->id, $selected_accommodations)) selected="selected" @endif>{{$accommodation->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="card">
                                                 <div class="card-header">
                                                     Tags
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="form-group col-md-12">
-                                                        <label class="">Tags</label>
                                                         @php
                                                             $selected_tags = [];
                                                             if($obj->id && count($obj->tags))
@@ -356,7 +361,7 @@
                                                         SCHEDULES
                                                     </div>
                                                     <div class="card-body text-center">
-                                                        <a href="{{route('admin.packages.schedule.index', [$obj->id])}}" class="webadmin-open-ajax-popup btn btn-sm btn-warning" title="SCHEDULES" data-popup-size="large">Schedules</a>
+                                                        <a href="{{route('admin.packages.schedule.index', [$obj->id])}}" class="btn btn-sm btn-warning" title="SCHEDULES" target="_blank">Schedules</a>
                                                     </div>
                                                 </div>
                                                 @endif

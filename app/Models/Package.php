@@ -69,6 +69,11 @@ class Package extends Model
         return $this->belongsToMany(Media::class, 'package_media', 'package_id', 'media_id')->withPivot('id', 'video_preview_image', 'created_by', 'updated_by', 'created_at', 'updated_at')->wherePivot('is_featured', 1);
     }
 
+    public function accommodations() :BelongsToMany
+    {
+        return $this->belongsToMany(Accommodation::class, 'package_accommodation', 'package_id', 'accommodation_id')->withPivot('created_by', 'updated_by', 'created_at', 'updated_at');
+    }
+
     public function reviews(): MorphMany
     {
         return $this->morphMany(Review::class, 'reviewable')->orderBy('priority', 'ASC')->orderBy('created_at', 'DESC');

@@ -540,7 +540,7 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
             Route::get('schedule/destroy/{id}', [PackageScheduleController::class, 'destroy'])->name('admin.packages.schedule.destroy');
             Route::post('schedule/store', [PackageScheduleController::class, 'store'])->name('admin.packages.schedule.store');
             Route::post('schedule/update', [PackageScheduleController::class, 'update'])->name('admin.packages.schedule.update');
-            Route::post('schedule/re-order', [PackageScheduleController::class, 'order_store'])->name('admin.packages.schedule.re-order');
+            Route::get('schedule/change-status/{id}', [PackageScheduleController::class, 'changeStatus'])->name('admin.packages.schedule.change-status');
             Route::get('schedule/create/{related_id}', [PackageScheduleController::class, 'create'])->name('admin.packages.schedule.create');
             Route::get('schedule/{related_id}', [PackageScheduleController::class, 'index'])->name('admin.packages.schedule.index');
         });

@@ -18,7 +18,8 @@ class PackageSchedule extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'icon' => new Media($this->icon_image),
-            'featured_image' => new Media($this->featured_image)
+            'featured_image' => new Media($this->featured_image),
+            'activities' => new ActivityCollection($this->activities),
         ];
     }
 }

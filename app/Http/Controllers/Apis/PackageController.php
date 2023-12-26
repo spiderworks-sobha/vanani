@@ -36,7 +36,7 @@ class PackageController extends Controller
 
     public function details(Request $request, string $slug){
         try{
-            $package = Package::with(['featured_image', 'banner_image', 'schedules', 'featured_video', 'reviews', 'og_image', 'attractions', 'activities', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
+            $package = Package::with(['featured_image', 'accommodations', 'banner_image', 'schedules', 'featured_video', 'reviews', 'og_image', 'attractions', 'activities', 'tags', 'medias', 'faq'])->where('slug', $slug)->where('status', 1)->first();
             if($package){
                 $other_packages = [];
                 $tags = $package->tags()->pluck('tags.id')->toArray();

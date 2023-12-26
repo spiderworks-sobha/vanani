@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\BaseController as Controller;
 use App\Http\Requests\Admin\Package as AdminPackage;
+use App\Models\Accommodation;
 use App\Traits\ResourceTrait;
 use App\Models\Package;
 use App\Models\PackageMedia;
@@ -59,14 +60,16 @@ class PackageController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view($this->views . '.form', array('obj'=>$this->model, 'tags'=>$tags));
+        $accommodations = Accommodation::all();
+        return view($this->views . '.form', array('obj'=>$this->model, 'tags'=>$tags, 'accommodations'=>$accommodations));
     }
 
     public function edit($id) {
         $id = decrypt($id);
         if($obj = $this->model->find($id)){
             $tags = Tag::all();
-            return view($this->views . '.form')->with('obj', $obj)->with('tags', $tags);
+            $accommodations = Accommodation::all();
+            return view($this->views . '.form')->with('obj', $obj)->with('tags', $tags)->with('accommodations', $accommodations);
         } else {
             return $this->redirect('notfound');
         }
@@ -90,6 +93,8 @@ class PackageController extends Controller
             $this->saveActivities($this->model, $data['activity_to']);
             $medias = (!empty($data['package_media']))?$data['package_media']:[];
             $this->savePackageMedia($this->model, $medias);
+            $accommodations = (!empty($data['accommodations']))?$data['accommodations']:[];
+            $this->saveAccommodations($this->model, $accommodations);
             $this->saveTags($this->model, $data['tags']);
         }
 
@@ -126,6 +131,16 @@ class PackageController extends Controller
         $package->tags()->sync($tag_array);
     }
 
+    protected function saveAccommodations($package, $accommodations=[]): void
+    {
+        $accommodation_array = [];
+        if($accommodations)
+            foreach($accommodations as $key=>$accommodation){
+                $accommodation_array[$accommodation] = ['created_by'=>auth()->user()->id, 'updated_by'=>auth()->user()->id, 'created_at'=>date('Y-m-d H:i:s')];
+            }
+        $package->accommodations()->sync($accommodation_array);
+    }
+
     protected function savePackageMedia($package, $medias=[]): void
     {
         $media_array = [];
@@ -155,6 +170,8 @@ class PackageController extends Controller
                 $this->saveActivities($obj, $data['activity_to']);
                 $medias = (!empty($data['rental_media']))?$data['rental_media']:[];
                 $this->savePackageMedia($obj, $medias);
+                $accommodations = (!empty($data['accommodations']))?$data['accommodations']:[];
+                $this->saveAccommodations($obj, $accommodations);
                 $this->saveTags($obj, $data['tags']);
             }
             return Redirect::to(route($this->route. '.edit', ['id'=>encrypt($id)]))->withSuccess('Package successfully updated!');
