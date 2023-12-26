@@ -26,8 +26,9 @@ class CustomPackageRequest extends FormRequest
             'name' => 'required|max:250',
             'phone_number' => 'required|max:20',
             'email' => 'nullable|email',
-            'duration' => 'required|max:250',
-            'no_of_individuals' => 'required|max:250'
+            'checkin_date' => 'required|date',
+            'checkout_date' => 'required|date',
+            'no_of_adults' => 'required|integer'
         ];
     }
 }
