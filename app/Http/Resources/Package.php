@@ -19,7 +19,7 @@ class Package extends JsonResource
             'title' => $this->title,
             'tagline' => $this->tagline,
             'short_description' => $this->short_description,
-            'summary' => $this->summary,
+            'summary' => $this->precessSummary($this->summary),
             'featured_image' => new Media($this->featured_image),
             'banner_image' => new Media($this->banner_image),
             'featured_video' => new Media($this->featured_video),
@@ -40,5 +40,13 @@ class Package extends JsonResource
             'faq' => new FaqCollection($this->faq),
             'other_packages' => new PackageListCollection($this->other_packages)
         ];
+    }
+
+    protected function precessSummary($summary){
+        $summary = explode(',', $summary);
+        $summary = array_filter($summary, function($item){
+            return trim($item);
+        });
+        return $summary;
     }
 }
