@@ -44,9 +44,9 @@ class Package extends JsonResource
 
     protected function precessSummary($summary){
         $summary = explode(',', $summary);
-        $summary = array_filter($summary, function($item){
+        $summary = array_map(function($item){
             return trim($item);
-        });
+        }, $summary);
         return $summary;
     }
 }
