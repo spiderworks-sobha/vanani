@@ -15,11 +15,13 @@ class Package extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'slug' => $this->slug,
             'title' => $this->title,
             'tagline' => $this->tagline,
             'short_description' => $this->short_description,
             'summary' => $this->precessSummary($this->summary),
+            'whatsapp_number' => $this->whatsapp_number,
             'featured_image' => new Media($this->featured_image),
             'banner_image' => new Media($this->banner_image),
             'featured_video' => new Media($this->featured_video),

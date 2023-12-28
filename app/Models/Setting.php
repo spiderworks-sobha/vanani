@@ -44,4 +44,14 @@ class Setting extends Model
         return $this->parent_validate($data);
     }
 
+    public function common_settings(){
+        $common_settings = [];
+        $settings = static::all();
+        foreach($settings as $setting)
+        {
+            $common_settings[$setting->code] = $setting->value_text;
+        }
+        return $common_settings;
+    }
+
 }

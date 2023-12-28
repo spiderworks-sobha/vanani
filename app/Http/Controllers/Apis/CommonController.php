@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Apis;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ContactRequest;
 use App\Http\Resources\SliderPhotoCollection;
 use Illuminate\Http\Request;
 use App\Models\SliderPhoto;
@@ -12,12 +13,14 @@ use App\Http\Resources\HomeWhatWeOfferCollection;
 use App\Http\Resources\Page as ResourcesPage;
 use App\Http\Resources\Widget as WidgetResource;
 use App\Models\Accommodation;
+use App\Models\Lead;
 use App\Models\Package;
 use App\Models\Page;
 use App\Models\Rental;
 use App\Models\Widget;
 use DB;
-use stdClass;
+use App\Models\Setting;
+use App\Services\MailSettings;
 
 class CommonController extends Controller
 {
@@ -115,6 +118,36 @@ class CommonController extends Controller
     public function countries(){
         $countries = \DB::table('countries')->select('name')->get();
         return response()->json(['data'=>$countries]);
+    }
+
+    public function contact_save(ContactRequest $request){
+        try{
+            $request->validated();
+            $contact = new Lead;
+            $contact->fill($request->all());
+            $contact->save();
+
+            $notif_emails = Setting::where('code', 'contact_notification_email_ids')->first();
+
+            if($notif_emails && trim($notif_emails->value_text) != '')
+            {
+                $mail = new MailSettings;
+                $email_array = explode(',', $notif_emails->value_text);
+                array_filter($email_array, function($value){ 
+                    return !is_null($value) && $value !== '';
+                });
+                $email_array = array_map('trim', $email_array);
+                $mail->to($email_array)->send(new \App\Mail\Contact($contact));
+            } 
+            if($contact->email){
+                $thank_mail = new MailSettings;
+                $thank_mail->to($contact->email)->send(new \App\Mail\ContactThankyou($contact));
+            }
+            return response()->json(['success' => true]);
+        }
+        catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
     
 }

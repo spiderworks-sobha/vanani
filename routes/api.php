@@ -103,3 +103,5 @@ Route::get('activities/featured', [ActivityController::class, 'featured'])->name
 Route::get('amenities', [AmenityController::class, 'index'])->name('api.amenities.index');
 Route::get('amenities/featured', [AmenityController::class, 'featured'])->name('api.amenities.featured');
 
+Route::post('contact/save', [CommonController::class, 'contact_save'])->name('contacts.save');
+

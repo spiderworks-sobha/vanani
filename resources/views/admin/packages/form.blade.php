@@ -114,17 +114,21 @@
                                                                 <input type="text" name="slug" class="form-control" value="{{$obj->slug}}" id="slug">
                                                                 <small class="text-muted">The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
                                                             </div>
-                                                            <div class="form-group col-md-5">
+                                                            <div class="form-group col-md-6">
                                                                 <label>Title</label>
                                                                 <input type="text" name="title" class="form-control" value="{{$obj->title}}" >
                                                             </div>
-                                                            <div class="form-group col-md-5">
+                                                            <div class="form-group col-md-6">
                                                                 <label>Tagline</label>
                                                                 <input type="text" name="tagline" class="form-control" value="{{$obj->tagline}}" >
                                                             </div>
-                                                            <div class="form-group col-md-2">
+                                                            <div class="form-group col-md-6">
                                                                 <label>No. of Days</label>
                                                                 <input type="text" name="no_of_days" class="form-control" value="{{$obj->no_of_days}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Whatsapp Number</label>
+                                                                <input type="text" name="whatsapp_number" class="form-control" value="{{$obj->whatsapp_number}}" >
                                                             </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Inclution Summary</label>
@@ -277,9 +281,13 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-footer text-muted">
-                                                    <div class="custom-control custom-switch switch-primary float-left">
+                                                    <div class="custom-control custom-switch switch-primary">
                                                         <input type="checkbox" class="custom-control-input" value="1" id="show_on_menu" name="show_on_menu" @if($obj->show_on_menu == 1) checked="checked" @endif>
                                                         <label class="custom-control-label" for="show_on_menu">Show on Menu</label>
+                                                    </div>
+                                                    <div class="custom-control custom-switch switch-primary">
+                                                        <input type="checkbox" class="custom-control-input" value="1" id="show_on_accommodation_listing" name="show_on_accommodation_listing" @if($obj->show_on_accommodation_listing == 1) checked="checked" @endif>
+                                                        <label class="custom-control-label" for="show_on_accommodation_listing">Show on Accommodation Listing</label>
                                                     </div>
                                                     <button class="btn btn-sm btn-primary float-right">Save</button>
                                                 </div>

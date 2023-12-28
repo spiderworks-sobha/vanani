@@ -26,6 +26,15 @@ class PackageController extends Controller
                     $query->whereIn('package_tag.tag_id', $tags);
                 });
             }
+            if(!empty($data['show_on_accommodation'])){
+                $packages->where('show_on_accommodation_listing', 1);
+            }
+            if(!empty($data['accommodation_id'])){
+                $accommodation_id = $data['accommodation_id'];
+                $packages->whereHas('accommodations', function($query) use($accommodation_id){
+                    $query->where('accommodations.id', $accommodation_id);
+                });
+            }
             $packages = $packages->orderBy('priority', 'DESC')->paginate($limit);
             return new PackageListCollection($packages);
         }

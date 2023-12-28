@@ -96,7 +96,31 @@
         <div class="form-group col-md-12">
             <label>Highlights short description</label>
             <input type="text" name="content[detail_page_highlights_short_description]" class="form-control" @if($obj->content && isset($obj->content['detail_page_highlights_short_description'])) value="{{$obj->content['detail_page_highlights_short_description']}}" @endif >
-        </div>                                                                            
+        </div>
+        <div class="form-group col-md-12">
+            <label>Schedule Section Title</label>
+            <input type="text" name="content[detail_page_schedule_title]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_title'])) value="{{$obj->content['detail_page_schedule_title']}}" @endif >
+        </div>
+        <div class="form-group col-md-6">
+            <label>Schedule Section Subtitle1</label>
+            <input type="text" name="content[detail_page_schedule_sub_title1]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_sub_title1'])) value="{{$obj->content['detail_page_schedule_sub_title1']}}" @endif >
+        </div> 
+        <div class="form-group col-md-6">
+            <label>Schedule Section Subtitle2</label>
+            <input type="text" name="content[detail_page_schedule_sub_title2]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_sub_title2'])) value="{{$obj->content['detail_page_schedule_sub_title2']}}" @endif >
+        </div>
+        <div class="form-group col-md-6">
+            <label>Schedule Section Bottom Text</label>
+            <input type="text" name="content[detail_page_schedule_bottom_text]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_bottom_text'])) value="{{$obj->content['detail_page_schedule_bottom_text']}}" @endif >
+        </div>
+        <div class="form-group col-md-6">
+            <label>Schedule Section Bottom Link Text</label>
+            <input type="text" name="content[detail_page_schedule_bottom_link_text]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_bottom_link_text'])) value="{{$obj->content['detail_page_schedule_bottom_link_text']}}" @endif >
+        </div>
+        <div class="form-group col-md-12">
+            <label>Schedule Section Whatsapp Text</label>
+            <input type="text" name="content[detail_page_schedule_whatsapp_text]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_whatsapp_text'])) value="{{$obj->content['detail_page_schedule_whatsapp_text']}}" @endif >
+        </div>                                                                      
         <div class="form-group col-md-12">
             <label>Other rentals listing title</label>
             <input type="text" name="content[detail_page_others_listing_title]" class="form-control" @if($obj->content && isset($obj->content['detail_page_others_listing_title'])) value="{{$obj->content['detail_page_others_listing_title']}}" @endif >
