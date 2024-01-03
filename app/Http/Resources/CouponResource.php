@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PackageList extends JsonResource
+class CouponResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,15 +15,13 @@ class PackageList extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'name' => $this->name,
-            'slug' => $this->slug,
-            'tagline' => $this->tagline,
+            'id' => $this->id,
             'title' => $this->title,
-            'no_of_days' => $this->no_of_days,
             'short_description' => $this->short_description,
-            'featured_image' => new Media($this->whenLoaded('featured_image')),
-            'featured_medias' => new PackageGalleryCollection($this->whenLoaded('featured_medias')),
             'list' => (!empty($this->listing))? new ListingResourceCollection($this->listing->list): [],
+            'url' => $this->url,
+            'no_of_days' => $this->no_of_days,
+            'icon' => new Media($this->icon)
         ];
     }
 }

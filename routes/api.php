@@ -105,3 +105,5 @@ Route::get('amenities/featured', [AmenityController::class, 'featured'])->name('
 
 Route::post('contact/save', [CommonController::class, 'contact_save'])->name('contacts.save');
 
+Route::get('coupons', [CommonController::class, 'coupons'])->name('coupons');
+

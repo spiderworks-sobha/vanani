@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Apis;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactRequest;
+use App\Http\Resources\CouponResourceCollection;
 use App\Http\Resources\SliderPhotoCollection;
 use Illuminate\Http\Request;
 use App\Models\SliderPhoto;
@@ -13,6 +14,7 @@ use App\Http\Resources\HomeWhatWeOfferCollection;
 use App\Http\Resources\Page as ResourcesPage;
 use App\Http\Resources\Widget as WidgetResource;
 use App\Models\Accommodation;
+use App\Models\Coupon;
 use App\Models\Lead;
 use App\Models\Package;
 use App\Models\Page;
@@ -148,6 +150,11 @@ class CommonController extends Controller
         catch(\Exception $e){
             return response()->json(['error' => $e->getMessage()], 500);
         }
+    }
+
+    public function coupons(){
+        $coupons = Coupon::where('status', 1)->orderBy('priority')->take(2)->get();
+        return new CouponResourceCollection($coupons);
     }
     
 }

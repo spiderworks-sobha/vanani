@@ -37,6 +37,7 @@ use App\Http\Controllers\Admin\ListingController;
 use App\Http\Controllers\Admin\ListigItemController;
 use App\Http\Controllers\Admin\Auth\AuthenticateSessionOtpController;
 use App\Http\Controllers\Admin\AwardController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\PackageController;
@@ -584,6 +585,16 @@ Route::group(['prefix' => $prefix, 'middleware' => ['web']], function () use($mi
          Route::post('awards/store', [AwardController::class, 'store'])->name('admin.awards.store');
          Route::post('awards/update', [AwardController::class, 'update'])->name('admin.awards.update');
          Route::get('awards/show/{id}', [AwardController::class, 'show'])->name('admin.awards.show');
+
+         //coupons
+        Route::get('coupons', [CouponController::class, 'index'])->name('admin.coupons.index');
+        Route::get('coupons/create', [CouponController::class, 'create'])->name('admin.coupons.create');
+        Route::get('coupons/edit/{id}', [CouponController::class, 'edit'])->name('admin.coupons.edit');
+        Route::get('coupons/destroy/{id}', [CouponController::class, 'destroy'])->name('admin.coupons.destroy');    
+        Route::post('coupons/store', [CouponController::class, 'store'])->name('admin.coupons.store');
+        Route::post('coupons/update', [CouponController::class, 'update'])->name('admin.coupons.update');
+        Route::get('coupons/change-status/{id}', [CouponController::class, 'changeStatus'])->name('admin.coupons.change-status');
+        Route::get('coupons/show/{id}', [CouponController::class, 'show'])->name('admin.coupons.show');
 	});
 
     Route::get('/{id?}', [AuthenticateSessionOtpController::class, 'create'])->name('admin.auth.login');
