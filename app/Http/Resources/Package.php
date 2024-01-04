@@ -21,6 +21,8 @@ class Package extends JsonResource
             'tagline' => $this->tagline,
             'short_description' => $this->short_description,
             'summary' => $this->precessSummary($this->summary),
+            'no_of_days' => $this->no_of_days,
+            'total_activity_count' => $this->total_activity_count,
             'whatsapp_number' => $this->whatsapp_number,
             'featured_image' => new Media($this->featured_image),
             'banner_image' => new Media($this->banner_image),

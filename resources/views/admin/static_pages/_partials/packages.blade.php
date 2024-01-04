@@ -109,6 +109,10 @@
             <label>Schedule Section Subtitle2</label>
             <input type="text" name="content[detail_page_schedule_sub_title2]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_sub_title2'])) value="{{$obj->content['detail_page_schedule_sub_title2']}}" @endif >
         </div>
+        <div class="form-group col-md-12">
+            <label>Schedule Listing Title</label>
+            <input type="text" name="content[detail_page_schedule_listing_title]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_listing_title'])) value="{{$obj->content['detail_page_schedule_listing_title']}}" @endif >
+        </div>
         <div class="form-group col-md-6">
             <label>Schedule Section Bottom Text</label>
             <input type="text" name="content[detail_page_schedule_bottom_text]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_bottom_text'])) value="{{$obj->content['detail_page_schedule_bottom_text']}}" @endif >
@@ -120,6 +124,10 @@
         <div class="form-group col-md-12">
             <label>Schedule Section Whatsapp Text</label>
             <input type="text" name="content[detail_page_schedule_whatsapp_text]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_whatsapp_text'])) value="{{$obj->content['detail_page_schedule_whatsapp_text']}}" @endif >
+        </div>
+        <div class="form-group col-md-12">
+            <label>Schedule Section Whatsapp Button Text</label>
+            <input type="text" name="content[detail_page_schedule_whatsapp_button_text]" class="form-control" @if($obj->content && isset($obj->content['detail_page_schedule_whatsapp_button_text'])) value="{{$obj->content['detail_page_schedule_whatsapp_button_text']}}" @endif >
         </div>                                                                      
         <div class="form-group col-md-12">
             <label>Other rentals listing title</label>

@@ -114,13 +114,17 @@
                                                                 <input type="text" name="slug" class="form-control" value="{{$obj->slug}}" id="slug">
                                                                 <small class="text-muted">The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</small>
                                                             </div>
-                                                            <div class="form-group col-md-6">
+                                                            <div class="form-group col-md-12">
                                                                 <label>Title</label>
                                                                 <input type="text" name="title" class="form-control" value="{{$obj->title}}" >
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label>Tagline</label>
                                                                 <input type="text" name="tagline" class="form-control" value="{{$obj->tagline}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Total Activity Count</label>
+                                                                <input type="text" name="total_activity_count" class="form-control" value="{{$obj->total_activity_count}}" >
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label>No. of Days</label>
