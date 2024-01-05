@@ -35,6 +35,9 @@ class PackageController extends Controller
                     $query->where('accommodations.id', $accommodation_id);
                 });
             }
+            if(!empty($data['is_featured'])){
+                $packages->where('is_featured', 1);
+            }
             $packages = $packages->orderBy('priority', 'DESC')->paginate($limit);
             return new PackageListCollection($packages);
         }
