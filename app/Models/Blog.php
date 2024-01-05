@@ -25,7 +25,7 @@ class Blog extends Model
 
     protected $fillable = array('slug', 'name', 'title', 'short_description', 'content', 'parent_id', 'featured_image_id', 'banner_image_id', 
     'browser_title', 'meta_description', 'meta_keywords', 'bottom_description', 'og_title', 'og_description', 'og_image_id', 
-    'extra_js', 'category_id', 'is_featured', 'status', 'priority', 'published_on', 'published_by', 'featured_title', 'featured_section_image_id');
+    'extra_js', 'bottom_text', 'bottom_button_text', 'bottom_button_url', 'bottom_button_target', 'category_id', 'is_featured', 'status', 'priority', 'published_on', 'published_by', 'featured_title', 'featured_section_image_id');
 
     protected $dates = ['created_at','updated_at'];
 

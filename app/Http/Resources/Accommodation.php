@@ -28,6 +28,10 @@ class Accommodation extends JsonResource
             'features_listing_title' => $this->features_listing_title,
             'all_features_tagline' => $this->all_features_tagline,
             'all_features_title' => $this->all_features_title,
+            'all_features_bottom_text' => $this->all_features_bottom_text,
+            'all_features_button_text' => $this->all_features_button_text,
+            'all_features_button_link' => $this->all_features_button_link,
+            'all_features_button_target' => $this->all_features_button_target,
             'whatsapp_number' => $this->whatsapp_number,
             'dicount' => [
                 'tagline' => $this->discount_tagline,

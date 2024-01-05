@@ -99,6 +99,25 @@
                                                                 <label>Content</label>
                                                                 <textarea name="content" class="form-control editor" id="content">{{$obj->content}}</textarea>
                                                             </div>
+                                                            <div class="form-group col-md-12">
+                                                                <label>Bottom text</label>
+                                                                <input type="text" name="bottom_text" class="form-control" value="{{$obj->bottom_text}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Bottom button text</label>
+                                                                <input type="text" name="bottom_button_text" class="form-control" value="{{$obj->bottom_button_text}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Bottom button url</label>
+                                                                <input type="text" name="bottom_button_url" class="form-control" value="{{$obj->bottom_button_url}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-4">
+                                                                <label>Bottom button target</label>
+                                                                <select name="bottom_button_target" class="form-control">
+                                                                    <option value="" @if($obj->bottom_button_target == "") selected="selected" @endif></option>
+                                                                    <option value="_blank" @if($obj->bottom_button_target == "_blank") selected="selected" @endif>_blank</option>
+                                                                </select>
+                                                            </div>
                                                         </div>
                                                     </div>                                           
                                                 </div><!--end card-body-->

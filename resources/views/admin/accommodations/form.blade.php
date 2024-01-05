@@ -166,6 +166,25 @@
                                                             <input type="text" name="all_features_title" class="form-control" value="{{$obj->all_features_title}}" >
                                                         </div>
                                                         <div class="form-group col-md-12">
+                                                            <label>All Features bottom text</label>
+                                                            <input type="text" name="all_features_bottom_text" class="form-control" value="{{$obj->all_features_bottom_text}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>All Features button text</label>
+                                                            <input type="text" name="all_features_button_text" class="form-control" value="{{$obj->all_features_button_text}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>All Features button url</label>
+                                                            <input type="text" name="all_features_button_link" class="form-control" value="{{$obj->all_features_button_link}}" >
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            <label>All Features button target</label>
+                                                            <select name="all_features_button_target" class="form-control">
+                                                                <option value="" @if($obj->all_features_button_target == "") selected="selected" @endif></option>
+                                                                <option value="_blank" @if($obj->all_features_button_target == "_blank") selected="selected" @endif>_blank</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col-md-12">
                                                             <label>Content Tagline</label>
                                                             <input type="text" name="content_tagline" class="form-control" value="{{$obj->content_tagline}}" >
                                                         </div>
