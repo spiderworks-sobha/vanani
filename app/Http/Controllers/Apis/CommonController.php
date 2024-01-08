@@ -98,12 +98,18 @@ class CommonController extends Controller
     public function home_what_we_offer(){
         $data = [];
         $rental = Rental::with('icon_image', 'featured_image')->where('status', 1)->where('show_on_offer', 1)->first();
+        if(!$rental)
+            $rental = new Rental;
         $rental->type = "Rental";
         $data[] = $rental;
         $accommodation = Accommodation::with('icon_image', 'featured_image')->where('status', 1)->where('show_on_offer', 1)->first();
+        if(!$accommodation)
+            $accommodation = new Accommodation;
         $accommodation->type = "Accommodation";
         $data[] = $accommodation;
         $package = Package::with('icon_image', 'featured_image')->where('status', 1)->where('show_on_offer', 1)->first();
+        if(!$package)
+            $package = new Package;
         $package->type = "Package";
         $data[] = $package;
         return new HomeWhatWeOfferCollection($data);
