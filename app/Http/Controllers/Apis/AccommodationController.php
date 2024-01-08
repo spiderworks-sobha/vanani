@@ -32,7 +32,7 @@ class AccommodationController extends Controller
     }
 
     public function featured(Request $request){
-        $accommodations = Accommodation::with(['featured_image'])->where('status', 1);
+        $accommodations = Accommodation::with(['featured_image', 'home_image'])->where('status', 1);
         if($tags = $request->tags){
             $accommodations->whereHas('tags', function($query) use($tags){
                 $query->whereIn('accommodation_tag.tag_id', $tags);

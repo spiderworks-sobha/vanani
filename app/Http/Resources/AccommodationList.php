@@ -21,6 +21,13 @@ class AccommodationList extends JsonResource
             'tagline' => $this->tagline,
             'title' => $this->title,
             'short_description' => $this->short_description,
+            'home_featured_listing' =>[
+                'tagline' => $this->featured_home_listing_tagline,
+                'title' => $this->featured_home_listing_tite,
+                'sub_title' => $this->featured_home_listing_sub_heading,
+                'description' => $this->featured_home_listing_description,
+                'image' => new Media($this->whenLoaded('home_image')),
+            ],
             'featured_image' => new Media($this->whenLoaded('featured_image')),
             'featured_medias' => new MediaCollection($this->whenLoaded('featured_medias')),
             'featured_features' => new AmenityCollection($this->whenLoaded('featured_features')),
