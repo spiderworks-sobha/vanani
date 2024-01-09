@@ -22,7 +22,7 @@ class AminitySelect extends Component
      */
     public function render(): View|Closure|string
     {
-        $amenities = Amenity::where('is_a_feature', 0)->get();
+        $amenities = Amenity::get();
         return view('admin._partials.aminity_select')->with('amenities', $amenities)->with('selected', $this->selected);
     }
 }

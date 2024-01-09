@@ -114,11 +114,10 @@
                                                                 <input type="checkbox" class="custom-control-input" value="1" id="status" name="status" @if(!$obj->id || $obj->status == 1) checked="" @endif>
                                                                 <label class="custom-control-label" for="status">Status</label>
                                                             </div>
-                                                            <div class="custom-control custom-switch switch-primary float-right">
+                                                            {{--<div class="custom-control custom-switch switch-primary float-right">
                                                                 <input type="checkbox" class="custom-control-input" value="1" id="is_a_feature" name="is_a_feature" @if($obj->is_a_feature == 1) checked="" @endif>
                                                                 <label class="custom-control-label" for="is_a_feature">List as a Feature</label>
-                                                            </div>
-                                                        </div>
+                                                            </div>--}}                                                        </div>
                                                         <div class="form-group w-100 mb-1">
                                                             <label for="name">Created On: </label>
                                                             @if(!$obj->id)
@@ -154,10 +153,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-footer text-muted">
-                                                    <div class="custom-control custom-switch switch-primary float-left">
+                                                    {{--<div class="custom-control custom-switch switch-primary float-left">
                                                         <input type="checkbox" class="custom-control-input" value="1" id="is_featured" name="is_featured" @if($obj->is_featured == 1) checked="" @endif>
                                                         <label class="custom-control-label" for="is_featured">Is Featured</label>
-                                                    </div>
+                                                    </div>--}}
                                                     <button class="btn btn-sm btn-primary float-right">Save</button>
                                                 </div>
                                             </div>

@@ -298,6 +298,7 @@
                                                         $activities = [];
                                                         if(count($obj->activities))
                                                             $activities = $obj->activities->toArray();
+
                                                     @endphp
                                                     <x-activity-select :selected="$activities"></x-activity-select>
                                                 </div>

@@ -105,9 +105,7 @@
                                                             </div>
                                                             <div class="form-group col-md-12" id="text-div" @if($obj->review_type == 'Video') style="display:none;" @endif>
                                                                 <label>Review</label>
-                                                                <textarea class="form-control" name="text_review">
-                                                                    @if($obj->review_type == 'Text') {{$obj->review}} @endif
-                                                                </textarea>
+                                                                <textarea class="form-control" name="text_review">@if($obj->review_type == 'Text'){{$obj->review}}@endif</textarea>
                                                             </div>
                                                             <div class="form-group col-md-12" id="video-div" @if(!$obj->id || $obj->review_type == 'Text') style="display:none;" @endif>
                                                                 <label>Review Video</label>
