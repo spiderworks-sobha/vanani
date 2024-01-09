@@ -134,6 +134,28 @@
                                                                 <label>Banner Content Colour</label>
                                                                 <input type="text" name="banner_content_colour" class="form-control" value="{{$obj->banner_content_colour}}" >
                                                             </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Highlights Listings</label>
+                                                                <select name="highlights_listings_id" class="w-100 webadmin-select2-input form-control" data-select2-url="{{route('admin.select2.list')}}">
+                                                                    @if($obj->highlights_listings_id)
+                                                                        <option value="{{$obj->highlights_listings->id}}" selected >{{$obj->highlights_listings->listing_name}}</option>
+                                                                    @endif
+                                                                </select>
+                                                                @if($obj->highlights_listings)
+                                                                    <a href="{{route('admin.listing-items.index', [$obj->highlights_listings->id])}}" class="float-right text-success" target="_blank">Edit</a>
+                                                                @endif
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Features Listings</label>
+                                                                <select name="features_listings_id" class="w-100 webadmin-select2-input form-control" data-select2-url="{{route('admin.select2.list')}}">
+                                                                    @if($obj->features_listings_id)
+                                                                        <option value="{{$obj->features_listings->id}}" selected >{{$obj->features_listings->listing_name}}</option>
+                                                                    @endif
+                                                                </select>
+                                                                @if($obj->features_listings)
+                                                                    <a href="{{route('admin.listing-items.index', [$obj->features_listings->id])}}" class="float-right text-success" target="_blank">Edit</a>
+                                                                @endif
+                                                            </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Short Description</label>
                                                                 <textarea name="short_description" class="form-control" rows="2" id="short_description">{{$obj->short_description}}</textarea>
@@ -252,19 +274,6 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    Features
-                                                </div>
-                                                <div class="card-body">
-                                                    @php
-                                                        $features = [];
-                                                        if(count($obj->features))
-                                                            $features = $obj->features->toArray();
-                                                    @endphp
-                                                    <x-feature-select :selected="$features"></x-feature-select>
                                                 </div>
                                             </div>
                                             <div class="card">

@@ -107,4 +107,14 @@ class Accommodation extends Model
     {
         return $this->belongsTo(Media::class, 'featured_home_listing_image_id');
     }
+
+    public function highlights_listings(): BelongsTo
+    {
+        return $this->belongsTo(Listing::class, 'highlights_listings_id');
+    }
+
+    public function features_listings(): BelongsTo
+    {
+        return $this->belongsTo(Listing::class, 'features_listings_id');
+    }
 }
