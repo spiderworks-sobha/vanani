@@ -44,6 +44,7 @@ class AmenityController extends Controller
         $request->validated();
         $data = $request->all();
         $data['status'] = isset($data['status'])?1:0;
+        $data['is_featured'] = isset($data['is_featured'])?1:0;
         $data['priority'] = !empty($data['priority'])?$data['priority']:0;
         $this->model->fill($data);
         $this->model->save();
@@ -58,6 +59,7 @@ class AmenityController extends Controller
         $id =  decrypt($data['id']);
         if($obj = $this->model->find($id)){
             $data['status'] = isset($data['status'])?1:0;
+            $data['is_featured'] = isset($data['is_featured'])?1:0;
             $data['priority'] = !empty($data['priority'])?$data['priority']:0;
             $obj->update($data);
             return Redirect::to(route($this->route. '.edit', ['id'=>encrypt($id)]))->withSuccess('Amenity successfully updated!');

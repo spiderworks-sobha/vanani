@@ -518,6 +518,7 @@
                         left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
                         right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
                     },
+                    sort: false,
                     fireSearch: function(value) {
                         return value.length > 2;
                     }
@@ -528,6 +529,7 @@
                         left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
                         right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
                     },
+                    sort: false,
                     fireSearch: function(value) {
                         return value.length > 2;
                     }
@@ -538,6 +540,7 @@
                         left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
                         right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
                     },
+                    sort: false,
                     fireSearch: function(value) {
                         return value.length > 2;
                     }

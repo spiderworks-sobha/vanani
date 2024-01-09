@@ -153,10 +153,10 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-footer text-muted">
-                                                    {{--<div class="custom-control custom-switch switch-primary float-left">
+                                                    <div class="custom-control custom-switch switch-primary float-left">
                                                         <input type="checkbox" class="custom-control-input" value="1" id="is_featured" name="is_featured" @if($obj->is_featured == 1) checked="" @endif>
                                                         <label class="custom-control-label" for="is_featured">Is Featured</label>
-                                                    </div>--}}
+                                                    </div>
                                                     <button class="btn btn-sm btn-primary float-right">Save</button>
                                                 </div>
                                             </div>
