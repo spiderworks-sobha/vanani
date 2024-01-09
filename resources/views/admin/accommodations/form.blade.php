@@ -126,6 +126,14 @@
                                                                 <label>Whatsapp Number</label>
                                                                 <input type="text" name="whatsapp_number" class="form-control" value="{{$obj->whatsapp_number}}" >
                                                             </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Banner Heading Colour</label>
+                                                                <input type="text" name="banner_heading_colour" class="form-control" value="{{$obj->banner_heading_colour}}" >
+                                                            </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label>Banner Content Colour</label>
+                                                                <input type="text" name="banner_content_colour" class="form-control" value="{{$obj->banner_content_colour}}" >
+                                                            </div>
                                                             <div class="form-group col-md-12">
                                                                 <label>Short Description</label>
                                                                 <textarea name="short_description" class="form-control" rows="2" id="short_description">{{$obj->short_description}}</textarea>

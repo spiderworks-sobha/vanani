@@ -22,6 +22,8 @@ class Accommodation extends JsonResource
             'short_description' => $this->short_description,
             'content_tagline' => $this->content_tagline,
             'content' => $this->content,
+            'banner_heading_colour' => $this->banner_heading_colour,
+            'banner_content_colour' => $this->banner_content_colour,
             'features_tagline' => $this->features_tagline,
             'features_title' => $this->features_title,
             'features_short_description' => $this->features_short_description,

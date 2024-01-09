@@ -45,12 +45,12 @@ class Accommodation extends Model
 
     public function features() :BelongsToMany
     {
-        return $this->belongsToMany(Amenity::class, 'rental_feature', 'rental_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');
+        return $this->belongsToMany(Amenity::class, 'accommodation_feature', 'accommodation_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC');
     }
 
     public function featured_features() :BelongsToMany
     {
-        return $this->belongsToMany(Amenity::class, 'rental_feature', 'rental_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC')->limit(4);
+        return $this->belongsToMany(Amenity::class, 'accommodation_feature', 'accommodation_id', 'amenity_id')->withPivot('priority', 'created_by', 'updated_by', 'created_at', 'updated_at')->orderByPivot('priority', 'ASC')->limit(4);
     }
 
     public function amenities() :BelongsToMany
